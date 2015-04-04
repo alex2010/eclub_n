@@ -19,16 +19,8 @@ onError = (error) ->
             throw error
     return
 
-#
-#onListening = ->
-#    addr = server.address()
-#    bind = if typeof addr == 'string' then 'pipe ' + addr else 'port ' + addr.port
-#    debug 'Listening on ' + bind
-#    return
 
 app._hk = 'hk'
-#app.set 'hk', 'hk'
 server = http.createServer(app)
-server.listen(3000)
+server.listen(5000)
 server.on('error', onError)
-#server.on('listening', onListening)
