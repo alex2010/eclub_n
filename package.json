@@ -19,10 +19,10 @@
     "multer": "~0.1",
     "connect-mongo": "~0",
     "nodemailer": "~1",
-    "gm": "~1"
+    "gm": "~1",
+    "async": "~0"
   },
   "devDependencies": {
-    "node-dev": "~2",
-    "async": "~0"
+    "nodemon": "~1"
   }
 }

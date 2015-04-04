@@ -1,4 +1,4 @@
-settings = require('../setting')
+s = require('../setting')
 Mongodb = require('mongodb')
 _ = require('underscore')
 
@@ -10,14 +10,20 @@ Server = Mongodb.Server
 
 log = console.log
 
-module.exports = (@name) ->
-
-    @db = new Db(@name || settings.code, new Server(settings.host, settings.port)) #, safe: true
-
-    @db.open()
+module.exports = (@name, callback) ->
+    if app._hk
+        opt = s[app._hk]
+        that = @
+        Mongodb.MongoClient.connect "mongodb://#{opt.user}:#{opt.psd}@#{opt.host}:#{opt.port}/#{opt.db}", (err, db)->
+            log 'ping t'
+            that.db = db
+            callback?()
+    else
+        @db = new Db(@name || s.db, new Server(s.host, s.port)) #, safe: true
+        @db.open()
 
     @pick = (name, cName)->
-        if @name isnt name
+        if @name isnt name and !app.get('hk')
             @name = name
             @db = @db.db(name)
 
@@ -93,7 +99,6 @@ module.exports = (@name) ->
         @db.close()
 
     @
-
 
 
 #    @pick = (name, cName)->

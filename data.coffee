@@ -3,11 +3,14 @@ psd = 'psd'
 
 log = console.log
 
+`app = {
+    _hk: 'hk'
+}
+`
 community =
     code: code
     name: 'travel in Beijing'
-    url: 'http://127.0.0.1:3000'
-    record: 'asdfdsafasdf'
+    url: 'tourguideinbeijing.herokuapp.com'
 
 role = [
     title: 'admin'
@@ -97,13 +100,6 @@ user = [
     password: psd
 ]
 
-dao = new require('./model/dao')(code)
-setTimeout ->
-    dao.save code, 'community:code', community
-    dao.save code, 'role:title', role
-    dao.save code, 'user:username,rid', user
-, 500
-
 insertMember = (title, username)->
     membership = {}
     dao.get code, 'role', title: title, (doc)->
@@ -113,8 +109,17 @@ insertMember = (title, username)->
             dao.save code, 'membership:uid,rid', membership, ->
                 dao.close()
 
-setTimeout ->
-    insertMember 'admin', code
-    log 'finish'
-, 1000
+cl = [
+    ->
+        dao.save code, 'community:code', community
+    ->
+        dao.save code, 'role:title', role
+    ->
+        dao.save code, 'user:username,rid', user
+]
+
+async = require('async')
+dao = new require('./model/dao') code, ->
+    async.parallel cl, ->
+        insertMember 'admin', code
 

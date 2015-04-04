@@ -9,7 +9,17 @@ node_modules
 # *.js
 # *.css
 
+
 public/module/bower_components
+public/module/_club
+public/module/_wShop
+public/module/after
+public/module/gwsport
+public/module/upup
+public/module/hailai
+public/module/house
+public/module/tmpl
+
 back
 public/lib
 public/res

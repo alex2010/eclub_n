@@ -5,17 +5,15 @@ logger = require('morgan')
 cookieParser = require('cookie-parser')
 bodyParser = require('body-parser')
 
-`
-    _ = require('underscore');
-    app = express();
-    app.env = app.get('env') == 'development';
-    app.setting = require('./setting');
-    log = console.log;
-    _path = __dirname;
-    _resPath = app.env ? '/res/' : setting.res_path;
-    dao = new require('./model/dao')('main');
-    dbCache = new require('./model/cache')();
-`
+`_ = require('underscore');
+app = express();
+app.env = app.get('env') == 'development';
+app.setting = require('./setting');
+log = console.log;
+_path = __dirname;
+_resPath = app.env ? '/res/' : setting.res_path;
+dao = new require('./model/dao')('main');
+dbCache = new require('./model/cache')()`
 
 app._script = {}
 app._community = {}
@@ -30,11 +28,16 @@ app.pickScript = (code)->
         app._script[code] = sc
     sc
 
-app.setCommunity = (dao, code)->
-    dao.get code, 'community', code: code, (c)->
-        dao.get code, 'role', title: 'guest', (item)->
-            c.menu = item.res.menu
-            app._community[code] = c
+
+app.setCommunity = (dao, code, callback)->
+    if app._community[code]
+        callback()
+    else
+        dao.get code, 'community', code: code, (c)->
+            dao.get code, 'role', title: 'guest', (item)->
+                c.menu = item.res.menu
+                app._community[code] = c
+                callback()
 
 # view engine setup
 app.set 'view engine', 'jade'

@@ -9,13 +9,6 @@ attrs = (attr)->
         op[it] = 1
     op
 buildQuery =  (q)->
-#    for k,v of q
-#        [op,type,val,opt] = v.split('_')
-#        if type is 'reg'
-#            val =
-#                $regex: val
-#        if type is ''
-#        q[k] = v
     q
 
 cleanItem = (q)->
@@ -30,7 +23,6 @@ cleanItem = (q)->
     for k,v of q
         if v.toString().charAt(0) is '_'
             delete q[k]
-    log q
     q
 
 dataController =
@@ -44,7 +36,6 @@ dataController =
             if req.query._attrs
                 op.fields = attrs u.d req.query, '_attrs'
         q = buildQuery req.query.q
-        log q
         entity = req.params.entity
         dao.find code, entity, q, op, (entities)->
             dao.count code, entity, q, (count)->

@@ -1,7 +1,5 @@
-_ = require('underscore')
-
 module.exports = (@lang)->
-    @_i18n = require("../i18n/message_#{@lang}")
+    @_i18n = require("../i18n/#{@lang}")
 
     @cat = (k)->
         @_i['cat.' + k]
@@ -32,7 +30,6 @@ module.exports = (@lang)->
         @_i['nav.' + p] || @_i('c.' + p) || @_i(p) || p
 
     @load = (code)->
-        log "../public/module/#{code}/src/i18n/#{@lang}"
         @_i = _.extend _.clone(@_i18n), require("../public/module/#{code}/src/i18n/#{@lang}")
         @
 
