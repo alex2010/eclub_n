@@ -1,0 +1,391 @@
+[
+    {
+        "label": "channel",
+        "cur": 1,
+        "children": [
+            {
+                "label": "bj",
+                "label_en": "Beijing in Detail",
+                "type": "channel",
+                "cur": 1,
+                "href": "/beijing.html",
+                "children": [
+                    {
+                        "type": "bj",
+                        "label_en": "History",
+                        "cur": 0,
+                        "href": "/beijing.html#history"
+                    },
+                    {
+                        "type": "bj",
+                        "label_en": "Culture",
+                        "cur": 1,
+                        "href": "/beijing.html#culture"
+                    },
+                    {
+                        "type": "bj",
+                        "label_en": "Education",
+                        "cur": 2,
+                        "href": "/beijing.html#education"
+                    },
+                    {
+                        "type": "bj",
+                        "label_en": "Climate",
+                        "cur": 3,
+                        "href": "/beijing.html#climate"
+                    },
+                    {
+                        "type": "bj",
+                        "label_en": "Politics",
+                        "cur": 4,
+                        "href": "/beijing.html#politics"
+                    },
+                    {
+                        "type": "bj",
+                        "label_en": "Economy",
+                        "cur": 5,
+                        "href": "/beijing.html#economy"
+                    },
+                    {
+                        "type": "bj",
+                        "label_en": "Geography",
+                        "cur": 6,
+                        "href": "/beijing.html#geography"
+                    }
+                ]
+            },
+            {
+                "label": "sib",
+                "label_en": "Sights in Beijing",
+                "type": "channel",
+                "cur": 2,
+                "href": "/beijing_sights.html",
+                "children": [
+                    {
+                        "type": "sib",
+                        "label_en": "Main Sights",
+                        "cur": 0,
+                        "href": "/beijing_sights.html#main"
+                    },
+                    {
+                        "type": "sib",
+                        "label_en": "Off the Beaten",
+                        "cur": 1,
+                        "href": "/beijing_sights.html#off"
+                    }
+                ]
+            },
+            {
+                "label": "rest",
+                "label_en": "Restaurants",
+                "type": "channel",
+                "cur": 4,
+                "href": "/restaurants.html",
+                "children": [
+                    {
+                        "type": "rest",
+                        "label_en": "Chinese",
+                        "entity": "category",
+                        "action": "restaurant",
+                        "cur": 0
+                    },
+                    {
+                        "type": "rest",
+                        "label_en": "Western",
+                        "entity": "category",
+                        "action": "restaurant",
+                        "cur": 1
+                    },
+                    {
+                        "type": "rest",
+                        "label_en": "Indian",
+                        "entity": "category",
+                        "action": "restaurant",
+                        "cur": 2
+                    },
+                    {
+                        "type": "rest",
+                        "label_en": "Mexican",
+                        "entity": "category",
+                        "action": "restaurant",
+                        "cur": 3
+                    },
+                    {
+                        "type": "rest",
+                        "label_en": "Halal",
+                        "entity": "category",
+                        "action": "restaurant",
+                        "cur": 4
+                    }
+                ]
+            },
+            {
+                "label": "night",
+                "label_en": "Nightlife",
+                "type": "channel",
+                "cur": 4,
+                "href": "/nightlife.html",
+                "children": [
+                    {
+                        "type": "night",
+                        "label_en": "Performances",
+                        "entity": "category",
+                        "action": "entertainment",
+                        "cur": 0
+                    },
+                    {
+                        "type": "night",
+                        "label": "bar",
+                        "label_en": "Bar & Club",
+                        "entity": "category",
+                        "action": "entertainment",
+                        "cur": 1
+                    },
+                    {
+                        "type": "night",
+                        "label_en": "For Children",
+                        "label": "children",
+                        "entity": "category",
+                        "action": "entertainment",
+                        "cur": 2
+                    }
+                ]
+            },
+            {
+                "label": "tm",
+                "label_en": "Transportation&Maps",
+                "type": "channel",
+                "cur": 4,
+                "href": "/transportation.html",
+                "children": [
+                    {
+                        "type": "tm",
+                        "label_en": "Taxi",
+                        "entity": "content",
+                        "href": "/content-taxi.html",
+                        "cur": 0
+                    },
+                    {
+                        "type": "tm",
+                        "label_en": "Bar & Club",
+                        "entity": "content",
+                        "href": "/content-subway.html",
+                        "cur": 1
+                    },
+                    {
+                        "type": "tm",
+                        "label_en": "Airport Shuttle Bus",
+                        "entity": "content",
+                        "href": "/content-airport_shuttle_bus.html",
+                        "cur": 2
+                    }
+                ]
+            },
+            {
+                "label": "pi",
+                "label_en": "Practical Information",
+                "type": "channel",
+                "cur": 4,
+                "children": [
+                    {
+                        "type": "pi",
+                        "label_en": "Hospital",
+                        "entity": "content",
+                        "href": "/content-hospital.html",
+                        "cur": 0
+                    },
+                    {
+                        "type": "pi",
+                        "label_en": "Insurance",
+                        "entity": "content",
+                        "href": "/content-insurance.html",
+                        "cur": 1
+                    }
+                ]
+            },
+            {
+                "label": "tours",
+                "label_en": "Tours",
+                "type": "channel",
+                "cur": 4,
+                "children": [
+                    {
+                        "type": "tours",
+                        "label_en": "Self-catering Tour",
+                        "href": "/self_catering.html",
+                        "cur": 0
+                    },
+                    {
+                        "type": "tours",
+                        "label_en": "Private-guided Tour",
+                        "href": "/private_guided.html",
+                        "cur": 1
+                    }
+                ]
+            },
+            {
+                "label": "better",
+                "label_en": "Better to Know",
+                "type": "channel",
+                "cur": 4,
+                "children": [
+                    {
+                        "type": "better",
+                        "label_en": "History",
+                        "entity": "content",
+                        "href": "/content-history.html",
+                        "cur": 0
+                    },
+                    {
+                        "type": "better",
+                        "label_en": "Culture",
+                        "entity": "content",
+                        "href": "/content-culture.html",
+                        "cur": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "label": "menu",
+        "cur": 2,
+        "children": []
+    },
+    {
+        "label": "link",
+        "cur": 3
+    },
+    {
+        "label": "footer",
+        "cur": 4,
+        "children": [
+            {
+                "type": "footer",
+                "label_en": "关于我们",
+                "cur": 0,
+                "className": "c1"
+            },
+            {
+                "type": "footer",
+                "label_zh": "社区介绍",
+                "entity": "content",
+                "cur": 1,
+                "className": "c1"
+            },
+            {
+                "type": "footer",
+                "label_zh": "社区历史",
+                "entity": "content",
+                "cur": 2,
+                "className": "c1"
+            },
+            {
+                "type": "footer",
+                "label_zh": "社区守则",
+                "cur": 3,
+                "className": "c1",
+                "entity": "content"
+            },
+            {
+                "type": "footer",
+                "label_zh": "社区组织者",
+                "cur": 4,
+                "href": "/team.html",
+                "className": "c1"
+            },
+            {
+                "type": "footer",
+                "label_zh": "联系方式",
+                "cur": 5,
+                "entity": "content",
+                "className": "c1"
+            },
+            {
+                "type": "footer",
+                "label_zh": "对外合作",
+                "cur": 0,
+                "className": "c2"
+            },
+            {
+                "type": "footer",
+                "label_zh": "活动合作",
+                "entity": "content",
+                "cur": 1,
+                "className": "c2"
+            },
+            {
+                "type": "footer",
+                "label_zh": "友情链接",
+                "cur": 2,
+                "href": "/linkList.html",
+                "className": "c2"
+            },
+            {
+                "type": "footer",
+                "label_zh": "技术服务",
+                "cur": 3,
+                "href": "http://www.eclubnet.com",
+                "className": "c2"
+            },
+            {
+                "type": "footer",
+                "label_zh": "社区导读",
+                "cur": 0,
+                "className": "c3"
+            },
+            {
+                "type": "footer",
+                "label_zh": "志愿者计划",
+                "cur": 1,
+                "className": "c3",
+                "entity": "form"
+            },
+            {
+                "label_zh": "新手必读",
+                "type": "footer",
+                "cur": 2,
+                "className": "c3",
+                "entity": "content"
+            },
+            {
+                "label_zh": "常见问题",
+                "type": "footer",
+                "cur": 3,
+                "className": "c3",
+                "entity": "content"
+            },
+            {
+                "type": "footer",
+                "label_zh": "社区网络",
+                "cur": 0,
+                "className": "c4"
+            },
+            {
+                "type": "footer",
+                "label_zh": "社区微博",
+                "cur": 31,
+                "href": "http://postenglishtime.com",
+                "className": "c4"
+            },
+            {
+                "type": "footer",
+                "label_zh": "豆瓣小站",
+                "cur": 33,
+                "href": "http://postenglishtime.com",
+                "className": "c4"
+            },
+            {
+                "type": "footer",
+                "label_zh": "官方博客",
+                "cur": 33,
+                "href": "http://postenglishtime.com",
+                "className": "c4"
+            }
+        ]
+    },
+    {
+        "label": "permission",
+        "cur": 5
+    }
+]

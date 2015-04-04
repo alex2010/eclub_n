@@ -1,0 +1,15 @@
+script.
+    var cf = {
+        lang: '#{lang}',
+        code: '#{c.code}',
+        console: true,
+        app: '#{app}',
+        mode: #{mode},
+        community: !{cstr},
+        index: '#{index}'
+    };
+if true
+    script(src='/module/rfg.js')
+    script.
+        cfg = exports.cfg("#{c.code}")
+    script(data-main='/module/mrfg.js', src='/module/bower_components/requirejs/require.js')

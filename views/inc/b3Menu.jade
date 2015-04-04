@@ -1,0 +1,9 @@
+ul(class= mClass || 'nav navbar-nav')
+    each it in c.menu
+        li
+            a(href='#{it.href}') #{it.label}
+            if it.children
+                ul.dropdown-menu
+                    each sub in it.children
+                        li
+                            a(href='#{sub.href}') #{sub.label}

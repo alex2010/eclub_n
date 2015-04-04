@@ -1,0 +1,78 @@
+extends main
+
+block content
+    .topHead
+        h1
+            strong= title
+            .cat
+                | sights /
+                a Other
+        .carousel.slide
+            .carousel-inner.refresh
+                each it in refFile || []
+                    .item
+                        img(src= f.resPath(mode, c.code, it))
+                        .carousel-caption
+                            h4
+                                a(target='_blank')= title
+                            p= content
+
+    article.clearfix
+        section.col-md-8
+            h2
+                | Introducing #{title}
+            .shrink
+                .sInside= content
+            h3 SubSights
+            each it in sub
+                .main
+                    = it.title
+        aside.col-md-4
+            dl.info-list
+                dt
+                    | Opening hours
+                dd
+                    = opening
+                dt
+                    | Prices
+                dd
+                    | #{fee}
+                dt
+                    | Getting there
+                dd
+                    | subway
+                    strong Tian'anmen West or Tian'anmen East
+                dt
+                    | Telephone
+                dd
+                    a.tel(href='tel:#{phone}')
+                        = phone
+                dt
+                    | Best Time to See
+                dd
+                    = opening
+                dt
+                    | English Audio Guide
+                dd
+                dt Latest Updated
+                dt 1985-11-11
+
+
+        .col-md-12.footerFunc
+            hr
+            a.fl.btn.btn-default.btn-sm
+                i.glyphicon.glyphicon-home
+                | Back to Sights
+            a.fl.btn.btn-primary.btn-sm
+                i.glyphicon.glyphicon-home
+                | Explore it
+            a.fr.btn.btn-default.btn-sm
+                i.glyphicon.glyphicon-home
+                | Print
+            a.fr.btn.btn-default.btn-sm
+                i.glyphicon.glyphicon-home
+                | Email
+
+        section
+            h3 Related Tours
+            .sightCardList

@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        include inc/meta
+        link(rel='stylesheet', href='#{adminCss}')
+    body
+        .headerWrapper
+            #header.navbar.navbar-inverse.navbar-fixed-top
+                .navbar-header
+                    h1#logo
+                        a.navbar-brand(href="#")
+        .container-fluid
+            #content
+        .footerWrapper
+            #footer
+
+    include inc/sub

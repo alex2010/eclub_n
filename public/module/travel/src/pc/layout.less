@@ -1,0 +1,389 @@
+@bg: url(/module/travel/images/bg.png);
+@logo: url(/res/upload/travel/images/logo.jpg);
+@mainBg: url(/module/travel/css/images/bg.gif);
+@sidebg: url(/module/travel/css/images/sidebg.jpg);
+@headbg: url(/module/travel/css/images/headbg.jpg);
+
+@width: 900px;
+@_fontColor: #111;
+@_headColor: #111;
+@_fontSize: 14px;
+@_link: #061E38;
+@_hover: #0077BE;
+@_bgColor: #fff;
+@_headBgColor: #fff;
+
+@deepBlue: #206fac;
+
+html {
+  font: 0.875em/1em "Helvetica Neue", Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, legend, caption {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  color: @_fontColor;
+  background-color: #EEF1F3;;
+}
+
+a {
+  color: @_link;
+  text-decoration: none;
+  &:hover {
+    color: @_hover;
+  }
+}
+
+.headerWrapper {
+  width: 100%;
+  background: #1d508c;
+  overflow: visible;
+  #header {
+    height: 100px;
+    background: @logo no-repeat scroll 0 0;
+    h1 {
+      text-indent: -1000px;
+    }
+  }
+}
+
+#head {
+  margin: 15px 0;
+}
+
+.whiteBg {
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.bigger {
+  a {
+    color: @deepBlue;
+    font-size: 2em;
+    line-height: 2.5em;
+  }
+}
+
+.big {
+  a {
+    color: @deepBlue;
+    font-size: 1.5em;
+    line-height: 2em;
+  }
+}
+
+.footerWrapper {
+  margin-top: 15px;
+  min-height: 180px;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  #footer {
+    .menus {
+      display: none;
+    }
+    ul {
+      text-align: left;
+      margin: 55px 30px 20px 0;
+      float: left;
+      width: 120px;
+      h3 {
+        color: #3b444f;
+        font-size: 14px;
+        margin: -32px 0 15px 0;
+      }
+      li {
+        line-height: 28px;
+        float: left;
+        width: 100%;
+        a {
+          color: #111;
+          font-size: 0.9em;
+          &.hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .logoPic {
+      background: @logo repeat 0 0 transparent;
+      background-size: contain;
+      .square(100px);
+      float: right;
+      margin: 25px;
+    }
+    .mark {
+      padding-top: 20px;
+      h1 {
+        font-weight: bold;
+        font-size: 25px;
+        letter-spacing: 3px;
+        line-height: 20px;
+      }
+      p {
+        font-size: 12px;
+        max-width: 240px;
+        line-height: 28px;
+        a {
+          color: #ff4500;
+        }
+      }
+    }
+  }
+}
+
+.breadcrumb {
+  margin: 10px 0 0;
+  background: transparent;
+}
+
+.newsletter {
+  input {
+    background-color: white;
+    padding: 10px;
+    width: 100%;
+    color: @gray-dark;
+    border: 0;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+}
+
+.footerInfo {
+  li {
+    margin-right: 1rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+}
+
+nav {
+  .whiteBg;
+  margin-bottom: 10px;
+  .menus {
+    li {
+      color: #3b444f;
+      display: block;
+      border-bottom: 1px solid #e6edf5;
+      &:hover {
+        background-color: #f2f6fa;
+      }
+      a {
+        line-height: 45px;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+      &.subItem {
+        ul {
+          overflow-y: hidden;
+          max-height: 0;
+          .transition(all 0.5s ease);
+          .transition-delay(0.5s);
+        }
+        span{
+          margin: -25px 15px 0;
+        }
+        &:hover {
+          span{
+            display: none;
+          }
+          ul {
+            max-height: 600px;
+          }
+        }
+      }
+    }
+  }
+}
+
+#logo {
+  img {
+  }
+}
+
+#menu {
+  li {
+  }
+}
+
+#content {
+  h3 {
+    strong {
+      float: left;
+    }
+    .all {
+      float: right;
+      font-weight: normal;
+      font-size: 0.8em;
+      margin-right: 8px;
+    }
+  }
+}
+
+#footer {
+}
+
+#top-panel {
+}
+
+#bottom-panel {
+}
+
+.col-md-2p5 {
+  width: 25%;
+}
+
+.sightCardList {
+  margin-right: -10px;
+  .col-md-3 {
+    padding-left: 0;
+    padding-right: 10px;
+    .wrapper {
+      display: block;
+      padding: 13px 15px 0 15px;
+      background-color: white;
+      background-repeat: no-repeat;
+      background-position: 0 -540px;
+      background-size: contain;
+      margin-bottom: 10px;
+      text-decoration: none;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
+      h3 {
+        font-size: 1.2rem;
+        word-wrap: break-word;
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+      p {
+        font-size: 0.93rem;
+        line-height: 1.3rem;
+      }
+      .content {
+        opacity: 1;
+        transition: opacity .25s ease-in-out;
+      }
+      &:visited, &:hover {
+        background-position: 0 0;
+        .transition(background-position 1s);
+        .transition-delay(.5s ease-in-out);
+        .content {
+          opacity: 0.2;
+        }
+      }
+      .title {
+        text-align: center;
+        height: 145px;
+        margin: 0;
+        strong {
+          float: none !important;
+          margin: auto;
+          line-height: 38px;
+          font-size: 30px;
+          word-wrap: break-word;
+        }
+      }
+    }
+  }
+}
+
+.carousel {
+  margin-bottom: 15px;
+  .carousel-inner {
+    .item {
+      width: 100%;
+      border-radius: 5px;
+      img {
+        width: 100%;
+      }
+      .carousel-caption {
+        padding: 0;
+        left: 20px;
+        text-align: left;
+      }
+    }
+  }
+  .carousel-control {
+    display: none;
+  }
+  .carousel-indicators {
+    position: absolute;
+    right: 40px;
+    left: auto;
+    width: auto;
+  }
+  &:hover {
+    .carousel-control {
+      .transition(all 0.5s ease);
+      display: block;
+    }
+  }
+}
+
+.headMenu {
+  text-align: right;
+  li {
+    a {
+      padding: 5px 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      &:hover, &.current {
+        background-color: #32cd32;
+        color: white;
+      }
+    }
+  }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: @screen-sm-min) {
+  //  .carousel {
+  //    .item {
+  //      height: 288px;
+  //    }
+  //  }
+  //  .sightCardList {
+  //    .wrapper {
+  //      height: 336px;
+  //    }
+  //  }
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) {
+  .carousel {
+    .item {
+      height: 288px;
+    }
+  }
+
+  .sightCardList {
+    .wrapper {
+      height: 336px;
+    }
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: @screen-md-min) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: @screen-lg-min) {
+  .carousel {
+    .item {
+      height: 350px;
+    }
+  }
+
+  .sightCardList {
+    .wrapper {
+      height: 412px;
+    }
+  }
+}

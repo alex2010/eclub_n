@@ -1,0 +1,67 @@
+[
+    {
+        "fName": "admin.js",
+        "inc": "adminpc",
+        "folder": "lib",
+        "type": "js",
+        "zip": true,
+        "clean": true,
+        "files": [
+            "_inc:frame",
+
+            "_inc:models",
+            "_inc:widget",
+            "_inc:adminWidget",
+            "_inc:form",
+
+            "_inc:plugins",
+            "_inc:date",
+            "_inc:message_en",
+            "_inc:message_zh",
+
+            "/module/##code/src/pc/admin.coffee",
+            "/module/admin/src/pc/app.coffee",
+            "/module/admin/src/pc/init.coffee"
+        ]
+    },
+    {
+        "fName": "pc.js",
+        "inc": "pc",
+        "folder": "lib",
+        "type": "js",
+        "zip": true,
+        "clean": true,
+        "files": [
+            "_inc:frame",
+
+            "/src/widget/menu.coffee",
+            "/src/widget/pickBox.coffee",
+            "/src/widget/pickPicBox.coffee",
+            "/src/widget/paging.coffee",
+            "/src/widget/map.coffee",
+            "/src/widget/slide.coffee",
+
+            "/module/##code/src/pc/app.coffee",
+            "/module/##code/src/pc/init.coffee"
+        ]
+    },
+    {
+        "fName": "pc.css",
+        "folder": "css",
+        "inc": "pc",
+        "type": "css",
+        "zip": true,
+        "files": [
+            "/module/##code/src/pc/css.less"
+        ]
+    },
+    {
+        "fName": "pc.html",
+        "folder": "lib",
+        "type": "html",
+        "files": [
+            "/module/##code/src/pc/tmpl.haml",
+            "/src/apps/tmpl.haml"
+        ]
+    }
+]

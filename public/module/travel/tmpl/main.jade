@@ -1,0 +1,123 @@
+doctype html
+html
+    head
+        title= title
+        include ../../../../views/inc/meta
+        block head
+    body
+        .headerWrapper
+            #header.container
+                h1 TRAVEL IN CHINA
+        #content.container
+            #head.row
+                ul.headMenu.inline.col-lg-12
+                    li
+                        a Main Sights
+                    li
+                        a Off the Beaten
+                    li
+                        a Free Sights
+                    li
+                        a Museums
+                    li
+                        a Need to know
+            #home.row
+                nav.col-md-2
+                    - var mClass = 'menus';
+                    include ../../../../views/inc/b3Menu
+                .col-md-10
+                    block content
+            .row
+                ol.breadcrumb
+                    li
+                        a(href='#')
+                            i.glyphicon.glyphicon-home
+                    li
+                        a(href='#') Beijing
+                    li
+                        a(href='#') Sights
+                    li.active Forbidden City
+
+        .footerWrapper
+            .container
+                #footer.row
+                    .col-md-9
+                        .footerBox
+                            ul.sep
+                                h3.c1 Top Ten Sights
+                                li.c1
+                                    a(href='/page/content-159.html') Forbidden City
+                                li.c1
+                                    a(href='/page/content-119.html') Great Wall
+                                li.c1
+                                    a(href='/page/content-151.html') Summer Palace
+                                li.c1
+                                    a(href='/team.html') Ming Tomb
+                                li.c1
+                                    a(href='/page/content-121.html') Hutong
+                            ul.sep
+                                h3.c2 Top Eevents
+                                li.c2
+                                    a(href='/page/content-122.html') English Salon
+                                li.c2
+                                    a(href='/linkList.html') Music Festival
+                                li.c2
+                                    a(href='http://www.eclubnet.com') Temple Fair
+                            ul.sep
+                                h3.c3 Top Restaurants
+                                li.c3
+                                    a(href='/page/form-null.html') Quanjude
+                                li.c3
+                                    a(href='/page/content-127.html') Bianyifang
+                                li.c3
+                                    a(href='/page/content-152.html') Da Dong
+                            ul.sep
+                                h3.c4 Top Shows
+                                li.c4
+                                    a(href='http://postenglishtime.com') Peking Opera
+                                li.c4
+                                    a(href='http://postenglishtime.com') Acrobatics
+                                li.c4
+                                    a(href='http://postenglishtime.com') Kung Fu
+                            ul.sep
+                                h3.c4 Top Shows
+                                li.c4
+                                    a(href='http://postenglishtime.com') Peking Opera
+                                li.c4
+                                    a(href='http://postenglishtime.com') Acrobatics
+                                li.c4
+                                    a(href='http://postenglishtime.com') Kung Fu
+                    .col-md-3.newsletter
+                        h4
+                            | Newsletter sign up
+                        p
+                            strong  Subscribe now
+                            |  and receive a
+                            strong  Fresh
+                            |  travel Information
+                        input(type='text', placeholder='Your@email.com')
+                        a.btn.btn-primary.btn-block Sign up
+        .container.footerInfo
+            .col-lg-8
+                ul.inline.row
+                    li
+                        a About us
+                    li
+                        a Contact us
+                    li
+                        a Press centre
+                    li
+                        a trade & advertising
+                    li
+                        a Terms & conditions
+            .col-lg-4
+                ul.inline.row
+                    strong Follow us:
+                    li Facebook
+                    li Twitter
+                    li Youtube
+                    li Wechat
+            p
+                | © 2014 China Viator. All rights reserved. No part of this site may be reproduced without our written permission.
+
+    include ../../../../views/inc/sub
