@@ -1,0 +1,98 @@
+settings = require('../setting')
+Mongodb = require('mongodb')
+
+oid = require('mongodb').ObjectID
+
+Db = Mongodb.Db
+Connection = Mongodb.Connection
+Server = Mongodb.Server
+
+module.exports = () ->
+
+    @db = new Db('main', new Server(settings.host, settings.port)) #, safe: true
+
+    @db.open()
+#
+#    @pick = (name, cName)->
+#        if @name isnt name
+#            @name = name
+#            @db = @db.db(name)
+#
+#        if @cName isnt cName or !@collection
+#            @cName = cName
+#            @collection = @db.collection cName
+#
+#        @collection
+
+    @load = (k)->
+        false
+
+    @put = ()->
+
+    @del = ()->
+#
+#    @get = (db, entity, opt, callback)->
+#        opt = @cleanOpt(opt)
+#        @pick(db, entity).findOne opt, (err, doc)->
+#            log err if err
+#            callback?(doc)
+#
+#    @find = (db, entity, opt, op, callback)->
+#        @pick(db, entity).find(opt, op).toArray (err, docs)->
+#            log err if err
+#            callback?(docs)
+#
+#
+#    @cleanOpt = (opt) ->
+#        if opt._id
+#            if _.isArray opt._id
+#                opt._id = (new oid(it) for it in opt._id)
+#            else
+#                opt._id = new oid(opt._id)
+#        opt
+#
+#    @count = (db, entity, opt, callback)->
+#        @pick(db, entity).count opt, (err, count)->
+#            log err if err
+#            callback(count)
+#
+#
+#    @findAndUpdate = (db, entity, filter, opt, callback)->
+#        filter = @cleanOpt(filter)
+#        delete opt._id
+#        @pick(db, entity).findOneAndUpdate filter, opt, (err, doc)->
+#            log err if err
+#            callback?(doc)
+#
+#    @save = (db, entity, items, callback)->
+#        [entity,keys] = entity.split(':')
+#        keys = keys.split(',') if keys
+#        items = [items] unless _.isArray items
+#        if keys
+#            for it in items
+#                @pick(db, entity).update _.pick(it, keys), it, upsert: true, (err, docs)->
+#                    throw err if err
+#                    callback?(docs)
+#        else
+#            @pick(db, entity).insert items, {safe: true}, (err, docs)->
+#                log err if err
+#                callback?(docs)
+#
+#    @del = (db, entity, opt, callback)->
+#        opt = @cleanOpt(opt)
+#        if opt._id
+#            m = 'deleteOne'
+#        else
+#            m = 'deleteMany'
+#        @pick(db, entity)[m] opt, null, (err, res)->
+#            log err if err
+#            callback(res)
+#
+#    @remove = (db, entity)->
+#        @pick(db, entity).remove()
+#
+#    @close = ->
+#        log 'closed'
+#        @db.close()
+
+    @
