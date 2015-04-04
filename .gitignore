@@ -2,8 +2,8 @@
 node_modules
 
 # heroku
-*.coffee
-*.less
+#*.coffee
+#*.less
 
 # github
 # *.js
