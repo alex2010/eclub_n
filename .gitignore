@@ -1,8 +1,17 @@
 .DS_Store
 node_modules
-*.js
-*.css
+
+# heroku
+*.coffee
+*.less
+
+# github
+# *.js
+# *.css
+
+public/module/bower_components
 back
 public/lib
+public/res
 memo.txt
 uploads
