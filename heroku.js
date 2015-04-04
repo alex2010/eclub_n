@@ -25,10 +25,12 @@ onError = function(error) {
   }
 };
 
+app.set('port', process.env.PORT || 5000);
+
 app._hk = 'hk';
 
 server = http.createServer(app);
 
-server.listen(5000);
+server.listen(app.get('port'));
 
 server.on('error', onError);
