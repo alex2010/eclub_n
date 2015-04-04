@@ -1,1 +1,1 @@
-web: node data.js
+web: node heroku.js
