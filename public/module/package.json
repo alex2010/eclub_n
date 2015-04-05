@@ -8,9 +8,9 @@
     "devDependencies": {
         "express": "~4",
         "grunt": "~0.4",
+        "bower": "~0.10",
 
         "grunt-contrib-connect": "~0.7.1",
-        "bower": "~0.10",
         "grunt-contrib-concat": "~0.3.0",
         "grunt-contrib-clean": "~0.5.0",
         "matchdep": "~0.1.2",

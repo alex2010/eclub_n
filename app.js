@@ -41,24 +41,6 @@ app.pickScript = function(code) {
   return sc;
 };
 
-app.setCommunity = function(dao, code, callback) {
-  if (app._community[code]) {
-    return callback();
-  } else {
-    return dao.get(code, 'community', {
-      code: code
-    }, function(c) {
-      return dao.get(code, 'role', {
-        title: 'guest'
-      }, function(item) {
-        c.menu = item.res.menu;
-        app._community[code] = c;
-        return callback();
-      });
-    });
-  }
-};
-
 app.set('view engine', 'jade');
 
 app.use(bodyParser.json());
@@ -71,7 +53,29 @@ app.use(cookieParser());
 
 app.use(express["static"](path.join(__dirname, 'public')));
 
-app.use('/', require('./routes/index'));
+app.setCommunity = function(dao, opt, callback) {
+  var v;
+  v = _.values(opt)[0];
+  if (app._community[v]) {
+    return callback();
+  } else {
+    return dao.get(code, 'community', opt, function(c) {
+      return dao.get(code, 'role', {
+        title: 'guest'
+      }, function(item) {
+        c.menu = item.res.menu;
+        app._community[v] = c;
+        return callback();
+      });
+    });
+  }
+};
+
+if (app.env) {
+  app.use('/', require('./routes/index'));
+} else {
+  app.use('/', require('./routes/prod'));
+}
 
 app.use(function(req, res, next) {
   var err;

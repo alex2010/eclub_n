@@ -28,17 +28,6 @@ app.pickScript = (code)->
         app._script[code] = sc
     sc
 
-
-app.setCommunity = (dao, code, callback)->
-    if app._community[code]
-        callback()
-    else
-        dao.get code, 'community', code: code, (c)->
-            dao.get code, 'role', title: 'guest', (item)->
-                c.menu = item.res.menu
-                app._community[code] = c
-                callback()
-
 # view engine setup
 app.set 'view engine', 'jade'
 
@@ -54,10 +43,23 @@ app.use cookieParser()
 app.use express.static(path.join(__dirname, 'public'))
 #app.use express.static(path.join(__dirname, 'public/res'))
 
-app.use '/', require('./routes/index')
+app.setCommunity = (dao, opt, callback)->
+    v = _.values(opt)[0]
+    if app._community[v]
+        callback()
+    else
+        dao.get code, 'community', opt, (c)->
+            dao.get code, 'role', title: 'guest', (item)->
+                c.menu = item.res.menu
+                app._community[v] = c
+                callback()
+
+if app.env
+    app.use '/', require('./routes/index')
+else
+    app.use '/', require('./routes/prod')
 
 
-# catch 404 and forward to error handler
 app.use (req, res, next) ->
     err = new Error('Not Found')
     err.status = 404
@@ -84,3 +86,15 @@ app.use (err, req, res, next) ->
     return
 
 module.exports = app
+
+
+
+#    app.setCommunity = (dao, url, callback)->
+#        if app._community[url]
+#            callback()
+#        else
+#            dao.get code, 'community', url: url, (c)->
+#                dao.get code, 'role', title: 'guest', (item)->
+#                    c.menu = item.res.menu
+#                    app._community[url] = c
+#                    callback()
