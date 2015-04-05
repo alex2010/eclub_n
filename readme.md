@@ -2,7 +2,7 @@
 
 ## run
 
-npm install -g grunt-cli pm2 grunt-express bower nodemon 
+npm install -g coffee-script grunt-cli pm2 grunt-express bower nodemon
 
 npm install
 
