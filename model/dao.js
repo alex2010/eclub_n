@@ -20,7 +20,7 @@ log = console.log;
 module.exports = function(name1, callback) {
   var opt, that;
   this.name = name1;
-  if (app._hk) {
+  if (app && app._hk) {
     opt = s[app._hk];
     that = this;
     Mongodb.MongoClient.connect("mongodb://" + opt.user + ":" + opt.psd + "@" + opt.host + ":" + opt.port + "/" + opt.db, function(err, db) {
@@ -33,7 +33,7 @@ module.exports = function(name1, callback) {
     this.db.open();
   }
   this.pick = function(name, cName) {
-    if (this.name !== name && !app.get('hk')) {
+    if (this.name !== name && !app._hk) {
       this.name = name;
       this.db = this.db.db(name);
     }

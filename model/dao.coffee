@@ -11,7 +11,7 @@ Server = Mongodb.Server
 log = console.log
 
 module.exports = (@name, callback) ->
-    if app._hk
+    if app and app._hk
         opt = s[app._hk]
         that = @
         Mongodb.MongoClient.connect "mongodb://#{opt.user}:#{opt.psd}@#{opt.host}:#{opt.port}/#{opt.db}", (err, db)->
@@ -23,7 +23,7 @@ module.exports = (@name, callback) ->
         @db.open()
 
     @pick = (name, cName)->
-        if @name isnt name and !app.get('hk')
+        if @name isnt name and !app._hk
             @name = name
             @db = @db.db(name)
 

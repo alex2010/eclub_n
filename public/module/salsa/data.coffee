@@ -1,7 +1,3 @@
-code = 'travel'
-log = console.log
-oid = require('mongodb').ObjectID
-
 adminRoleId = new oid()
 adminUserId = new oid()
 
@@ -104,15 +100,15 @@ post = [
 ]
 
 
-new require('../../../pData')
+module.exports =
     community:
         code: code
         name: 'travel in Beijing'
         url: 'tourguideinbeijing.herokuapp.com'
 
     data:
-        'role:title': role
-        'user:username': user
+#        'role:title': role
+#        'user:username': user
         'membership:uid,rid': membership
 
         'post:title': post

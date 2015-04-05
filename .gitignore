@@ -7,7 +7,7 @@ node_modules
 #*.less
 
 # github
-*.js
+#*.js
 # *.css
 
 
