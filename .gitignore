@@ -1,5 +1,7 @@
 .DS_Store
 .ftppass
+.idea
+npm-debug.log
 node_modules
 
 # heroku
