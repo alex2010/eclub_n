@@ -43,16 +43,16 @@ app.use cookieParser()
 app.use express.static(path.join(__dirname, 'public'))
 #app.use express.static(path.join(__dirname, 'public/res'))
 
-app.setCommunity = (dao, opt, callback)->
-    v = _.values(opt)[0]
-    if app._community[v]
-        callback()
-    else
-        dao.get code, 'community', opt, (c)->
-            dao.get code, 'role', title: 'guest', (item)->
-                c.menu = item.res.menu
-                app._community[v] = c
-                callback()
+app.setCommunity = (dao, code, callback)->
+#    v = _.values(opt)[0]
+#    if app._community[v]
+#        callback()
+#    else
+    dao.get code, 'community', code:code, (c)->
+        dao.get code, 'role', title: 'guest', (item)->
+            c.menu = item.res.menu
+            app._community[code] = c
+            callback()
 
 if app.env
     app.use '/', require('./routes/index')

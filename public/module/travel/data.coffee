@@ -1,7 +1,3 @@
-code = 'travel'
-log = console.log
-oid = require('mongodb').ObjectID
-
 adminRoleId = new oid()
 adminUserId = new oid()
 
@@ -38,13 +34,14 @@ role = [
                 href: '/sightList.html?category=great'
             ]
         ,
-            label: 'Famous Food'
+            label: 'Famous Food good'
             href: '/food.html'
         ,
             label: 'Beijing Shows'
             href: '/shows.html'
         ,
             label: 'Handicrafts'
+            title: 'xzcvxcvzxcv'
             href: '/crafts.html'
         ,
             label: 'Cars & Guides'
@@ -55,6 +52,9 @@ role = [
         ,
             label: 'Tours'
             href: '/tours.html'
+        ]
+        foot: [
+            label: 'sdfsdfsdf'
         ]
 ]
 
@@ -86,6 +86,14 @@ palace complex in the world."
         '17:00-18:00 19:00-21:00 (Wenday)'
         '17:00-18:00 19:00-21:00 (Thursday)'
     ]
+    refFile:
+        head: ['p1.jpg', 'p2.jpg']
+        p1:
+            title: 'Spring'
+            description: 'amazing spring'
+        p2:
+            title: 'Fall'
+            description: 'amazing Fall'
     sub: [
         title: 'RenShoudian'
         content: "asdfsdf sadfsdf'sdfsdfsadf"
@@ -93,6 +101,19 @@ palace complex in the world."
         title: 'cixi'
         content: 'asdasdsads asd asdasdasdasd'
     ]
+,
+    title: 'great wall'
+    phone: '1231231231'
+    address: 'sdvxcvzcvcvxczv'
+    content: "de moat at the very heart of Beijing, the For"
+    refFile:
+        head: ['p1.jpg', 'p2.jpg']
+        p1:
+            title: 'Spring'
+            description: 'amazing spring'
+        p2:
+            title: 'Fall'
+            description: 'amazing Fall'
 ]
 
 post = [
@@ -103,8 +124,13 @@ post = [
     content: 'sdfsdfsdzxcvcxv xzcvxzcv'
 ]
 
+content = [
+    title: '网站内容'
+    content: '对方水电费水电费'
+    brief: '121223'
+]
 
-new require('../../../pData')
+module.exports =
     community:
         code: code
         name: 'travel in Beijing'
@@ -117,5 +143,6 @@ new require('../../../pData')
 
         'post:title': post
         'sight:title': sight
+        'content:title': content
 
     reset: ['post']

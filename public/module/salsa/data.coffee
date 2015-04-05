@@ -12,7 +12,7 @@ role = [
                 data: 3
                 file: 6
             entity:
-                sight: 1
+                course: 1
                 content: 3
                 post: 4
                 head: 5
@@ -24,33 +24,14 @@ role = [
     title: 'guest'
     res:
         menu: [
-            label: 'Attractions'
-            href: '/attractions.html'
-            children: [
-                label: 'UNESCO'
-                href: '/sightList.html?category=unesco'
-            ,
-                label: 'Great Wall'
-                href: '/sightList.html?category=great'
-            ]
+            label: '首页'
+            href: '/'
         ,
-            label: 'Famous Food'
-            href: '/food.html'
+            label: '课程列表'
+            href: '/p/salsa/courseList'
         ,
-            label: 'Beijing Shows'
-            href: '/shows.html'
-        ,
-            label: 'Handicrafts'
-            href: '/crafts.html'
-        ,
-            label: 'Cars & Guides'
-            href: '/cg.html'
-        ,
-            label: 'Beijing Maps'
-            href: '/maps.html'
-        ,
-            label: 'Tours'
-            href: '/tours.html'
+            label: '关于我们'
+            href: '/p/about'
         ]
 ]
 
@@ -65,30 +46,20 @@ membership = [
     rid: adminRoleId
 ]
 
-sight = [
-    title: 'Summer Palace'
+course = [
+    title: 'Salsa Basic'
     phone: '12233322'
-    address: 'sadfsd sdfsdfsadf'
-    fee: 200
-    route: 'sadfsd dsfdsfsdaf'
-    lat: '100'
-    lng: '200'
+    fee: '800元/月'
     brief: 'Ringed by a 52m-wide moat at the very heart of Beijing, the Forb'
     content: "Ringed by a 52m-wide moat at the very heart of Beijing, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest
 palace complex in the world."
-    opening: [
-        '17:00-18:00 19:00-21:00 (Monday)'
-        '17:00-18:00 19:00-21:00 (Tuesday)'
-        '17:00-18:00 19:00-21:00 (Wenday)'
-        '17:00-18:00 19:00-21:00 (Thursday)'
-    ]
-    sub: [
-        title: 'RenShoudian'
-        content: "asdfsdf sadfsdf'sdfsdfsadf"
-    ,
-        title: 'cixi'
-        content: 'asdasdsads asd asdasdasdasd'
-    ]
+    startDate: new Date()
+    endDate: new Date()
+
+,
+    title: 'great wall'
+    phone: '1231231231'
+    address: 'sdvxcvzcvcvxczv'
 ]
 
 post = [
@@ -107,11 +78,11 @@ module.exports =
         url: 'tourguideinbeijing.herokuapp.com'
 
     data:
-#        'role:title': role
-#        'user:username': user
+        'role:title': role
+        'user:username': user
         'membership:uid,rid': membership
 
         'post:title': post
-        'sight:title': sight
+        'course:title': course
 
     reset: ['post']

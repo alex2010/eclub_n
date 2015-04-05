@@ -5,6 +5,8 @@ async = require('async');
 
 _db = 'main';
 
+_db = 'salsa';
+
 _code = '';
 
 process.argv.forEach(function(val, index, array) {

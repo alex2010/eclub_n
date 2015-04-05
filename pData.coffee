@@ -1,6 +1,7 @@
 async = require('async')
 
 _db = 'main'
+_db = 'salsa'
 _code = ''
 process.argv.forEach (val, index, array)->
     _code = array[2]

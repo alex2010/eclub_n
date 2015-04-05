@@ -1,19 +1,17 @@
+all = (ctx)->
+    ctx.css = ctx.cssPath('css')
+    ctx
+
 module.exports =
-    all: (item)->
-        item.css = item.cssPath('css')
 
-    index: (item, callback)->
-        item.css = item.cssPath('css')
-        log item.c.code
-        dao.find item.c.code, 'sight', {}, {}, (res)->
-            log 'zzcv'
-            log res
-            item.sights = res
-            callback item
+    index: (ctx, callback)->
+        log 'index page'
+        dao.find ctx.c.code, 'sight', {}, {}, (res)->
+            ctx.sights = res
+            callback all ctx
 
-    sight: (item, callback)->
+    sight: (ctx, callback)->
         log 'sight page'
-        item.css = item.cssPath('css')
-        callback item
+        callback all ctx
 
 

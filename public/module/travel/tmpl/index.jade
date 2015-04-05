@@ -19,15 +19,17 @@ block content
                         h4
                             a(target='_blank') Top things to do in Beijing
                         p The Forbidden City by Francisco Diez Creative Commons Attribution
+
+
     .sightCardList.clearfix
-        .col-md-3.col-sm-4
-            a.wrapper(href='/china/beijing/sights/other/forbidden-city')
-                .content
-                    img(src='/res/upload/travel/images/cc.png')
-                    h3  Forbidden City
-                    p
-                        | Ringed by a 52m-wide moat at the very heart of Běijīng, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest
-                        | palace complex in the world.
+        each it in sights
+            .col-md-3.col-sm-4
+                a.wrapper(href= f.navPage(c.code, it))
+                    .content
+                        img(src= f.resPath(c.code, it.refFile.head[0]))
+                        h3= it.title
+                        p= it.content
+
         .col-md-3.col-sm-4
             a.wrapper(href='/china/beijing/sights/other/forbidden-city')
                 .content

@@ -9,6 +9,12 @@ module.exports =
     resPath: (code, path)->
         _resPath + 'upload/' + code + '/' + path
 
+    navPage: (code, it)->
+        if app.env
+            "/p/#{code}/sight/#{it._id}"
+        else
+            "/p/sight/#{it._id}"
+
     crumbItem: (items)->
         [
             label: '首页'

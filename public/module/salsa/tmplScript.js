@@ -8,14 +8,12 @@ all = function(ctx) {
 
 module.exports = {
   index: function(ctx, callback) {
-    log('index page');
-    return dao.find(ctx.c.code, 'sight', {}, {}, function(res) {
-      ctx.sights = res;
+    return dao.find(ctx.c.code, 'course', {}, {}, function(res) {
+      ctx.course = res;
       return callback(all(ctx));
     });
   },
-  sight: function(ctx, callback) {
-    log('sight page');
+  courseList: function(ctx, callback) {
     return callback(all(ctx));
   }
 };

@@ -17,7 +17,7 @@ pageOpt = (code)->
     i: i18n.load(code)
     cstr: JSON.stringify(_.pick(c, 'code', 'url'))
     cssPath: (name)->
-        if app.env then "/module/#{code}/src/pc/#{name}.css" else "/lib/#{name}.css"
+        if app.env then "/module/#{code}/src/style/#{name}.css" else "/lib/#{name}.css"
     jsPath: (name)->
         if app.env then "/module/#{code}/src/#{name}.js" else "/lib/#{name}.js"
 

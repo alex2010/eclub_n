@@ -1,0 +1,43 @@
+doctype html
+html
+    head
+        title= title
+        include ../../../../views/inc/meta
+        block head
+    body
+        .headerWrapper
+            #header.container
+                h1= c.title
+        #content.container
+            #head.row
+                nav.col-md-2
+                    - var mClass = 'menus';
+                    include ../../../../views/inc/b3Menu
+            #home.row
+                block content
+
+        .footerWrapper
+            .container
+                #footer.row
+                    .col-md-9
+
+                    .col-md-3.newsletter
+
+        .container.footerInfo
+            .col-lg-8
+                ul.inline.row
+                    li
+                        a About us
+                    li
+                        a Contact us
+                    li
+                        a Press centre
+                    li
+                        a trade & advertising
+                    li
+                        a Terms & conditions
+            .col-lg-4
+
+            p
+                | salsa俱乐部
+    include ../../../../views/inc/sub

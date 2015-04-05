@@ -53,22 +53,18 @@ app.use(cookieParser());
 
 app.use(express["static"](path.join(__dirname, 'public')));
 
-app.setCommunity = function(dao, opt, callback) {
-  var v;
-  v = _.values(opt)[0];
-  if (app._community[v]) {
-    return callback();
-  } else {
-    return dao.get(code, 'community', opt, function(c) {
-      return dao.get(code, 'role', {
-        title: 'guest'
-      }, function(item) {
-        c.menu = item.res.menu;
-        app._community[v] = c;
-        return callback();
-      });
+app.setCommunity = function(dao, code, callback) {
+  return dao.get(code, 'community', {
+    code: code
+  }, function(c) {
+    return dao.get(code, 'role', {
+      title: 'guest'
+    }, function(item) {
+      c.menu = item.res.menu;
+      app._community[code] = c;
+      return callback();
     });
-  }
+  });
 };
 
 if (app.env) {
