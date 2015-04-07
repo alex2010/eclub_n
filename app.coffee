@@ -6,34 +6,25 @@ cookieParser = require('cookie-parser')
 bodyParser = require('body-parser')
 
 `_ = require('underscore');
+async = require('async');
+fs = require('fs');
 app = express();
 app.env = app.get('env') == 'development';
 app.setting = require('./setting');
+oid = require('mongodb').ObjectID;
 log = console.log;
 _path = __dirname;
 _resPath = app.env ? '/res/' : setting.res_path;
-dao = new require('./model/dao')('main');
-dbCache = new require('./model/cache')()`
-
-app._script = {}
-app._community = {}
-
-_ts = require('./tmplScript')
-app.pickScript = (code)->
-    sc = app._script[code]
-    if sc
-        sc
-    else
-        sc = _.extend _.clone(_ts), require("./public/module/#{code}/tmplScript")
-        app._script[code] = sc
-    sc
+_mdb = 'main';
+dao = new require('./model/dao')(_mdb);
+dbCache = new require('./model/cache')();
+`
 
 # view engine setup
 app.set 'view engine', 'jade'
 
-
 # uncomment after placing your favicon in /public
-#app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 #app.use logger('dev')
 app.use bodyParser.json()
@@ -43,21 +34,19 @@ app.use cookieParser()
 app.use express.static(path.join(__dirname, 'public'))
 #app.use express.static(path.join(__dirname, 'public/res'))
 
-app.setCommunity = (dao, code, callback)->
-#    v = _.values(opt)[0]
-#    if app._community[v]
-#        callback()
-#    else
-    dao.get code, 'community', code:code, (c)->
-        dao.get code, 'role', title: 'guest', (item)->
-            c.menu = item.res.menu
-            app._community[code] = c
-            callback()
+app._community = {}
 
-if app.env
-    app.use '/', require('./routes/index')
-else
-    app.use '/', require('./routes/prod')
+setTimeout ->
+    dao.find _mdb, 'community', {}, {}, (res)->
+        log 'init data...'
+        for it in res
+            app._community[it.url] = it
+
+, 500
+
+#dao.pick(_mdb, 'cache').createIndex 'page cache', time: 1, expireAfterSeconds: 2
+
+app.use '/', require('./routes/prod')
 
 
 app.use (req, res, next) ->
@@ -87,14 +76,3 @@ app.use (err, req, res, next) ->
 
 module.exports = app
 
-
-
-#    app.setCommunity = (dao, url, callback)->
-#        if app._community[url]
-#            callback()
-#        else
-#            dao.get code, 'community', url: url, (c)->
-#                dao.get code, 'role', title: 'guest', (item)->
-#                    c.menu = item.res.menu
-#                    app._community[url] = c
-#                    callback()

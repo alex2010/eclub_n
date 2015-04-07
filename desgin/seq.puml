@@ -1,0 +1,11 @@
+@startuml
+App -> Dao : request dao
+Dao --> App : returen data
+Dao -> Alice : get date
+Dao -> Bob : get money
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
+@enduml

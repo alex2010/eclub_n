@@ -1,14 +1,15 @@
 u = require '../util'
 oid = require('mongodb').ObjectID
 async = require('async')
-tmplUtil = require('../tmplUtil')
-
+tmplUtil = require('../views/tmplUtil')
+ts = require('../views/tmplScript')
+jade = require('jade')
 i18n = require('../i18n/lang')('zh')
 
-pageOpt = (code)->
-    c = app._community[code]
+pageOpt = (c)->
+    code = c.code
 
-    title: 'console'
+    title: c.title
     lang: 'zh'
     mode: app.env
     c: c
@@ -22,52 +23,49 @@ pageOpt = (code)->
         if app.env then "/module/#{code}/src/#{name}.js" else "/lib/#{name}.js"
 
 
-module.exports =
+pre =(req)->
+    ctx = pageOpt(req.c)
+    ps = req.params
+    ctx.index = ps.page || ps.entity || 'index'
+    ctx
 
+pickScript = (ctx)->
+    sc = require("../public/module/#{ctx.c.code}/tmplScript")
+
+    initOpt = sc._init(ctx) || {}
+
+    opt = if sc[ctx.index]
+        sc[ctx.index](ctx) || {}
+    else if ts[ctx.index]
+        ts[ctx.index](ctx) || {}
+    else
+        {}
+
+    _.extend initOpt, opt
+
+render = (req, rsp, ctx)->
+    opt = pickScript(ctx)
+    dao.pick(_mdb, 'cache').ensureIndex time: 1,
+        expireAfterSeconds: 7200
+        background: true
+    async.parallel opt, (err, res)->
+        _.extend ctx, res
+        str = jade.renderFile("#{req.fp}/#{ctx.index}.jade", ctx)
+        unless app.env
+            dao.save _mdb, 'cache',
+                k: req.k
+                str: str
+                time: new Date()
+        rsp.end str
+
+module.exports =
     page: (req, rsp) ->
-        code = req.params.code
-        page = req.params.page
-        opt = pageOpt(code)
-        opt.index = page
-        script = app.pickScript(code)
-        rc = (opt)->
-            rsp.render page, opt
-        if script[page]
-            script[page] opt, rc
-        else
-            rc opt
+        render req, rsp, pre(req)
 
     entity: (req, rsp) ->
-        code = req.params.code
-        entity = req.params.entity
-        script = app.pickScript(code)
-        opt = pageOpt(code)
-
-        opt.index = entity
-        log 'zxcvcxvzc'
-        dao.get code, entity, _id: req.params.id, (item)->
-            log item
+        ctx = pre(req)
+        dao.get ctx.c.code, req.params.entity, _id: req.params.id, (item)->
             unless item
-                log '5050'
-                req.redirect './404.html'
-                return
-            opt = _.extend opt, item
-            rc = (opt)->
-                rsp.render entity, opt
-            if script[entity]
-                script[entity] opt, rc
-            else
-                log 'zxcvxcvxzcv'
-                rc opt
-
-#
-#    console: (req, rsp) ->
-#        dao.get 'community', code: _code, (item)->
-#            opt =
-#                title: 'console'
-#                lang: 'zh'
-#                index: 'console'
-#                app: 'admin'
-#                mode: app.env
-#                c: item
-#            rsp.render 'console', opt
+                rsp.end('no item')
+            ctx = _.extend ctx, item
+            render req, rsp, ctx

@@ -39,10 +39,10 @@ role = [
           href: '/'
         }, {
           label: '课程列表',
-          href: '/p/salsa/courseList'
+          href: '/courseList'
         }, {
           label: '关于我们',
-          href: '/p/about'
+          href: '/about'
         }
       ]
     }
@@ -93,8 +93,8 @@ post = [
 module.exports = {
   community: {
     code: code,
-    name: 'travel in Beijing',
-    url: 'tourguideinbeijing.herokuapp.com'
+    name: 'YMSalsa',
+    url: 't.salsa.com'
   },
   data: {
     'role:title': role,

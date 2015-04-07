@@ -1,15 +1,18 @@
-all = (ctx)->
-    ctx.css = ctx.cssPath('css')
-    ctx
-
 module.exports =
 
-    index: (ctx, callback)->
-        dao.find ctx.c.code, 'course', {}, {}, (res)->
-            ctx.course = res
-            callback all ctx
+    _init: (ctx)->
+        ctx.css = ctx.cssPath('css')
+        menu: (cb)->
+            dao.get ctx.c.code, 'role', title: 'guest', (res)->
+                cb(null, res.res.menu)
 
-    courseList: (ctx, callback)->
-        callback all ctx
+    index: (ctx)->
+        course: (cb)->
+            dao.find ctx.c.code, 'course', {}, {}, (res)->
+                cb(null, res)
+
+
+    courseList: (ctx)->
+        null
 
 

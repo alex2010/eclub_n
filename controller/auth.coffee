@@ -12,9 +12,8 @@ checkType = (k)->
 authController =
 
     login: (req, rsp) ->
-        code = req.params.code
+        code = req.c.code
         opt = checkType req.body.username
-        log opt
         dao.get code, 'user', opt, (user)->
             unless user
                 rsp.status(300).send msg: 'm.login_f'

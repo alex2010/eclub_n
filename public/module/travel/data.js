@@ -164,7 +164,7 @@ module.exports = {
   community: {
     code: code,
     name: 'travel in Beijing',
-    url: 'tourguideinbeijing.herokuapp.com'
+    url: 't.travel.com'
   },
   data: {
     'role:title': role,

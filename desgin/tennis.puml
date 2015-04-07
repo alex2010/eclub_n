@@ -1,0 +1,30 @@
+@startuml
+left to right direction
+skinparam packageStyle rect
+
+
+:教练: << Human >>
+:球员:
+:参与者:
+
+
+
+
+:服务器: << Application >>
+
+rectangle 微信应用 {
+    教练 -- (微信应用)
+    (微信应用) .> (登录) : include
+    (个人信息) .> (微信应用) : include
+    (微信应用) -- 服务器
+}
+
+rectangle 网站应用 {
+    教练 -- (网站应用)
+    (微信应用) .> (登录) : include
+    (个人信息) .> (微信应用) : include
+    (微信应用) -- 服务器
+}
+
+
+@enduml

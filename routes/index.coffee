@@ -1,7 +1,6 @@
 router = require('express').Router()
 path = require('path')
 
-
 router.get '/', (req, res, next) ->
     res.render 'index', title: 'Express'
 
@@ -10,7 +9,6 @@ router.get '/p/:code/*', (req, rsp, next)->
     app.set 'views', path.join(_path, "public/module/#{code}/tmpl")
     app.setCommunity dao, code, ->
         next()
-
 
 auth = require '../controller/auth'
 data = require '../controller/data'

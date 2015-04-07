@@ -1,0 +1,18 @@
+@startuml
+
+package "Some Group" {
+HTTP - [First Component]
+SOA - [Another Component]
+}
+
+package "Other Groups" {
+FTP - [Second Component]
+[First Component] --> FTP
+}
+
+package "BB Groups" {
+Dao - [DAO COM]
+[DAO COM] --> FTP
+}
+
+@enduml

@@ -9,18 +9,19 @@ Connection = Mongodb.Connection
 Server = Mongodb.Server
 
 log = console.log
-
+_opt = {w: 1}
 module.exports = (@name, callback) ->
     if app and app._hk
         opt = s[app._hk]
         that = @
         Mongodb.MongoClient.connect "mongodb://#{opt.user}:#{opt.psd}@#{opt.host}:#{opt.port}/#{opt.db}", (err, db)->
-            log 'ping t'
+            log 'connect to hk'
             that.db = db
             callback?()
     else
         @db = new Db(@name || s.db, new Server(s.host, s.port)) #, safe: true
-        @db.open()
+        @db.open ->
+            callback?()
 
     @pick = (name, cName)->
         if @name isnt name and !app._hk
@@ -33,6 +34,9 @@ module.exports = (@name, callback) ->
 
         @collection
 
+    #    @index = (db, entity, index, opt)->
+    #
+    #        @pick(db, entity).createIndex index, opt
 
     @get = (db, entity, opt, callback)->
         opt = @cleanOpt(opt)
@@ -40,8 +44,8 @@ module.exports = (@name, callback) ->
             log err if err
             callback?(doc)
 
-    @find = (db, entity, opt, op, callback)->
-        @pick(db, entity).find(opt, op).toArray (err, docs)->
+    @find = (db, entity, filter, op, callback)->
+        @pick(db, entity).find(filter, op).toArray (err, docs)->
             log err if err
             callback?(docs)
 
@@ -81,18 +85,23 @@ module.exports = (@name, callback) ->
                 log err if err
                 callback?(docs)
 
-    @del = (db, entity, opt, callback)->
-        opt = @cleanOpt(opt)
-        if opt._id
+    @del = ()->
+        log 'rm'
+
+    @delItem = (db, entity, filter, opt = _opt, callback)->
+        filter = @cleanOpt(filter)
+        if filter._id
             m = 'deleteOne'
         else
             m = 'deleteMany'
-        @pick(db, entity)[m] opt, null, (err, res)->
+        log m
+        @pick(db, entity)[m] filter, opt, (err, res)->
             log err if err
-            callback(res)
+            log 'del finish'
+            callback?(res)
 
-    @remove = (db, entity)->
-        @pick(db, entity).remove()
+    @remove = (db, entity, filter, opt = _opt, callback)->
+        @pick(db, entity).remove(filter, opt, callback)
 
     @close = ->
         log 'closed'

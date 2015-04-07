@@ -1,17 +1,17 @@
-all = (ctx)->
-    ctx.css = ctx.cssPath('css')
-    ctx
-
 module.exports =
 
-    index: (ctx, callback)->
-        log 'index page'
-        dao.find ctx.c.code, 'sight', {}, {}, (res)->
-            ctx.sights = res
-            callback all ctx
+    _init: (ctx)->
+        ctx.css = ctx.cssPath('css')
+        menu: (cb)->
+            dao.get ctx.c.code, 'role', title: 'guest', (res)->
+                cb(null, res.res.menu)
 
-    sight: (ctx, callback)->
-        log 'sight page'
-        callback all ctx
+    index: (ctx)->
+        sights: (cb)->
+            dao.find ctx.c.code, 'sight', {}, {}, (res)->
+                cb(null, res)
+
+    sight: (ctx)->
+        null
 
 

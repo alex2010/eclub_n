@@ -28,7 +28,8 @@ cleanItem = (q)->
 dataController =
 
     list: (req, rsp) ->
-        code = req.params.code
+        code = req.c.code
+        log code
         if req.query
             op =
                 skip: u.d(req.query, 'offset') || 0
@@ -42,14 +43,14 @@ dataController =
                 rsp.send u.r entities, count
 
     get: (req, rsp) ->
-        code = req.params.code
+        code = req.c.code
         entity = req.params.entity
 
         dao.get code, entity, _id: req.params.id, (item)->
             rsp.send u.r item
 
     edit: (req, rsp) ->
-        code = req.params.code
+        code = req.c.code
         entity = req.params.entity
         bo = req.body
         _attrs = bo._attrs
@@ -59,7 +60,7 @@ dataController =
             rsp.send u.r _.pick(item, _attrs)
 
     save: (req, rsp) ->
-        code = req.params.code
+        code = req.c.code
         entity = req.params.entity
         bo = req.body
         _attrs = bo._attrs
@@ -69,7 +70,7 @@ dataController =
             rsp.send u.r _.pick(item, _attrs)
 
     del: (req, rsp) ->
-        code = req.params.code
+        code = req.c.code
         entity = req.params.entity
         dao.del code, entity, _id: req.params.id, ->
             rsp.send msg: 'del.ok'
