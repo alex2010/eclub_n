@@ -21,7 +21,7 @@ require('./ext/string');
 
 dao = new require('./model/dao')(_db, function() {
   var data, entity, k, ref, results, v;
-  if (args.length > 2) {
+  if (args.length > 3) {
     entity = args[3];
     return dao.remove(code, entity, {}, {}, function() {
       var a, b, i, it, k, len, list, ob, ref, ref1, v;

@@ -14,7 +14,7 @@ code = args[2]
 require('./ext/string')
 
 dao = new require('./model/dao') _db, ->
-    if args.length > 2
+    if args.length > 3
         entity = args[3]
         dao.remove code, entity, {}, {}, ->
             list = []
