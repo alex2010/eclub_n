@@ -25,7 +25,7 @@ pageOpt = function(c) {
     c: c,
     app: 'main',
     f: tmplUtil,
-    i: i18n.load(code),
+    i18: i18n.load(code),
     cstr: JSON.stringify(_.pick(c, 'code', 'url')),
     cssPath: function(name) {
       if (app.env) {

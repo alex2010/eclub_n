@@ -1,11 +1,21 @@
-module.exports =
-    img: (path)->
-        id = randomChar(4)
-        """<div id="#{id}" class="#{cls||''}" src="#{path}"
-        pop="#{pop||false}" style="background:url(#{this.rPath}/img/loading-bk.gif) no-repeat 50% 50%">loading...</div>"""
+util = {}
 
-    link: (name, it, cls)->
-        "<a href='/#{name}/#{it.id}' title='#{it.title}' class='#{cls || ''}'>#{it.title}</a>"
+_.extend util,
+
+    imgItem: (it, code, name = 'head')->
+        if it.refFile and it.refFile[name]
+            path = it.refFile[name][0]
+        else
+            path = ''
+        util.img util.resPath(code, path)
+
+    img: (path, cls = 'markImg', pop = false)->
+        id = String.randomChar(4)
+        """<div id="#{id}" class="#{cls}" src="#{path}" pop="#{pop}"
+        style="background:url(#{_resPath}/img/loading-bk.gif) no-repeat 50% 50%">loading...</div>"""
+
+    link: (name, it, prop = 'title', cls)->
+        "<a href='/#{name}/#{it._id}' title='#{it.title}' class='#{cls || ''}'>#{it[prop]}</a>"
 
     resPath: (code, path)->
         _resPath + 'upload/' + code + '/' + path
@@ -19,3 +29,13 @@ module.exports =
             href: '/'
         ].concat items
 
+    copyRight: (c, name, id)->
+        path = "http://#{c.url}/#{name}/#{id}"
+        """
+        <div class="copyright"><strong>C</strong><div>
+            <p>除非特别声明，本站文章均为#{c.title}原创文章，转载请注明原文链接</p>
+            <p>原文地址：<a href="#{path}">#{path}</a></p>
+        </div></div>
+        """
+
+module.exports = util

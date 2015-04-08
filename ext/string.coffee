@@ -20,6 +20,12 @@ _.extend String::,
         @substr(@lastIndexOf('/') + 1)
 
 
+String.randomChar = (len, x = '0123456789qwertyuioplkjhgfdsazxcvbnm') ->
+    ret = x.charAt(Math.ceil(Math.random() * 10000000) % x.length)
+    for n in [1..len]
+        ret += x.charAt(Math.ceil(Math.random() * 10000000) % x.length)
+    ret
+
 _.extend Date::,
 
     isSameDay: (d) ->

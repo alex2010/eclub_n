@@ -34,6 +34,18 @@ _.extend(String.prototype, {
   }
 });
 
+String.randomChar = function(len, x) {
+  var i, n, ref, ret;
+  if (x == null) {
+    x = '0123456789qwertyuioplkjhgfdsazxcvbnm';
+  }
+  ret = x.charAt(Math.ceil(Math.random() * 10000000) % x.length);
+  for (n = i = 1, ref = len; 1 <= ref ? i <= ref : i >= ref; n = 1 <= ref ? ++i : --i) {
+    ret += x.charAt(Math.ceil(Math.random() * 10000000) % x.length);
+  }
+  return ret;
+};
+
 _.extend(Date.prototype, {
   isSameDay: function(d) {
     return this.getFullYear() === d.getFullYear() && this.getMonth === d.getMonth && this.getDate() === d.getDate();

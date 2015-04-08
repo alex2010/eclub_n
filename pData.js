@@ -24,7 +24,7 @@ dao = new require('./model/dao')(_db, function() {
   if (args.length > 3) {
     entity = args[3];
     return dao.remove(code, entity, {}, {}, function() {
-      var a, b, i, it, k, len, list, ob, ref, ref1, v;
+      var a, b, i, it, j, k, len, len1, list, ob, ref, ref1, results, v;
       list = [];
       ref = require("./public/module/" + code + "/data/" + entity);
       for (i = 0, len = ref.length; i < len; i++) {
@@ -33,12 +33,17 @@ dao = new require('./model/dao')(_db, function() {
         for (k in it) {
           v = it[k];
           if (v !== null && !(k === 'cid' || k === 'version')) {
+            if (_.isString(v) && v.isEmpty()) {
+              continue;
+            }
             if (k.indexOf('_') > -1) {
               ref1 = k.split('_'), a = ref1[0], b = ref1[1];
               b = b.capitalize();
               k = [a, b].join('');
+            } else if (k === 'category') {
+              k = 'cat';
             }
-            if (v.toString().indexOf('{') === 0) {
+            if (_.isString(v) && v.indexOf('{') === 0) {
               v = JSON.parse(v);
             } else if (v.length === 19 && v.indexOf('20') === 0) {
               v = Date.parseLocal(v);
@@ -48,10 +53,55 @@ dao = new require('./model/dao')(_db, function() {
             }
             ob[k] = v;
           }
+          if (entity === 'user') {
+            if (it.woid) {
+              ob.wt = {
+                oid: it.woid
+              };
+              delete it.woid;
+              if (it.wid) {
+                ob.wt.id = it.wid;
+                delete it.wid;
+              }
+              if (it.wunid) {
+                ob.wt.unid = it.wunid;
+                delete it.wunid;
+              }
+            }
+          }
         }
         list.push(ob);
       }
-      return dao.save(code, args[3], list);
+      if (entity === 'role') {
+        entity += ':title';
+      } else if (entity === 'user') {
+        entity += ':username';
+      }
+      results = [];
+      for (j = 0, len1 = list.length; j < len1; j++) {
+        it = list[j];
+        results.push(dao.save(code, entity, it, function(res) {
+          var act, filter;
+          act = res.ops[0];
+          if (act && entity === 'activity' && act.master && !act.master.isEmpty()) {
+            filter = {
+              username: {
+                $in: act.master.split(',')
+              }
+            };
+            act.master = {};
+            return dao.find(code, 'user', filter, {}, function(ru) {
+              var l, len2, u;
+              for (l = 0, len2 = ru.length; l < len2; l++) {
+                u = ru[l];
+                act.master[u._id] = _.pick(u, 'id', 'username', 'title', 'industry', 'introduction');
+              }
+              return dao.save(code, entity + ':_id', act);
+            });
+          }
+        }));
+      }
+      return results;
     });
   } else {
     data = require("./public/module/" + code + "/data");
@@ -70,4 +120,4 @@ dao = new require('./model/dao')(_db, function() {
 
 _.delay(function() {
   return dao.close();
-}, 5000);
+}, 6000);

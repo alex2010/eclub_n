@@ -22,11 +22,14 @@ app.setting = require('./setting');
 oid = require('mongodb').ObjectID;
 log = console.log;
 _path = __dirname;
-_resPath = app.env ? '/res/' : setting.res_path;
+_resPath = app.env ? '/res/' : app.setting.res_path;
+_resPath = app.setting.res_path;
 _mdb = 'main';
 dao = new require('./model/dao')(_mdb);
 dbCache = new require('./model/cache')();
 ;
+
+require('./ext/string');
 
 app.set('view engine', 'jade');
 

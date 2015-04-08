@@ -48,8 +48,9 @@ cleanItem = function(q) {
 
 dataController = {
   list: function(req, rsp) {
-    var code, entity, op, q;
+    var code, entity, op, q, qu;
     code = req.c.code;
+    qu = req.query;
     log(code);
     if (req.query) {
       op = {

@@ -29,6 +29,7 @@ dataController =
 
     list: (req, rsp) ->
         code = req.c.code
+        qu = req.query
         log code
         if req.query
             op =
