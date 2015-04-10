@@ -9,6 +9,7 @@ i18n = require('../i18n/lang')('zh')
 pageOpt = (c)->
     code = c.code
 
+    tRender: jade.renderFile
     title: c.title
     lang: 'zh'
     mode: app.env

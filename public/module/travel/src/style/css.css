@@ -7015,7 +7015,6 @@ body > .popMsg i {
   margin-bottom: 20px;
 }
 .text-style p {
-  width: 100%;
   line-height: 26px;
   margin-bottom: 20px;
 }
@@ -7037,13 +7036,17 @@ body > .popMsg i {
 .text-style .markImg {
   text-align: center;
 }
+.text-style blockquote h3,
+.text-style blockquote h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
 .article-content {
   text-align: left;
   line-height: 25px;
   margin-bottom: 20px;
 }
 .article-content p {
-  width: 100%;
   line-height: 26px;
   margin-bottom: 20px;
 }
@@ -7065,6 +7068,11 @@ body > .popMsg i {
 .article-content .markImg {
   text-align: center;
 }
+.article-content blockquote h3,
+.article-content blockquote h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
 .subPage .subContent {
   text-align: left;
   line-height: 25px;
@@ -7073,7 +7081,6 @@ body > .popMsg i {
   padding: 15px 0;
 }
 .subPage .subContent p {
-  width: 100%;
   line-height: 26px;
   margin-bottom: 20px;
 }
@@ -7094,6 +7101,11 @@ body > .popMsg i {
 }
 .subPage .subContent .markImg {
   text-align: center;
+}
+.subPage .subContent blockquote h3,
+.subPage .subContent blockquote h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 .subPage .subContent h3 {
   padding-bottom: 5px;

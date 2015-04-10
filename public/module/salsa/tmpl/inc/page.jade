@@ -1,0 +1,14 @@
+extends main
+
+block slide
+
+
+
+block content
+    #content.container
+        #head.row
+            nav.col-md-2
+                - var mClass = 'menus';
+                include ../../../../views/inc/b3Menu
+        #home.row
+            block content

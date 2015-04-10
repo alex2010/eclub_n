@@ -71,12 +71,14 @@ membership = [
 
 sight = [
     title: 'Summer Palace'
+    slogan: 'at the very heart of Beijing'
     phone: '12233322'
     address: 'sadfsd sdfsdfsadf'
     fee: 200
     route: 'sadfsd dsfdsfsdaf'
     lat: '100'
     lng: '200'
+    row: 1009
     brief: 'Ringed by a 52m-wide moat at the very heart of Beijing, the Forb'
     content: "Ringed by a 52m-wide moat at the very heart of Beijing, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest
 palace complex in the world."
@@ -92,8 +94,9 @@ palace complex in the world."
             title: 'Spring'
             description: 'amazing spring'
         p2:
-            title: 'Fall'
+            title: 'Summer'
             description: 'amazing Fall'
+
     sub: [
         title: 'RenShoudian'
         content: "asdfsdf sadfsdf'sdfsdfsadf"
@@ -103,8 +106,10 @@ palace complex in the world."
     ]
 ,
     title: 'great wall'
+    slogan: 'at the very heart of Beijing'
     phone: '1231231231'
     address: 'sdvxcvzcvcvxczv'
+    row: 1008
     content: "de moat at the very heart of Beijing, the For"
     refFile:
         head: ['p1.jpg', 'p2.jpg']
@@ -115,7 +120,10 @@ palace complex in the world."
             title: 'Fall'
             description: 'amazing Fall'
 ]
-
+city = [
+    title: 'Beijing'
+    description: "Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux, and Backbone.js's suspenders. Underscore provides 80-odd functions that support both the usual functional suspects: map, select, invoke — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on. It delegates to built-in functions, if present, so modern browsers will use the native implementations of forEach, map, reduce, filter, every, some and indexOf."
+]
 post = [
     title: 'Travel rule'
     content: 'sdfsdfsdfdsfsdfsfdsf'
@@ -130,6 +138,7 @@ content = [
     brief: '121223'
 ]
 
+
 module.exports =
     community:
         code: code
@@ -143,6 +152,7 @@ module.exports =
 
         'post:title': post
         'sight:title': sight
+        'city:title': city
         'content:title': content
 
     reset: ['post']

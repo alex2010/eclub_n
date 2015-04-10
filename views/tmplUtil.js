@@ -4,6 +4,19 @@ var util;
 util = {};
 
 _.extend(util, {
+  userLink: function() {},
+  icon: function(icon, tag, str, cls) {
+    if (tag == null) {
+      tag = 'i';
+    }
+    if (str == null) {
+      str = '';
+    }
+    if (cls == null) {
+      cls = '';
+    }
+    return "<" + tag + " class='glyphicon glyphicon-" + icon + " " + cls + "'>" + str + "</" + tag + ">";
+  },
   imgItem: function(it, code, name) {
     var path;
     if (name == null) {
@@ -28,10 +41,15 @@ _.extend(util, {
     return "<div id=\"" + id + "\" class=\"" + cls + "\" src=\"" + path + "\" pop=\"" + pop + "\"\nstyle=\"background:url(" + _resPath + "/img/loading-bk.gif) no-repeat 50% 50%\">loading...</div>";
   },
   link: function(name, it, prop, cls) {
+    var text;
     if (prop == null) {
       prop = 'title';
     }
-    return "<a href='/" + name + "/" + it._id + "' title='" + it.title + "' class='" + (cls || '') + "'>" + it[prop] + "</a>";
+    text = prop === '_str' ? it : it[prop];
+    return "<a href='/" + name + "/" + it._id + "' title='" + text + "' class='" + (cls || '') + "'>" + text + "</a>";
+  },
+  href: function(name, id) {
+    return "/" + name + "/" + id;
   },
   resPath: function(code, path) {
     return _resPath + 'upload/' + code + '/' + path;

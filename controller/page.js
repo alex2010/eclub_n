@@ -19,6 +19,7 @@ pageOpt = function(c) {
   var code;
   code = c.code;
   return {
+    tRender: jade.renderFile,
     title: c.title,
     lang: 'zh',
     mode: app.env,

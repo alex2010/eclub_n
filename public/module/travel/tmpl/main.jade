@@ -8,35 +8,19 @@ html
         .headerWrapper
             #header.container
                 h1 TRAVEL IN CHINA
+
+        block slide
+
         #content.container
-            #head.row
-                ul.headMenu.inline.col-lg-12
-                    li
-                        a Main Sights
-                    li
-                        a Off the Beaten
-                    li
-                        a Free Sights
-                    li
-                        a Museums
-                    li
-                        a Need to know
+            block headLine
+
             #home.row
                 nav.col-md-2
+                    h3 Top Choice
                     - var mClass = 'menus';
                     include ../../../../views/inc/b3Menu
                 .col-md-10
                     block content
-            .row
-                ol.breadcrumb
-                    li
-                        a(href='#')
-                            i.glyphicon.glyphicon-home
-                    li
-                        a(href='#') Beijing
-                    li
-                        a(href='#') Sights
-                    li.active Forbidden City
 
         .footerWrapper
             .container
@@ -87,16 +71,7 @@ html
                                     a(href='http://postenglishtime.com') Acrobatics
                                 li.c4
                                     a(href='http://postenglishtime.com') Kung Fu
-                    .col-md-3.newsletter
-                        h4
-                            | Newsletter sign up
-                        p
-                            strong  Subscribe now
-                            |  and receive a
-                            strong  Fresh
-                            |  travel Information
-                        input(type='text', placeholder='Your@email.com')
-                        a.btn.btn-primary.btn-block Sign up
+
         .container.footerInfo
             .col-lg-8
                 ul.inline.row

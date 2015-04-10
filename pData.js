@@ -20,10 +20,13 @@ code = args[2]
 require('./ext/string');
 
 dao = new require('./model/dao')(_db, function() {
-  var data, entity, k, ref, results, v;
+  var data, entity, filter, k, ref, results, v;
   if (args.length > 3) {
     entity = args[3];
-    return dao.remove(code, entity, {}, {}, function() {
+    filter = entity === 'user' ? {
+      x: 'x'
+    } : {};
+    return dao.remove(code, entity, filter, {}, function() {
       var a, b, i, it, j, k, len, len1, list, ob, ref, ref1, results, v;
       list = [];
       ref = require("./public/module/" + code + "/data/" + entity);
@@ -68,6 +71,11 @@ dao = new require('./model/dao')(_db, function() {
                 delete it.wunid;
               }
             }
+          } else if (entity === 'cat') {
+            if (ob.label) {
+              ob.title = ob.label;
+              delete ob.label;
+            }
           }
         }
         list.push(ob);
@@ -81,22 +89,89 @@ dao = new require('./model/dao')(_db, function() {
       for (j = 0, len1 = list.length; j < len1; j++) {
         it = list[j];
         results.push(dao.save(code, entity, it, function(res) {
-          var act, filter;
-          act = res.ops[0];
-          if (act && entity === 'activity' && act.master && !act.master.isEmpty()) {
-            filter = {
-              username: {
-                $in: act.master.split(',')
+          var act, estr;
+          if (entity === 'activity') {
+            act = res.ops[0];
+            estr = entity + ':_id';
+            if (act.master && !act.master.isEmpty()) {
+              filter = {
+                username: {
+                  $in: act.master.split(',')
+                }
+              };
+              act.master = {};
+              return dao.find(code, 'user', filter, {}, function(ru) {
+                var l, len2, u;
+                for (l = 0, len2 = ru.length; l < len2; l++) {
+                  u = ru[l];
+                  act.master[u._id] = _.pick(u, 'id', 'username', 'title', 'industry', 'introduction');
+                }
+                return dao.save(code, estr, act, function() {
+                  if (act.cat) {
+                    return dao.get(code, 'cat', {
+                      code: act.cat
+                    }, function(res) {
+                      if (res) {
+                        act.cat = {
+                          title: res.title,
+                          code: res.code
+                        };
+                        return dao.save(code, estr, act, function() {
+                          if (act.vid) {
+                            return dao.get(code, 'venue', {
+                              id: act.vid
+                            }, function(res) {
+                              if (res) {
+                                act.venue = {
+                                  title: res.title,
+                                  fee: res.fee,
+                                  phone: res.phone,
+                                  lng: res.lng,
+                                  lat: res.lat
+                                };
+                                return dao.save(code, estr, act);
+                              }
+                            });
+                          }
+                        });
+                      }
+                    });
+                  }
+                });
+              });
+            }
+          } else if (entity === 'post') {
+            act = res.ops[0];
+            estr = entity + ':_id';
+            if (_.isString(act.uid) && act.uid.isEmpty()) {
+              return;
+            }
+            log(act.uid);
+            return dao.get(code, 'user', {
+              id: act.uid
+            }, function(doc) {
+              log(doc);
+              if (doc) {
+                act.author = {
+                  username: doc.username,
+                  id: doc._id
+                };
               }
-            };
-            act.master = {};
-            return dao.find(code, 'user', filter, {}, function(ru) {
-              var l, len2, u;
-              for (l = 0, len2 = ru.length; l < len2; l++) {
-                u = ru[l];
-                act.master[u._id] = _.pick(u, 'id', 'username', 'title', 'industry', 'introduction');
-              }
-              return dao.save(code, entity + ':_id', act);
+              return dao.save(code, estr, act, function() {
+                if (act.cat) {
+                  return dao.get(code, 'cat', {
+                    code: act.cat
+                  }, function(res) {
+                    if (res) {
+                      act.cat = {
+                        title: res.title,
+                        code: res.code
+                      };
+                      return dao.save(code, estr, act);
+                    }
+                  });
+                }
+              });
             });
           }
         }));

@@ -2,6 +2,12 @@ util = {}
 
 _.extend util,
 
+    userLink: ->
+
+
+    icon: (icon, tag = 'i', str = '', cls = '')->
+        "<#{tag} class='glyphicon glyphicon-#{icon} #{cls}'>#{str}</#{tag}>"
+
     imgItem: (it, code, name = 'head')->
         if it.refFile and it.refFile[name]
             path = it.refFile[name][0]
@@ -15,7 +21,14 @@ _.extend util,
         style="background:url(#{_resPath}/img/loading-bk.gif) no-repeat 50% 50%">loading...</div>"""
 
     link: (name, it, prop = 'title', cls)->
-        "<a href='/#{name}/#{it._id}' title='#{it.title}' class='#{cls || ''}'>#{it[prop]}</a>"
+        text = if prop is '_str'
+            it
+        else
+            it[prop]
+        "<a href='/#{name}/#{it._id}' title='#{text}' class='#{cls || ''}'>#{text}</a>"
+
+    href: (name, id)->
+        "/#{name}/#{id}"
 
     resPath: (code, path)->
         _resPath + 'upload/' + code + '/' + path

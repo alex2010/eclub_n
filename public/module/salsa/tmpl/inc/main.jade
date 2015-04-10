@@ -2,12 +2,15 @@ doctype html
 html
     head
         title= title
-        include ../../../../views/inc/meta
+        include ../../../../../views/inc/meta
         block head
     body
         .headerWrapper
             #header.container
                 h1= c.title
+
+        block slide
+
         #content.container
             #head.row
                 nav.col-md-2

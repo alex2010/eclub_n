@@ -14,8 +14,17 @@ module.exports = {
   },
   index: function(ctx) {
     return {
+      city: function(cb) {
+        return dao.find(ctx.c.code, 'city', {
+          title: 'Beijing'
+        }, {}, function(res) {
+          return cb(null, res);
+        });
+      },
       sights: function(cb) {
-        return dao.find(ctx.c.code, 'sight', {}, {}, function(res) {
+        var filter;
+        filter = {};
+        return dao.find(ctx.c.code, 'sight', filter, {}, function(res) {
           return cb(null, res);
         });
       }

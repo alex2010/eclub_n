@@ -16,7 +16,13 @@ require('./ext/string')
 dao = new require('./model/dao') _db, ->
     if args.length > 3
         entity = args[3]
-        dao.remove code, entity, {}, {}, ->
+
+        filter = if entity is 'user'
+             x:'x'
+        else
+            {}
+
+        dao.remove code, entity, filter, {}, ->
             list = []
             for it in require("./public/module/#{code}/data/#{entity}")
                 ob = {}
@@ -50,6 +56,10 @@ dao = new require('./model/dao') _db, ->
                             if it.wunid
                                 ob.wt.unid = it.wunid
                                 delete it.wunid
+                    else if entity is 'cat'
+                        if ob.label
+                            ob.title = ob.label
+                            delete ob.label
                 list.push ob
 
 
@@ -60,16 +70,54 @@ dao = new require('./model/dao') _db, ->
 
             for it in list
                 dao.save code, entity, it, (res)->
-                    act = res.ops[0]
-                    if act and entity is 'activity' and act.master and !act.master.isEmpty()
-                        filter =
-                            username:
-                                $in: act.master.split(',')
-                        act.master = {}
-                        dao.find code, 'user', filter, {}, (ru)->
-                            for u in ru
-                                act.master[u._id] = _.pick(u, 'id', 'username', 'title', 'industry', 'introduction')
-                            dao.save code, entity+':_id', act
+                    if entity is 'activity'
+                        act = res.ops[0]
+                        estr = entity + ':_id'
+                        if act.master and !act.master.isEmpty()
+                            filter =
+                                username:
+                                    $in: act.master.split(',')
+                            act.master = {}
+                            dao.find code, 'user', filter, {}, (ru)->
+                                for u in ru
+                                    act.master[u._id] = _.pick(u, 'id', 'username', 'title', 'industry', 'introduction')
+                                dao.save code, estr, act, ->
+                                    if act.cat
+                                        dao.get code, 'cat', {code: act.cat}, (res)->
+                                            if res
+                                                act.cat =
+                                                    title: res.title
+                                                    code: res.code
+                                                dao.save code, estr, act, ->
+                                                    if act.vid
+                                                        dao.get code, 'venue', {id:act.vid}, (res)->
+                                                            if res
+                                                                act.venue =
+                                                                    title: res.title
+                                                                    fee: res.fee
+                                                                    phone: res.phone
+                                                                    lng: res.lng
+                                                                    lat: res.lat
+                                                                dao.save code, estr, act
+                    else if entity is 'post'
+                        act = res.ops[0]
+                        estr = entity + ':_id'
+                        return if _.isString(act.uid) and act.uid.isEmpty()
+                        log act.uid
+                        dao.get code, 'user', {id: act.uid}, (doc)->
+                            log doc
+                            if doc
+                                act.author =
+                                    username: doc.username
+                                    id: doc._id
+                            dao.save code, estr, act, ->
+                                if act.cat
+                                    dao.get code, 'cat', {code: act.cat}, (res)->
+                                        if res
+                                            act.cat =
+                                                title: res.title
+                                                code: res.code
+                                            dao.save code, estr, act
 
     else
         data = require("./public/module/#{code}/data")
