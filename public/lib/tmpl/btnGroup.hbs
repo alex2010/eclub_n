@@ -1,0 +1,14 @@
+<div class="btn-group">
+    {{{btn}}}
+    <a class="{{style}} dropdown-toggle" data-toggle="dropdown">
+        {{{label}}}
+        <span class="caret"></span>
+    </a>
+    {{#if btns}}
+    <ul class="dropdown-menu">
+        {{#each btns}}
+            <li>{{{.}}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</div>

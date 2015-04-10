@@ -1,0 +1,38 @@
+{{#if slides}}
+    <ol class="carousel-indicators">
+        {{#each slides}}
+            <li data-target="#slide" data-slide-to="{{@index}}"></li>
+        {{/each}}
+    </ol>
+    <div class="carousel-inner refresh">
+        {{#each slides}}
+            <div class="item">
+                <img class="img-responsive" src="{{imgUrl}}">
+                {{#if title}}
+
+                    <div class="carousel-caption">
+                        <h4><a href="{{href}}" title="{{title}}" target="_blank">{{title}}</a></h4>
+                        {{#if brief}}
+                            <p>{{brief}}</p>
+                        {{/if}}
+                    </div>
+                {{/if}}
+            </div>
+        {{/each}}
+    </div>
+
+    {{#if control}}
+        <a class="carousel-control left" href="#slide" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="carousel-control right" href="#slide" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    {{/if}}
+{{else}}
+    {{#if picUrl}}
+        <img class="img-responsive" src="{{picUrl}}">
+    {{else}}
+        <img class="img-responsive" src="http://placehold.it/{{d size '617x320'}}">
+    {{/if}}
+{{/if}}

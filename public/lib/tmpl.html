@@ -1,0 +1,27 @@
+define([
+<%files.each{%>
+'hbs!/module/${code}/src/tmpl/${it}',
+<%}%>
+'/lib/init.js'
+], function (
+<%files.each{
+if(it.indexOf('/')>-1){
+it = it.split('/')[1]
+}
+%>
+${it},
+<%}%>
+cf
+) {
+\$.extend(cf.tp, {
+<%files.each{
+if(it.indexOf('/')>-1){
+    it = it.split('/')[1]
+}
+%>
+${it}: ${it},
+<%}%>
+_t:null
+});
+return cf.tp;
+});

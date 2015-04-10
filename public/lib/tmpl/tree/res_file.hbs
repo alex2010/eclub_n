@@ -1,0 +1,16 @@
+<i></i>
+{{#cp type '==' 'folder-close'}}
+    {{icon 'folder-close' 'b'}}
+    <a class="edit" id="{{id}}">{{label}}</a>
+{{else}}
+    {{icon 'file' 'b'}}
+    {{#if url}}
+        <a class="edit" url="{{href}}" id="{{id}}">{{label}}</a>
+    {{else}}
+        <a class="edit" id="{{id}}">{{label}}</a>
+    {{/if}}
+{{/cp}}
+
+{{#unless fixed}}
+    {{icon 'trash.del' 'a'}}
+{{/unless}}

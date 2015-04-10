@@ -1,0 +1,14 @@
+<div id="crumb">
+    <ul class="breadcrumb">
+        <li><i class="glyphicon glyphicon-home"></i><a href="/index.html">首页</a></li>
+        {{#each .}}
+            <li>
+                {{#if @key}}
+                    <a href="{{@key}}">{{.}}</a>
+                {{else}}
+                    {{.}}
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+</div>

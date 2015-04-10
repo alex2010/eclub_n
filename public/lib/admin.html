@@ -1,0 +1,6 @@
+require([
+<%files.each{%>
+'/lib/admin/app/${it}.js',
+<%}%>
+'/lib/init.js'
+], function () {});

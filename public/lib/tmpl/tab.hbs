@@ -1,0 +1,11 @@
+<ul class="nav nav-tabs">
+    {{#each .}}
+    <li{{#if selected}} class="active"{{/if}}><a data-tab="{{code}}" href="{{navUrl name code}}">{{title}}</a></li>
+    {{/each}}
+</ul>
+
+<div class="tab-content">
+    {{#each .}}
+        <div class="tab-pane{{#if selected}} active{{/if}}" id="{{code}}"></div>
+    {{/each}}
+</div>

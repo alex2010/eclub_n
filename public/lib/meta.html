@@ -1,0 +1,7 @@
+require([
+'/lib/meta/common.js',
+<%files.each{%>
+'/lib/meta/${it}.js',
+<%}%>
+'/lib/init.js'
+], function (meta) {return meta;});

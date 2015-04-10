@@ -1,0 +1,10 @@
+<table id="{{entity}}Tb" class="table {{tbStyle}}">
+    <thead>
+    <tr>
+        {{#each cols}}
+            <th class="labels" {{#if w}}style="width:{{w}}"{{/if}}>{{#unless noLabel}}{{#if label}}{{label}}{{else}}{{ie ../../../entity @key}}{{/if}}{{#if panel}}{{{n 'btnGroup' panel}}}{{/if}}{{/unless}}</th>
+        {{/each}}
+    </tr>
+    </thead>
+    <tbody class="refresh"></tbody>
+</table>

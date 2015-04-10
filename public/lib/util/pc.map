@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "pc.js",
+  "sourceRoot": "",
+  "sources": [
+    "pc.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA"
+}

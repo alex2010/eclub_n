@@ -1,0 +1,18 @@
+<div class="panel {{or style 'panel-default'}}">
+    <div class="panel-heading">
+        {{#if title}}
+            <div class="panel-title">
+                <strong>{{{title}}}</strong>
+                {{#if toolbar}}
+                    <div class="toolbar"></div>
+                {{/if}}
+            </div>
+        {{/if}}
+    </div>
+
+    <{{or tag 'div'}} class="{{or bodyStyle 'panel-body'}}"></{{or tag 'div'}}>
+
+    {{#if foot}}
+        <div class="panel-footer clearfix"></div>
+    {{/if}}
+</div>

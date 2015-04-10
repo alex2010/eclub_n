@@ -1,0 +1,13 @@
+<ul class="refresh">
+    {{#rec .}}
+        <li>
+            {{{n 'res_file' .}}}
+            {{#cp type '==' 'folder-close'}}
+                <ul class="sub">
+                    {{{rec children}}}
+                    {{{n 'res_add' ..}}}
+                </ul>
+            {{/cp}}
+        </li>
+    {{/rec}}
+</ul>
