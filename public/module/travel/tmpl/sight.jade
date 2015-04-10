@@ -9,16 +9,16 @@ block content
         h2= title
             include inc/share
             small.btn A ~ Z
-
-        #slide.carousel.slide(data-ride='carousel')
-            .carousel-inner
-                each it in refFile.head
-                    .item(class= i == 0 ? 'active' : '' )
-                        img(src= f.resPath(c.code, it))
-                        .carousel-caption
-                            h4
-                                a(target='_blank')= title
-                            p= content
+        if refFile
+            #slide.carousel.slide(data-ride='carousel')
+                .carousel-inner
+                    each it in refFile.head
+                        .item(class= i == 0 ? 'active' : '' )
+                            img(src= f.resPath(c.code, it))
+                            .carousel-caption
+                                h4
+                                    a(target='_blank')= title
+                                p= content
 
     article.clearfix
         section.col-md-8
