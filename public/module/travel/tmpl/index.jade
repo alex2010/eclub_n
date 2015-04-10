@@ -7,7 +7,7 @@ block slide
             each it,i in _slides
                 .item(class= i == 0 ? 'active' : '' )
                     != f.imgItem(it, c.code)
-                    .container.text-center
+                    .container.text-center.abs
                         h4 Beijing in For Seasons
                         .dropdown.btn.btn-default
                             a(data-toggle="dropdown",role='button')
