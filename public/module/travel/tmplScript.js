@@ -15,9 +15,9 @@ module.exports = {
   index: function(ctx) {
     return {
       city: function(cb) {
-        return dao.find(ctx.c.code, 'city', {
+        return dao.get(ctx.c.code, 'city', {
           title: 'Beijing'
-        }, {}, function(res) {
+        }, function(res) {
           return cb(null, res);
         });
       },

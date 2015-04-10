@@ -8,7 +8,7 @@ module.exports =
 
     index: (ctx)->
         city: (cb)->
-            dao.find ctx.c.code, 'city', {title: 'Beijing'}, {}, (res)->
+            dao.get ctx.c.code, 'city', {title: 'Beijing'}, (res)->
                 cb(null, res)
 
         sights: (cb)->
