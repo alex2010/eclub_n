@@ -23,8 +23,33 @@ module.exports = {
       },
       sights: function(cb) {
         var filter;
-        filter = {};
+        filter = {
+          row: {
+            $gt: 1000
+          }
+        };
         return dao.find(ctx.c.code, 'sight', filter, {}, function(res) {
+          return cb(null, res);
+        });
+      }
+    };
+  },
+  top: function(ctx) {
+    return {
+      sights: function(cb) {
+        var filter;
+        filter = {
+          cat: 'top'
+        };
+        return dao.find(ctx.c.code, 'sight', filter, {}, function(res) {
+          var i, it, len;
+          ctx.slides = [];
+          for (i = 0, len = res.length; i < len; i++) {
+            it = res[i];
+            if (it.row > 1000) {
+              ctx.slides.push(it);
+            }
+          }
           return cb(null, res);
         });
       }

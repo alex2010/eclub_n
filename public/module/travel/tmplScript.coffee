@@ -12,15 +12,21 @@ module.exports =
                 cb(null, res)
 
         sights: (cb)->
-            filter ={}
-#                row:
-#                    $gt: 1000
+            filter =
+                row:
+                    $gt: 1000
             dao.find ctx.c.code, 'sight', filter, {}, (res)->
-#                ctx.slides = []
-#                for it in res
-#                    ctx.slides.push
                 cb(null, res)
 
+    top: (ctx)->
+        sights: (cb)->
+            filter =
+                cat: 'top'
+            dao.find ctx.c.code, 'sight', filter, {}, (res)->
+                ctx.slides = []
+                for it in res
+                    ctx.slides.push it if it.row > 1000
+                cb(null, res)
     sight: (ctx)->
         null
 

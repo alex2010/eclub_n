@@ -8,8 +8,8 @@ node_modules
 #*.coffee
 #*.less
 
-# github
-#*.js
+#github
+*.js
 # *.css
 
 

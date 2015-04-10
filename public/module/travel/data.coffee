@@ -73,6 +73,7 @@ sight = [
     title: 'Summer Palace'
     slogan: 'at the very heart of Beijing'
     phone: '12233322'
+    cat: 'top'
     address: 'sadfsd sdfsdfsadf'
     fee: 200
     route: 'sadfsd dsfdsfsdaf'
@@ -110,6 +111,7 @@ palace complex in the world."
     phone: '1231231231'
     address: 'sdvxcvzcvcvxczv'
     row: 1008
+    cat: 'top'
     content: "de moat at the very heart of Beijing, the For"
     refFile:
         head: ['p1.jpg', 'p2.jpg']
@@ -119,6 +121,14 @@ palace complex in the world."
         p2:
             title: 'Fall'
             description: 'amazing Fall'
+
+    sub: [
+        title: 'RenShoudian'
+        content: "asdfsdf sadfsdf'sdfsdfsadf"
+    ,
+        title: 'cixi'
+        content: 'asdasdsads asd asdasdasdasd'
+    ]
 ]
 city = [
     title: 'Beijing'
