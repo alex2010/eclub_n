@@ -1,17 +1,20 @@
 extends main
 
+block script
+    - headMenu = _.where(menu, {code: 'top'})[0].children;
+
 block content
+
     .topHead
-        h1
-            strong= title
-            .cat
-                | sights /
-                a Other
-        .carousel.slide
-            .carousel-inner.refresh
-                each it in refFile || []
-                    .item
-                        img(src= f.resPath(mode, c.code, it))
+        h2= title
+            include inc/share
+            small.btn A ~ Z
+
+        #slide.carousel.slide(data-ride='carousel')
+            .carousel-inner
+                each it in refFile.head
+                    .item(class= i == 0 ? 'active' : '' )
+                        img(src= f.resPath(c.code, it))
                         .carousel-caption
                             h4
                                 a(target='_blank')= title

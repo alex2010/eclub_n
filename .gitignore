@@ -24,6 +24,13 @@ public/module/house
 public/module/tmpl
 
 back
-public/lib
+public/lib/admin
+public/lib/func
+public/lib/meta
+public/lib/model
+public/lib/plugins
+public/lib/style
+public/lib/view
+public/lib/widget
 public/res
 memo.txt

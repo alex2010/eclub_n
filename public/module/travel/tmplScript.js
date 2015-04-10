@@ -2,17 +2,7 @@
 module.exports = {
   _init: function(ctx) {
     ctx.css = ctx.cssPath('css');
-    return {
-      menu: function(cb) {
-        return dao.get(ctx.c.code, 'role', {
-          title: 'guest'
-        }, function(res) {
-          return cb(null, res.res.menu);
-        });
-      }
-    };
-  },
-  index: function(ctx) {
+    ctx.headMenu = 'sns';
     return {
       city: function(cb) {
         return dao.get(ctx.c.code, 'city', {
@@ -21,6 +11,19 @@ module.exports = {
           return cb(null, res);
         });
       },
+      menu: function(cb) {
+        return dao.get(ctx.c.code, 'role', {
+          title: 'guest'
+        }, function(res) {
+          var menu;
+          menu = res.res.menu;
+          return cb(null, menu);
+        });
+      }
+    };
+  },
+  index: function(ctx) {
+    return {
       sights: function(cb) {
         var filter;
         filter = {
@@ -35,6 +38,7 @@ module.exports = {
     };
   },
   top: function(ctx) {
+    ctx.headTitle = 'Top Collection In Beijing';
     return {
       sights: function(cb) {
         var filter;
@@ -55,7 +59,5 @@ module.exports = {
       }
     };
   },
-  sight: function(ctx) {
-    return null;
-  }
+  sight: function(ctx) {}
 };

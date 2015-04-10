@@ -1,4 +1,5 @@
 extends main
+
 block content
 
     #slide.carousel.slide(data-ride='carousel')
@@ -10,37 +11,14 @@ block content
                     .carousel-caption
                         h3= it.title
                         p= it.slogan
+                        a.btn(href!= f.href('sight', it._id)) See Details
 
         include ../../../../views/inc/slideBtn
 
     .panel
         h2 Introducing #{city.title}
         .content= city.description
-    .sightCardList
-        .row
-            .panel.col-md-6
-                h4 Top choice
-                p A collection of must to see orders in Beijing
-            .panel.col-md-3
-                h4 Top choice
-                p A collection of must to see orders in Beijing
-            .panel.col-md-3
-                h4 Top choice
-                p A collection of must to see orders in Beijing
-            .panel.col-md-3
-            .panel.col-md-3
-            .panel.col-md-3
-                h3 Cards Guides
-                ul
-                    li 'Cashed'
-            .panel.col-md-3
-                h3 Maps
-                ul
-                    li City Map
-                    li City Map
-                    li City Map
-                    li City Map
-                    li City Map
+
     .sightCardList.clearfix
         each it in sights
             .col-md-3.col-sm-4
@@ -49,54 +27,7 @@ block content
                         img(src= f.resPath(c.code, it.refFile.head[0]))
                         h3= it.title
                         p= it.content
-        .col-md-3.col-sm-4
-            a.wrapper(href='/china/beijing/sights/other/forbidden-city')
-                .content
-                    img(src='/res/upload/travel/images/zjc.png')
-                    h3  Forbidden City
-                    p
-                        | Ringed by a 52m-wide moat at the very heart of Běijīng, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest
-                        | palace complex in the world.
-        .col-md-3.col-sm-4
-            a.wrapper(href='/china/beijing/sights/other/forbidden-city')
-                .content
-                    span.context
-                    h3  Forbidden City
-                    p
-                        | Ringed by a 52m-wide moat at the very heart of Běijīng, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest
-                        | palace complex in the world.
-        .col-md-3.col-sm-6
-            a.wrapper(href='/china/beijing/sights/other/forbidden-city')
-                .content
-                    span.context
-                    h3  Forbidden City
-                    p
-                        | Ringed by a 52m-wide moat at the very heart of Běijīng, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest
-                        | palace complex in the world.
-        .col-md-3
-            a.wrapper(href='/china/beijing/sights/other/forbidden-city')
-                .content
-                    span.context
-                    h3  Forbidden City
-                    p
-                        | Ringed by a 52m-wide moat at the very heart of Běijīng, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest
-                        | palace complex in the world.
-        .col-md-3
-            a.wrapper(href='/china/beijing/sights/other/forbidden-city')
-                .content
-                    span.context
-                    h3  Forbidden City
-                    p
-                        | Ringed by a 52m-wide moat at the very heart of Běijīng, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest
-                        | palace complex in the world.
-        .col-md-3
-            a.wrapper(href='/china/beijing/sights/other/forbidden-city')
-                .content
-                    span.context
-                    h3  Forbidden City
-                    p
-                        | Ringed by a 52m-wide moat at the very heart of Běijīng, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest
-                        | palace complex in the world.
+
         .col-md-3
             a.wrapper(href='/china/beijing/sights/other/forbidden-city')
                 .content

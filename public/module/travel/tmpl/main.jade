@@ -1,4 +1,7 @@
 doctype html
+
+block script
+
 html
     head
         title= title
@@ -11,12 +14,28 @@ html
 
         block slide
 
+        .topLine
+            .container
+                .row
+                    .col-md-2
+                        | China / #{city.title}
+                    .col-md-10
+                        block headLine
+                            if headTitle
+                                .pull-left= headTitle
+
+                            if headMenu == 'sns'
+                                include inc/share
+                            else if _.isArray(headMenu)
+                                ul.headMenu.inline.pull-right
+                                    each it in headMenu
+                                        li
+                                            a(href= it.href)= it.label
+
         #content.container
-            block headLine
 
             #home.row
                 nav.col-md-2
-                    h3 Top Choice
                     - var mClass = 'menus';
                     include ../../../../views/inc/b3Menu
                 .col-md-10

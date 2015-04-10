@@ -24,6 +24,36 @@ role = [
     title: 'guest'
     res:
         menu: [
+
+            label: 'Top Choices'
+            code: 'top'
+            href: '/top'
+            children: [
+                label: 'UNESCO'
+                href: '/sightList?cat=unesco'
+            ,
+                label: 'Great Wall'
+                href: '/sightList?cat=great'
+            ,
+                label: 'Museum'
+                href: '/sightList?cat=great'
+            ,
+                label: 'Temple'
+                href: '/sightList?cat=great'
+            ,
+                label: 'Park/Garden'
+                href: '/sightList?cat=great'
+            ,
+                label: 'Historical'
+                href: '/sightList?cat=great'
+            ,
+                label: 'Free'
+                href: '/sightList?cat=great'
+            ,
+                label: 'Call'
+                href: '/sightList?cat=great'
+            ]
+        ,
             label: 'Attractions'
             href: '/attractions.html'
             children: [

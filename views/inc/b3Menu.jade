@@ -1,9 +1,9 @@
 ul(class= mClass || 'nav navbar-nav')
     if menu
         each it in menu
-            li
+            li(class= it.code || '')
                 a(href='#{it.href}') #{it.label}
-                if it.children
+                if _showSub && it.children
                     ul.dropdown-menu
                         each sub in it.children
                             li
