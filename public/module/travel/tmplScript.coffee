@@ -41,7 +41,11 @@ module.exports =
                 cb(null, res)
 
     sight: (ctx)->
-
+        _recommeded: (cb)->
+            filter =
+                cat: 'top'
+            dao.find ctx.c.code, 'sight', filter, {}, (res)->
+                cb(null, res)
 
 
 

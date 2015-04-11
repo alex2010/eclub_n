@@ -59,5 +59,17 @@ module.exports = {
       }
     };
   },
-  sight: function(ctx) {}
+  sight: function(ctx) {
+    return {
+      _recommeded: function(cb) {
+        var filter;
+        filter = {
+          cat: 'top'
+        };
+        return dao.find(ctx.c.code, 'sight', filter, {}, function(res) {
+          return cb(null, res);
+        });
+      }
+    };
+  }
 };
