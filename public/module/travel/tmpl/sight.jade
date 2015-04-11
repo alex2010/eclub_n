@@ -2,63 +2,95 @@ extends main
 
 block script
     - headMenu = _.where(menu, {code: 'top'})[0].children;
-
+    - log(locals);
 block content
 
     .topHead
         h2= title
             include inc/share
             small.btn A ~ Z
-        if refFile
-            #slide.carousel.slide(data-ride='carousel')
-                .carousel-inner
-                    each it in refFile.head
-                        .item(class= i == 0 ? 'active' : '' )
-                            img(src= f.resPath(c.code, it))
-                            .carousel-caption
-                                h4
-                                    a(target='_blank')= title
-                                p= content
 
-    article.clearfix
-        section.col-md-8
-            h2
-                | Introducing #{title}
-            .shrink
-                .sInside= content
-            h3 SubSights
-            each it in sub
-                .main
-                    = it.title
-        aside.col-md-4
-            dl.info-list
-                dt
-                    | Opening hours
-                dd
-                    = opening
-                dt
-                    | Prices
-                dd
-                    | #{fee}
-                dt
-                    | Getting there
-                dd
-                    | subway
-                    strong Tian'anmen West or Tian'anmen East
-                dt
-                    | Telephone
-                dd
-                    a.tel(href='tel:#{phone}')
-                        = phone
-                dt
-                    | Best Time to See
-                dd
-                    = opening
-                dt
-                    | English Audio Guide
-                dd
-                dt Latest Updated
-                dt 1985-11-11
+        if refFile
+        #slide.carousel.slide(data-ride='carousel')
+            .carousel-inner
+                -var _slides = refFile.head
+                each it,i in refFile.head
+                    .item(class= i == 0 ? 'active' : '' )
+                        img(src= f.resPath(c.code, it))
+                        .carousel-caption
+                            h4
+                                - k = it.split('.')[0]
+                                a(target='_blank')= refFile[k].title
+                            p= refFile[k].description
+            include ../../../../views/inc/slideBtn
+
+    article.col-md-12.panel
+        h3= title
+        .article= content
+
+    .col-md-8
+        .row.panel
+            if sub
+                each it in sub
+                    h4= it.title
+                    if it.refFile && it.refFile.head
+                        img(src= f.resPath(c.code, it.refFile.head[0]))
+                        div= it.content
+        .row
+            if extra
+                #people.panel-group
+                    .panel.panel-default
+                        each it,i in extra
+                            .panel-heading
+                                h4.panel-title
+                                    a(data-toggle='collapse', data-parent='#people', href= '#cl'+i)= it.title
+                            .panel-collapse.collapse(id= 'cl'+i, class= i==0?'in':'')
+                                .panel-body= it.content
+
+    .col-md-4
+        #info.panel-group.row
+            .panel.panel-default
+                each it in ['opening','price','address','distance','getting','map','tip','web','watch','update']
+                    .panel-heading
+                        h4.panel-title
+                            a(data-toggle='collapse', data-parent='#people', href= '#cl'+i)= it
+                    .panel-collapse.collapse(id= 'cl'+i, class= i==0?'in':'')
+                        .panel-body= locals[it]
+
+
+    .col-md-12.panle
+        h3  Recommanded Pages
+
+
+
+        dl.info-list
+            dt
+                | Opening hours
+            dd
+                = opening
+            dt
+                | Prices
+            dd
+                | #{fee}
+            dt
+                | Getting there
+            dd
+                | subway
+                strong Tian'anmen West or Tian'anmen East
+            dt
+                | Telephone
+            dd
+                a.tel(href='tel:#{phone}')
+                    = phone
+            dt
+                | Best Time to See
+            dd
+                = opening
+            dt
+                | English Audio Guide
+            dd
+            dt Latest Updated
+            dt 1985-11-11
 
 
         .col-md-12.footerFunc
