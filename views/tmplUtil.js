@@ -38,7 +38,7 @@ _.extend(util, {
       pop = false;
     }
     id = String.randomChar(4);
-    return "<div id=\"" + id + "\" class=\"" + cls + "\" src=\"" + path + "\" pop=\"" + pop + "\"\nstyle=\"background:url(" + _resPath + "/img/loading-bk.gif) no-repeat 50% 50%\">loading...</div>";
+    return "<div id=\"" + id + "\" class=\"" + cls + "\" src=\"" + path + "\" pop=\"" + pop + "\"\nstyle=\"background:url(" + _resPath + "img/loading-bk.gif) no-repeat 50% 50%\">loading...</div>";
   },
   link: function(name, it, prop, cls) {
     var text;

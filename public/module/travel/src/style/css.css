@@ -6692,26 +6692,48 @@ object {
 }
 .carousel .item {
   position: relative;
+  height: 380px;
+  overflow: hidden;
 }
 .carousel .item .rel {
   height: 0;
   margin-bottom: -10px;
 }
 .carousel .item .rel h4 {
+  letter-spacing: 1px;
   color: #ffffff;
 }
 .carousel .item .carousel-caption {
+  position: absolute;
+  z-index: 2;
+  right: 10%;
+  bottom: 10px;
   text-align: left;
   padding: 0;
+}
+.carousel .item .carousel-caption h3 {
+  color: #ffffff;
+}
+.carousel .item .carousel-caption p {
+  color: #ffffff;
 }
 .carousel .item .carousel-caption .btn {
   position: absolute;
   right: 0;
-  bottom: 5px;
+  bottom: 15px;
 }
 .carousel .item .carousel-indicators li {
   margin-right: 10px;
   background: #fff;
+}
+.carousel-indicators {
+  bottom: 35px;
+}
+.carousel-indicators li {
+  background: #fff;
+}
+.carousel-indicators .active {
+  background: #288ad6;
 }
 .topLine {
   background: #fff;
@@ -6804,6 +6826,14 @@ nav .menus li.subItem:hover ul {
   font-size: 16px;
   line-height: 28px;
 }
+.panel ul {
+  padding: 20px 0 0 20px;
+}
+.panel ul li {
+  line-height: 30px;
+  font-size: 14px;
+  list-style-type: disc;
+}
 .pBoxList:before,
 .pBoxList:after {
   content: " ";
@@ -6841,13 +6871,21 @@ nav .menus li.subItem:hover ul {
   color: #fff;
 }
 .pBox {
-  border: 1px solid;
+  border: 1px solid #e6e6e6;
   height: 420px;
   overflow: hidden;
   margin-bottom: 10px;
 }
 .pBox .markImg {
   height: 320px;
+}
+.pBox h4 {
+  padding-left: 10px;
+  font-size: 12px;
+}
+.pBox p {
+  padding-left: 10px;
+  font-size: 16px;
 }
 .footerWrapper {
   margin-top: 15px;
