@@ -98,3 +98,12 @@ Date.parseLocal = (time) ->
     }
     return fmt;
 }`
+
+_.extend Array::,
+    sortBy: (attr, isAsc) ->
+        @sort (a, b) ->
+            if isAsc
+                if a[attr] < b[attr] then -1 else 1
+            else
+                if a[attr] > b[attr] then -1 else 1
+        @

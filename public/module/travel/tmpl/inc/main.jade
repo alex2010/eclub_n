@@ -1,0 +1,125 @@
+doctype html
+
+block script
+
+html
+    head
+        title= title
+        include ../../../../../views/inc/meta
+        block head
+    body
+        .headerWrapper
+            header#header.container
+                h1 TRAVEL IN CHINA
+                    img(src= f.resPath(c.code, 'images/logo_03.jpg'))
+
+        block slide
+
+        .topLine
+            .container
+                .row
+                    h2.col-md-2
+                        | China /
+                        a(href='/')= city.title
+                    .col-md-10
+                        block headLine
+                            if headTitle
+                                h3.pull-left= headTitle
+
+                            if headMenu == 'sns'
+                                include share
+                            else if _.isArray(headMenu)
+                                ul.headMenu.list-inline.pull-right
+                                    each it in headMenu
+                                        li
+                                            a(href= it.href)= it.title
+
+        #content.container
+
+            #home.row
+                nav.col-md-2
+                    - var mClass = 'menus row';
+                    include ../../../../../views/inc/b3Menu
+                .col-md-10
+                    block content
+
+        .footerWrapper
+            footer.container
+                .row
+                    .col-md-12
+                        h4 Destination #{city.title}
+
+                    each it in siteMap.sortBy('row')
+                        ul.col-md-2
+                            p
+                                strong= it.title
+                            each tt in it.items
+                                li
+                                    a(href= tt.href)= tt.title
+                    //    li
+                    //        a(href='/page/content-119.html') Great Wall
+                    //    li
+                    //        a(href='/page/content-151.html') Summer Palace
+                    //    li
+                    //        a(href='/team.html') Ming Tomb
+                    //    li
+                    //        a(href='/page/content-121.html') Hutong
+                    //ul.col-md-2
+                    //    p
+                    //        strong Top Eevents
+                    //    li
+                    //        a(href='/page/content-122.html') English Salon
+                    //    li
+                    //        a(href='/linkList.html') Music Festival
+                    //    li
+                    //        a(href='http://www.eclubnet.com') Temple Fair
+                    //ul.col-md-2
+                    //    p
+                    //        strong Top Restaurants
+                    //    li
+                    //        a(href='/page/form-null.html') Quanjude
+                    //    li
+                    //        a(href='/page/content-127.html') Bianyifang
+                    //    li
+                    //        a(href='/page/content-152.html') Da Dong
+                    //ul.col-md-2
+                    //    p
+                    //        strong Top Shows
+                    //    li
+                    //        a(href='http://postenglishtime.com') Peking Opera
+                    //    li
+                    //        a(href='http://postenglishtime.com') Acrobatics
+                    //    li
+                    //        a(href='http://postenglishtime.com') Kung Fu
+                    //ul.col-md-2
+                    //    p
+                    //        strong Top Shows
+                    //    li
+                    //        a(href='http://postenglishtime.com') Peking Opera
+                    //    li
+                    //        a(href='http://postenglishtime.com') Acrobatics
+                    //    li
+                    //        a(href='http://postenglishtime.com') Kung Fu
+                    //ul.col-md-2
+                    //    p
+                    //        strong Shows
+                    //    li
+                    //        a(href='http://postenglishtime.com') Peking Opera
+                    //    li
+                    //        a(href='http://postenglishtime.com') Acrobatics
+                    //    li
+                    //        a(href='http://postenglishtime.com') Kung Fu
+
+        .bottomWrapper
+            .container
+                .row
+                    .col-md-2
+                        img()
+                    ul.col-md-6.list-inline
+                        each it in foot
+                            li
+                                a(href= it.href)= it.label
+                    .col-md-4
+                        p.row © 2014 China Viator. All rights reserved. No part of this site may be reproduced without our written permission.
+
+    include ../../../../../views/inc/sub

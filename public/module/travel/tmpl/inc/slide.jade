@@ -1,0 +1,11 @@
+#slide.carousel.slide(data-ride='carousel')
+    .carousel-inner
+        each it,i in _slides
+            .item(class= i == 0 ? 'active' : '' )
+                != f.imgItem(it, c.code)
+                .carousel-caption
+                    h3= it.title
+                    p= it.subTitle
+                    a.btn(href!= it.href || f.href('sight', it._id)) See Details
+
+    include ../../../../../views/inc/slideBtn

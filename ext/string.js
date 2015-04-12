@@ -131,3 +131,24 @@ Date.prototype.pattern = function (fmt) {
     }
     return fmt;
 };
+
+_.extend(Array.prototype, {
+  sortBy: function(attr, isAsc) {
+    this.sort(function(a, b) {
+      if (isAsc) {
+        if (a[attr] < b[attr]) {
+          return -1;
+        } else {
+          return 1;
+        }
+      } else {
+        if (a[attr] > b[attr]) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+    });
+    return this;
+  }
+});

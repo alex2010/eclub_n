@@ -2,8 +2,9 @@ extends inc/main
 
 block content
     .panel
-        h2 Introducing #{city.title}
-        .content= city.description
+        h2= pageTitle
+
+
 
     - var _items = sightList;
     - var _entity = 'sight';

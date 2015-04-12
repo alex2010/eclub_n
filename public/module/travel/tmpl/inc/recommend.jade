@@ -1,9 +1,14 @@
 .panel
     h3 Recommended Pages
 
-each it in _recommeded
-    .pBox.col-md-3
-        .cat it.slogan
-        .title it.title
+- var _items = _recommeded;
+- var _entity = 'sight';
+- var _tours = true;
+include items
 
-include tours
+//each it in _recommeded
+//    .pBox.col-md-3
+//        .cat= it.slogan
+//        .title= it.title
+//
+//include tours

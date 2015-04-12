@@ -1,0 +1,12 @@
+.pBoxList
+    .row
+        each it in _items
+            div(class= it.cls || 'col-md-3')
+                .pBox
+                    - ee = it.entity || _entity
+                    a(href= f.href(ee, it._id))
+                        != f.imgItem(ee)
+                        .text
+                            h4= it.title
+                            p= it.subTitle
+    a.more More

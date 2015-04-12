@@ -1,76 +1,66 @@
-extends main
+extends inc/main
 
 block slide
-    - var _slides = sights
+    - var _slides = sights;
     #slide.carousel.slide(data-ride='carousel')
         .carousel-inner
             each it,i in _slides
                 .item(class= i == 0 ? 'active' : '' )
+                    .container.text-center
+                        .rel
+                            h4 Beijing in For Seasons
+                            .dropdown.btn.btn-default
+                                a(data-toggle="dropdown",role='button')
+                                    | Winter
+                                    span.caret
+                                ul.dropdown-menu
+                                    li
+                                        a Spring
+                                    li
+                                        a Summer
+                                    li
+                                        a Fall
+                                    li
+                                        a Winter
                     != f.imgItem(it, c.code)
-                    .container.text-center.abs
-                        h4 Beijing in For Seasons
-                        .dropdown.btn.btn-default
-                            a(data-toggle="dropdown",role='button')
-                                | Winter
-                                span.caret
-                            ul.dropdown-menu
-                                li Spring
-                                li Summer
-                                li Fall
-                                li Winter
+
                     .carousel-caption
                         h3= it.title
                         p= it.slogan
+                        a.btn.btn-primary(href='/') See Details
         include ../../../../views/inc/slideBtn
+
 
 block content
 
     .panel
         h2 Introducing #{city.title}
-        .content= city.description
-            a
-                more
-    .pBox.col-md-6
-        .cat Top Choices
-        .title A collection of most-see orders in Beijing
+        p= city.description
+        a= more
 
-    .pBox.col-md-3
-        .cat Top Choices
-        .title A collection of most-see orders in Beijing
+    .pBoxList
+        .row
+            each it in head.list
+                div(class= it.cls)
+                    .pBox
+                        a(href= it.href)
+                            != f.imgItem(it, c.code)
+                            .text
+                                h4= it.title
+                                p= it.subTitle
+            include inc/tours
 
-
-    .pBox.col-md-3
-        .cat Top Choices
-        .title A collection of most-see orders in Beijing
-
-
-    .pBox.col-md-3
-        .cat Top Choices
-        .title A collection of most-see orders in Beijing
-
-
-    .pBox.col-md-3
-        .cat Top Choices
-        .title A collection of most-see orders in Beijing
-
-
-
-    .panel.pBox.col-md-3
-        h3 Cars & Guides
-        ul
-            li
-                a() Cars
-            li
-                a() Guides
-    .panel.pBox.col-md-3
-        h3 Maps
-        ul
-            li
-                a City Map
-            li
-                a Attractions
-            li
-                a Subway
-            li
-                a Shattle Bus
-
+            .col-md-3
+                .panel.pBox
+                    h3 Cars & Guides
+                    ul
+                        each it in btm_cg
+                            li
+                                a(href= it.href)= it.title
+            .col-md-3
+                .panel.pBox
+                    h3 Maps
+                    ul
+                        each it in btm_map
+                            li
+                                a(href= it.href)= it.title

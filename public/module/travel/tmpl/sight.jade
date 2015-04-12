@@ -1,4 +1,4 @@
-extends main
+extends inc/main
 
 block script
     - headMenu = _.where(menu, {code: 'top'})[0].children;
@@ -53,7 +53,7 @@ block content
                 each it in ['opening','price','address','distance','getting','map','tip','web','watch','update']
                     .panel-heading
                         h4.panel-title
-                            a(data-toggle='collapse', data-parent='#people', href= '#cl'+i)= it
+                            a(data-toggle='collapse', data-parent='#info', href= '#cl'+i)= it
                     .panel-collapse.collapse(id= 'cl'+i, class= i==0?'in':'')
                         .panel-body= locals[it]
 
@@ -61,53 +61,3 @@ block content
     .col-md-12
         .row
             include inc/recommend
-
-
-        dl.info-list
-            dt
-                | Opening hours
-            dd
-                = opening
-            dt
-                | Prices
-            dd
-                | #{fee}
-            dt
-                | Getting there
-            dd
-                | subway
-                strong Tian'anmen West or Tian'anmen East
-            dt
-                | Telephone
-            dd
-                a.tel(href='tel:#{phone}')
-                    = phone
-            dt
-                | Best Time to See
-            dd
-                = opening
-            dt
-                | English Audio Guide
-            dd
-            dt Latest Updated
-            dt 1985-11-11
-
-
-        .col-md-12.footerFunc
-            hr
-            a.fl.btn.btn-default.btn-sm
-                i.glyphicon.glyphicon-home
-                | Back to Sights
-            a.fl.btn.btn-primary.btn-sm
-                i.glyphicon.glyphicon-home
-                | Explore it
-            a.fr.btn.btn-default.btn-sm
-                i.glyphicon.glyphicon-home
-                | Print
-            a.fr.btn.btn-default.btn-sm
-                i.glyphicon.glyphicon-home
-                | Email
-
-        section
-            h3 Related Tours
-            .sightCardList

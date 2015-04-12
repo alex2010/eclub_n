@@ -1,0 +1,19 @@
+extends inc/main
+
+block content
+    .panel
+        h2= food.title
+
+    -var _slides = slides
+    include inc/slide
+
+    .panel
+        h3= food.title
+        p= food.content
+
+    - var _items = foodList;
+    - var _entity = 'food';
+    include inc/items
+
+
+
