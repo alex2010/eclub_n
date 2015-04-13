@@ -4,7 +4,7 @@
     "dependencies": {
         "requirejs": "~2.1",
         "underscore": "~1.6.0",
-        "handlebars": "~3",
+        "handlebars": "~1",
         "backbone": "1.1.2",
         "codemirror": "3.x",
         "text": "requirejs/text#~2.0.10",

@@ -4,13 +4,12 @@ var exports;
 exports || (exports = {});
 
 exports.cfg = function(module, t) {
-  var devApp, lrPath, pathPrefix;
+  var devApp, pathPrefix;
   if (module == null) {
     module = '';
   }
   if (t) {
-    lrPath = 'res/';
-    pathPrefix = 'module/';
+    pathPrefix = "res/js/";
     devApp = [];
   } else {
     pathPrefix = '../res/js/';
@@ -18,13 +17,13 @@ exports.cfg = function(module, t) {
   }
   return {
     devApp: devApp,
-    baseUrl: '../',
+    baseUrl: 'public',
     preserveLicenseComments: false,
     removeCombined: true,
     findNestedDependencies: true,
     skipSemiColonInsertion: true,
-    include: ["../res/js/requirejs/require.js", "module/" + module + "/src/" + t],
-    out: module + "/lib/" + t + ".js",
+    include: [pathPrefix + "requirejs/require", "module/" + module + "/src/" + t],
+    out: "/Users/alexwang/Projects/eclub_n/public/res/upload/" + module + "/lib/" + t + ".js",
     optimize: "uglify2",
     paths: {
       jquery: pathPrefix + "jquery/dist/jquery",

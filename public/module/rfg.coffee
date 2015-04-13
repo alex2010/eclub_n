@@ -1,24 +1,22 @@
 exports || (exports = {})
 exports.cfg = (module = '', t) ->
-
 #    resPath = if !cf? or cf.mode is 'prod' then 'http://s.pet.org/' else '/res/'
-#    pathPrefix = 'module/'
     if t #zip
-        lrPath = 'res/'
-        pathPrefix = 'module/'
+#        pathPrefix = 'module/'
+        pathPrefix = "res/js/"
         devApp = []
     else #run
         pathPrefix = '../res/js/'
         devApp = ["/module/#{module}/src/#{cf.app}.js"]
 
     devApp: devApp
-    baseUrl: '../'
+    baseUrl: 'public'
     preserveLicenseComments: false
     removeCombined: true,
     findNestedDependencies: true,
     skipSemiColonInsertion: true,
-    include: ["../res/js/requirejs/require.js", "module/#{module}/src/#{t}"]
-    out: "#{module}/lib/#{t}.js"
+    include: ["#{pathPrefix}requirejs/require", "module/#{module}/src/#{t}"]
+    out: "/Users/alexwang/Projects/eclub_n/public/res/upload/#{module}/lib/#{t}.js"
 
     optimize: "uglify2"
 
