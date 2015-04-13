@@ -18,7 +18,7 @@ _.extend util,
     img: (path, cls = 'markImg', pop = false)->
         id = String.randomChar(4)
         """<div id="#{id}" class="#{cls}" src="#{path}" pop="#{pop}"
-        style="background:url(#{_resPath}/img/loading-bk.gif) no-repeat 50% 50%">loading...</div>"""
+        style="background:url(#{_resPath}img/loading-bk.gif) no-repeat 50% 50%">loading...</div>"""
 
     link: (name, it, prop = 'title', cls)->
         text = if prop is '_str'

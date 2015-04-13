@@ -329,12 +329,12 @@ head = [
         href: '/top'
       }, {
         title: 'Attraction',
-        subTitle: 'A collection of most-see orders in Beijing',
+        subTitle: 'Majir scenic sights in Beijing',
         cls: 'col-md-3',
         href: '/attraction'
       }, {
         title: 'Famous Food',
-        subTitle: 'A collection of most-see orders in Beijing',
+        subTitle: 'Popular food with locats',
         cls: 'col-md-3',
         href: '/foodList'
       }, {

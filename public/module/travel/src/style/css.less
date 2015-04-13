@@ -45,22 +45,35 @@
   overflow: hidden;
   .item {
     position: relative;
+    height:380px;
+    overflow:hidden;
     .rel {
       height: 0;
       margin-bottom: -10px;
       h4 {
+        letter-spacing:1px;
         color: @white;
       }
       .dropdown {
       }
     }
     .carousel-caption {
+      position:absolute;
+      z-index:2;
+      right:10%;
+      bottom:10px;
       text-align: left;
       padding: 0;
+      h3 {
+        color:@white;
+      }
+      p {
+        color:@white;
+      }
       .btn {
         position: absolute;
         right: 0;
-        bottom: 5px;
+        bottom: 15px;
       }
     }
 
@@ -76,6 +89,15 @@
     p {
 
     }
+  }
+}
+.carousel-indicators {
+  bottom:35px;
+  li {
+    background:#fff;
+  }
+  .active {
+    background:#288ad6;
   }
 }
 
@@ -199,8 +221,11 @@ nav {
 
   }
   ul {
+    padding:20px 0 0 20px;
     li {
-
+      line-height:30px;
+      font-size:14px;
+      list-style-type:disc;
     }
   }
 
@@ -245,7 +270,7 @@ nav {
 
 .pBox {
   //图片块
-  border: 1px solid;
+  border: 1px solid #e6e6e6;
   height: 420px;
   overflow: hidden;
   margin-bottom: 10px;
@@ -254,10 +279,12 @@ nav {
   }
 
   h4 {
-
+    padding-left:10px;
+    font-size:12px;
   }
   p {
-
+    padding-left:10px;
+    font-size:16px;
   }
 }
 
