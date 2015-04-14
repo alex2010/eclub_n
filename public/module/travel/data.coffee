@@ -353,11 +353,11 @@ module.exports =
     community:
         code: code
         name: 'travel in Beijing'
-        url: 't.travel.com'
+        url: if _env then 't.travel.com' else 'te.encorner.org'
 
     data:
-        'role:title': role
-        'user:username': user
+        'role:title,_id': role
+        'user:username,_id': user
         'membership:uid,rid': membership
 
         'post:title': post

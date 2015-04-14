@@ -26,11 +26,38 @@ router.param('entity', checkPagePattern);
 router.param('page', checkPagePattern);
 
 ck = function(req) {
-  return req.hostname + req.originalUrl;
+  return req.hostname + req.url;
 };
 
 pre = function(req, rsp, next) {
-  var k;
+  var cc, k, opt;
+  if (!(app.env && !app._hk)) {
+    req.hostname = req.get('Host');
+  }
+  cc = req.query._c;
+  if (cc) {
+    if (cc === '0' && req.query._e) {
+      opt = {
+        $regex: {
+          k: "" + req.query._e
+        }
+      };
+    } else if (cc === '1') {
+      req.url = req.url.replace('_c=1', '');
+      if (req.url.endsWith('?')) {
+        req.url = req.url.substr(0, req.url.length - 1);
+      }
+      opt = {
+        k: ck(req)
+      };
+    }
+    if (opt) {
+      log(opt);
+      dao.delItem(_mdb, 'cache', opt, function(res) {
+        return log('del...');
+      });
+    }
+  }
   k = ck(req);
   return dao.get(_mdb, 'cache', {
     k: k
@@ -40,7 +67,6 @@ pre = function(req, rsp, next) {
     } else {
       req.c = app._community[req.hostname];
       req.k = k;
-      log(req.k);
       return next();
     }
   });
@@ -48,6 +74,7 @@ pre = function(req, rsp, next) {
 
 checkPage = function(req, rsp, next) {
   var pm;
+  log(ck(req));
   pm = req.params;
   page = pm.page || pm.entity || 'index';
   if (page === 'r') {
@@ -61,21 +88,6 @@ checkPage = function(req, rsp, next) {
     return rsp.end('no page');
   }
 };
-
-router.get('/cc/:page', function(req, rsp) {
-  var opt;
-  opt = {
-    k: {
-      $regex: "" + req.params.page
-    }
-  };
-  dao.delItem(_mdb, 'cache', {
-    k: req.hostname + '/'
-  });
-  return dao.delItem(_mdb, 'cache', opt, function(res) {
-    return rsp.end(res.toString());
-  });
-});
 
 router.all('/a/*', pre);
 

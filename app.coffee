@@ -15,7 +15,6 @@ oid = require('mongodb').ObjectID;
 log = console.log;
 _path = __dirname;
 _resPath = app.env ? '/res/' : app.setting.res_path;
-_resPath = app.setting.res_path;
 _mdb = 'main';
 dao = new require('./model/dao')(_mdb);
 dbCache = new require('./model/cache')();
@@ -37,14 +36,14 @@ app.use express.static(path.join(__dirname, 'public'))
 #app.use express.static(path.join(__dirname, 'public/res'))
 
 app._community = {}
-
+log 'init app'
 setTimeout ->
     dao.find _mdb, 'community', {}, {}, (res)->
         log 'init data...'
         for it in res
             app._community[it.url] = it
 
-, 500
+, 2000
 
 #dao.pick(_mdb, 'cache').createIndex 'page cache', time: 1, expireAfterSeconds: 2
 

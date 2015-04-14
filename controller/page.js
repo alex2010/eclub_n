@@ -29,18 +29,16 @@ pageOpt = function(c) {
     i18: i18n.load(code),
     cstr: JSON.stringify(_.pick(c, 'code', 'url')),
     cssPath: function(name) {
-      if (app.env) {
-        return "/module/" + code + "/src/style/" + name + ".css";
-      } else {
-        return "/lib/" + name + ".css";
+      if (name == null) {
+        name = 'css';
       }
+      return _resPath + "upload/" + c.code + "/lib/" + name + ".css?" + (new Date().getTime());
     },
     jsPath: function(name) {
-      if (app.env) {
-        return "/module/" + code + "/src/" + name + ".js";
-      } else {
-        return "/lib/" + name + ".js";
+      if (name == null) {
+        name = 'main';
       }
+      return _resPath + "upload/" + c.code + "/lib/" + name + ".js?" + (new Date().getTime());
     }
   };
 };

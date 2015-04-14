@@ -26,7 +26,7 @@ module.exports = function(grunt) {
   });
   grunt.registerTask('bk', function(code) {
     var bStr;
-    bStr = code ? bStr += "public/module/" + code + "/tmpl,public/module/" + code : "./,views,routes,ext,model,i18n,controller,bin";
+    bStr = code ? "public/module/" + code + "/tmpl,public/module/" + code + ",public/module/" + code + "/data,public/module/" + code + "/src/i18n" : "./,views,routes,ext,model,i18n,controller,bin";
     grunt.config.init({
       ftpscript: {
         server: {
@@ -61,15 +61,6 @@ module.exports = function(grunt) {
         all: [m + '/lib/*']
       },
       copy: {
-        cleanAdmin: {
-          expand: true,
-          cwd: _res + 'css',
-          src: ['admin.css'],
-          dest: _res + 'css',
-          options: {
-            process: cssProcess
-          }
-        },
         cleanCss: {
           expand: true,
           cwd: _resSub,
@@ -89,14 +80,14 @@ module.exports = function(grunt) {
             {
               expand: true,
               cwd: m + 'style',
-              src: ['css.css'],
+              src: ['*.css'],
               dest: _resSub,
               ext: '.css'
             }, {
               expand: true,
               cwd: _admin + 'style',
-              src: ['admin.css'],
-              dest: _res + 'css',
+              src: ['*.css'],
+              dest: _resSub,
               ext: '.css'
             }
           ]
@@ -118,11 +109,6 @@ module.exports = function(grunt) {
           files: [
             {
               expand: true,
-              cwd: _res + 'css',
-              src: ['admin.css'],
-              dest: _remoteRes + 'css'
-            }, {
-              expand: true,
               cwd: _resSub,
               src: ['*.js', '*.css'],
               dest: _remoteResSub
@@ -133,7 +119,6 @@ module.exports = function(grunt) {
     });
     grunt.task.run('clean');
     grunt.task.run("cssmin");
-    grunt.task.run("copy:cleanAdmin");
     grunt.task.run("copy:cleanCss");
     grunt.task.run("requirejs:main");
     grunt.task.run("requirejs:admin");

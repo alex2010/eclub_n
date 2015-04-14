@@ -21,11 +21,17 @@ module.exports = (@name, callback) ->
     else
         @db = new Db(@name || s.db, new Server(s.host, s.port)) #, safe: true
         @db.open ->
+#            @db.setMaxListeners(0)
             callback?()
+
+#    emitter.setMaxListeners()
 
     @pick = (name, cName)->
         if @name isnt name and !app._hk
             @name = name
+#            log @db._emitter
+#            log @db.removeAllListeners()
+            @db.removeAllListeners()
             @db = @db.db(name)
 
         if @cName isnt cName or !@collection

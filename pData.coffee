@@ -9,14 +9,22 @@ _ = require('underscore')
 _db = 'main';
 log = console.log;
 oid = require('mongodb').ObjectID;
-code = args[2]
+code = args[2];
+_env = true;
 `
 require('./ext/string')
 
 dao = new require('./model/dao') _db, ->
-    if args.length > 3
-        entity = args[3]
 
+    if args.length > 3
+        if args[3] is '-p'
+            `
+            _env = false;
+            `
+        else
+            entity = args[3]
+
+    if entity
         filter = if entity is 'user'
              x:'x'
         else
@@ -122,6 +130,8 @@ dao = new require('./model/dao') _db, ->
     else
         data = require("./public/module/#{code}/data")
         dao.save _db, 'community:code', data.community
+
+        log data.community
 
         for k, v of data.data
             dao.save code, k, v, ->

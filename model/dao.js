@@ -41,6 +41,7 @@ module.exports = function(name1, callback) {
   this.pick = function(name, cName) {
     if (this.name !== name && !app._hk) {
       this.name = name;
+      this.db.removeAllListeners();
       this.db = this.db.db(name);
     }
     if (this.cName !== cName || !this.collection) {

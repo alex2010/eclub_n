@@ -7,7 +7,7 @@ page = require '../controller/page'
 up = require '../controller/upload'
 
 
-checkPagePattern =  (req, rsp, next, page)->
+checkPagePattern = (req, rsp, next, page)->
     if /^\w+$/.test(page)
         next()
     else
@@ -16,17 +16,33 @@ checkPagePattern =  (req, rsp, next, page)->
 router.param 'entity', checkPagePattern
 router.param 'page', checkPagePattern
 
-#
-#router.param 'id', (req, rsp, next, id)->
-#    log id
-#    if id.length isnt 24
-#        rsp.end('row id')
-#    else
-#        next()
 
 ck = (req)->
-    req.hostname + req.originalUrl
+    req.hostname + req.url
+
 pre = (req, rsp, next)->
+
+    unless app.env and !app._hk
+        req.hostname = req.get('Host')
+
+    cc = req.query._c
+    if cc
+        if cc is '0' and req.query._e
+            opt =
+                $regex:
+                    k: "#{req.query._e}"
+        else if cc is '1'
+            req.url = req.url.replace('_c=1', '')
+            if req.url.endsWith('?')
+                req.url = req.url.substr(0, req.url.length - 1)
+            opt =
+                k: ck(req)
+
+        if opt
+            log opt
+            dao.delItem _mdb, 'cache', opt, (res)->
+                log 'del...'
+
     k = ck req
     dao.get _mdb, 'cache', k: k, (res)->
         if res and !app.env
@@ -34,10 +50,10 @@ pre = (req, rsp, next)->
         else
             req.c = app._community[req.hostname]
             req.k = k
-            log req.k
             next()
 
 checkPage = (req, rsp, next)->
+    log ck req
     pm = req.params
     page = pm.page || pm.entity || 'index'
     if page is 'r'
@@ -49,16 +65,6 @@ checkPage = (req, rsp, next)->
     else
         rsp.end 'no page'
 
-
-router.get '/cc/:page', (req, rsp)->
-    opt =
-        k:
-            $regex: "#{req.params.page}"
-
-    dao.delItem _mdb, 'cache', k: req.hostname + '/'
-
-    dao.delItem _mdb, 'cache', opt, (res)->
-        rsp.end res.toString()
 
 router.all '/a/*', pre
 router.all '/r/*', pre

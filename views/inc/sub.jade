@@ -8,8 +8,10 @@ script.
         community: !{cstr},
         index: '#{index}'
     };
-if true
+if mode
     script(src='/module/rfg.js')
     script.
         cfg = exports.cfg("#{c.code}")
     script(data-main='/module/mrfg.js', src='/res/js/requirejs/require.js')
+else
+    script(src= jsPath(app))

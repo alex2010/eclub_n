@@ -412,11 +412,11 @@ module.exports = {
   community: {
     code: code,
     name: 'travel in Beijing',
-    url: 't.travel.com'
+    url: _env ? 't.travel.com' : 'te.encorner.org'
   },
   data: {
-    'role:title': role,
-    'user:username': user,
+    'role:title,_id': role,
+    'user:username,_id': user,
     'membership:uid,rid': membership,
     'post:title': post,
     'sight:title': sight,

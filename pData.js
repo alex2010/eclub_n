@@ -14,7 +14,8 @@ _ = require('underscore')
 _db = 'main';
 log = console.log;
 oid = require('mongodb').ObjectID;
-code = args[2]
+code = args[2];
+_env = true;
 ;
 
 require('./ext/string');
@@ -22,7 +23,15 @@ require('./ext/string');
 dao = new require('./model/dao')(_db, function() {
   var data, entity, filter, k, ref, results, v;
   if (args.length > 3) {
-    entity = args[3];
+    if (args[3] === '-p') {
+      
+            _env = false;
+            ;
+    } else {
+      entity = args[3];
+    }
+  }
+  if (entity) {
     filter = entity === 'user' ? {
       x: 'x'
     } : {};
@@ -181,6 +190,7 @@ dao = new require('./model/dao')(_db, function() {
   } else {
     data = require("./public/module/" + code + "/data");
     dao.save(_db, 'community:code', data.community);
+    log(data.community);
     ref = data.data;
     results = [];
     for (k in ref) {
