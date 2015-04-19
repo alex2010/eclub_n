@@ -5,8 +5,6 @@ define [
 
     '/lib/util/base.js'
 
-    '/lib/i18n/message_zh.js'
-
     'hbs!/lib/tmpl/blank'
     'hbs!/lib/tmpl/modal'
     'hbs!/lib/tmpl/panel'
@@ -23,7 +21,7 @@ define [
     '/lib/tmplHelper.js'
 
     'finger'
-], ($, _, Backbone, u, lang, blank, modal, panel, lia, alert, formItem, btnGroup, searchBox, pagination, tab, table, mobBtn)->
+], ($, _, Backbone, u, blank, modal, panel, lia, alert, formItem, btnGroup, searchBox, pagination, tab, table, mobBtn)->
     cf.W = window.W = window
 
     $.extend W,
@@ -31,7 +29,6 @@ define [
         popMsg: u.popMsg
         log: u.log
         _: _
-        _i: lang
 
     $.extend W, u.i18n
 
@@ -58,7 +55,8 @@ define [
     cid = cf.community.id
     code = cf.community.code
 
-    cf.dm = 'encorner.org'
+#    cf.dm = 'encorner.org'
+    cf.dm = 'wikibeijing.com'
     #    cf.dm = 'hailaihui.com'
 
 
@@ -108,7 +106,6 @@ define [
         cf.scEvent.push ->
             util.loadPic()
 
-
     $.extend cf,
         meta: {}
         model: {}
@@ -127,8 +124,8 @@ define [
         root: (if cf.mode then "/module/#{code}/" else "/")
         resPrefix: (if cf.mode then "/module/#{code}/" else "/")
         resFolder: "upload/"
-#        rPath: (if cf.mode then "/res/" else "http://s.#{cf.dm}/")
-        rPath: "http://s.#{cf.dm}/"
+        rPath: (if cf.mode then "/res/" else "http://s.#{cf.dm}/")
+#        rPath: "http://s.#{cf.dm}/"
         _es: []
         tmpl:
             blank: blank

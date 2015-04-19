@@ -2,7 +2,7 @@ adminRoleId = new oid()
 adminUserId = new oid()
 
 role = [
-    _id: adminRoleId
+#    _id: adminRoleId
     title: 'admin'
     res:
         mgm:
@@ -13,11 +13,14 @@ role = [
                 file: 6
             entity:
                 sight: 1
-                content: 3
-                post: 4
-                head: 5
-                category: 7
-                link: 8
+                show: 2
+                food: 3
+                handicraft: 4
+                content: 5
+                post: 6
+                head: 7
+                category: 8
+                link: 9
         permission:
             page: 'console'
 ,
@@ -67,14 +70,14 @@ role = [
 ]
 
 user = [
-    _id: adminUserId
+#    _id: adminUserId
     username: code
     password: 'psd'
 ]
 
 membership = [
-    uid: adminUserId
-    rid: adminRoleId
+#    uid: adminUserId
+#    rid: adminRoleId
 ]
 
 sight = [
@@ -353,11 +356,10 @@ module.exports =
     community:
         code: code
         name: 'travel in Beijing'
-        url: if _env then 't.travel.com' else 'te.encorner.org'
-
+        url: if _env then 't.travel.com' else _st.url
     data:
-        'role:title,_id': role
-        'user:username,_id': user
+        'role:title': role
+        'user:username': user
         'membership:uid,rid': membership
 
         'post:title': post

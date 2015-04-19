@@ -8,7 +8,7 @@ Db = Mongodb.Db
 Connection = Mongodb.Connection
 Server = Mongodb.Server
 
-log = console.log
+#log = console.log
 _opt = {w: 1}
 module.exports = (@name, callback) ->
     if app and app._hk
@@ -79,11 +79,12 @@ module.exports = (@name, callback) ->
 
     @save = (db, entity, items, callback)->
         [entity,keys] = entity.split(':')
-        keys = keys.split(',') if keys
         items = [items] unless _.isArray items
         if keys
+            keys = keys.split(',')
             for it in items
-                @pick(db, entity).update _.pick(it, keys), it, upsert: true, (err, docs)->
+                filter = _.pick(it, keys)
+                @pick(db, entity).update filter, it, upsert: true, (err, docs)->
                     throw err if err
                     callback?(docs)
         else

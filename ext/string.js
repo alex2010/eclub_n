@@ -6,6 +6,23 @@ _.extend(String.prototype, {
   capitalize: function() {
     return this.trim().substring(0, 1).toUpperCase() + this.trim().substring(1);
   },
+  capAll: function() {
+    var c, it, res;
+    res = (function() {
+      var i, ref, results;
+      results = [];
+      for (it = i = 1, ref = this.length; 1 <= ref ? i <= ref : i >= ref; it = 1 <= ref ? ++i : --i) {
+        c = this.charAt(it);
+        if (('A' < c && c < 'Z')) {
+          results.push(' ' + c);
+        } else {
+          results.push(c);
+        }
+      }
+      return results;
+    }).call(this);
+    return this.charAt(0).toUpperCase() + res.join('');
+  },
   startsWith: function(pattern) {
     return this.lastIndexOf(pattern, 0) === 0;
   },

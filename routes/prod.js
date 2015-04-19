@@ -74,7 +74,6 @@ pre = function(req, rsp, next) {
 
 checkPage = function(req, rsp, next) {
   var pm;
-  log(ck(req));
   pm = req.params;
   page = pm.page || pm.entity || 'index';
   if (page === 'r') {

@@ -3,6 +3,15 @@ define ['backbone'], (Backbone) ->
         @replace /^\s+|\s+$/g, ""
     String::capitalize = ->
         @trim().substring(0, 1).toUpperCase() + @trim().substring(1)
+    String::capAll =  ->
+        res = for it in [1..@length]
+            c = @charAt(it)
+            if 'A' < c < 'Z'
+                ' ' + c
+            else
+                c
+        @charAt(0).toUpperCase() + res.join('')
+
     String::startsWith = (pattern) ->
         @lastIndexOf(pattern, 0) is 0
     String::endsWith = (pattern) ->

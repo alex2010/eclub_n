@@ -2,7 +2,7 @@
 module.exports = {
   _init: function(ctx) {
     var btm_opt;
-    ctx.css = ctx.cssPath('css');
+    ctx.css = ctx.cssPath('main');
     ctx.headMenu = 'sns';
     ctx.siteMap = [];
     btm_opt = {

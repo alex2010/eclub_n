@@ -1,9 +1,14 @@
-multer  = require('multer')
+multer = require('multer')
 fs = require('fs')
 gm = require('gm')
 
 sPath = (code)->
-    "./public/res/upload/#{code}"
+    path = "/public/res/upload/#{code}"
+    if app.env
+        '.' + path
+    else
+        _path + path
+
 
 app.use multer
     dest: './public/res/img'
@@ -11,7 +16,9 @@ app.use multer
         fieldname
 
     onFileUploadComplete: (file, req, rsp)->
+        log 'fild cp'
         rp = sPath("#{req.query.code}/#{file.fieldname}.#{file.extension}")
+        log rp
         qu = req.query
         if qu.maxWidth
             thumb(rp, ':' + qu.maxWidth)

@@ -32,6 +32,8 @@ require('./ext/string');
 
 app.set('view engine', 'jade');
 
+app.set('views', path.join(_path, "views"));
+
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
 app.use(bodyParser.json());
@@ -70,17 +72,8 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-if (app.env) {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
 app.use(function(err, req, res, next) {
+  log(err.message);
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,

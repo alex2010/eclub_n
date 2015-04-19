@@ -24,6 +24,8 @@ require('./ext/string')
 # view engine setup
 app.set 'view engine', 'jade'
 
+app.set 'views', path.join(_path, "views")
+
 # uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
@@ -57,17 +59,18 @@ app.use (req, res, next) ->
 # error handlers
 # development error handler
 # will print stacktrace
-if app.env
-    app.use (err, req, res, next) ->
-        res.status err.status or 500
-        res.render 'error',
-            message: err.message
-            error: err
-        return
+#if app.env
+#    app.use (err, req, res, next) ->
+#        res.status err.status or 500
+#        res.render 'error',
+#            message: err.message
+#            error: err
+#        return
 
 # production error handler
 # no stacktraces leaked to user
 app.use (err, req, res, next) ->
+    log err.message
     res.status err.status or 500
     res.render 'error',
         message: err.message

@@ -2,13 +2,13 @@ extends inc/main
 
 block script
     - headMenu = _.where(menu, {code: 'top'})[0].children;
-    - log(locals);
 block content
 
     .topHead
-        h2= title
-            include inc/share
-            small.btn A ~ Z
+        .panel
+            h2= title
+                include inc/share
+                small.btn A ~ Z
 
         if refFile
         #slide.carousel.slide(data-ride='carousel')
@@ -27,35 +27,33 @@ block content
     article.col-md-12.panel
         h3= title
         .article= content
+    .row
+        .col-md-8.pr0
+            .panel
+                if sub
+                    each it in sub
+                        h4= it.title
+                        if it.refFile && it.refFile.head
+                            .row
+                                img(src= f.resPath(c.code, it.refFile.head[0]))
+                        p= it.content
+                if extra
+                    #people.panel-group
+                        .panel.panel-default
+                            each it,i in extra
+                                .panel-heading
+                                    h4.panel-title
+                                        a(data-toggle='collapse', data-parent='#people', href= '#cl' + i)= it.title
+                                .panel-collapse.collapse(id= 'cl' + i, class= i == 0 ? 'in' : '')
+                                    .panel-body= it.content
 
-    .col-md-8
-        .row.panel
-            if sub
-                each it in sub
-                    h4= it.title
-                    if it.refFile && it.refFile.head
-                        img(src= f.resPath(c.code, it.refFile.head[0]))
-                        div= it.content
-        .row
-            if extra
-                #people.panel-group
-                    .panel.panel-default
-                        each it,i in extra
-                            .panel-heading
-                                h4.panel-title
-                                    a(data-toggle='collapse', data-parent='#people', href= '#cl'+i)= it.title
-                            .panel-collapse.collapse(id= 'cl'+i, class= i==0?'in':'')
-                                .panel-body= it.content
-
-    .col-md-4
-        #info.panel-group.row
-            .panel.panel-default
-                each it in ['opening','price','address','distance','getting','map','tip','web','watch','update']
-                    .panel-heading
-                        h4.panel-title
-                            a(data-toggle='collapse', data-parent='#info', href= '#cl'+i)= it
-                    .panel-collapse.collapse(id= 'cl'+i, class= i==0?'in':'')
-                        .panel-body= locals[it]
+        #info.col-md-4
+            .panel.panel-default(style='padding:0')
+                each v,k in info
+                    a.panel-heading(data-toggle='collapse', data-parent='#info', href= '#' + k,style='display:block')
+                        h4.panel-title= k.toString().capAll()
+                    .panel-collapse.collapse(id= k)
+                        .panel-body= v
 
 
     .col-md-12

@@ -1,8 +1,18 @@
 module.exports = (grunt)->
-    dm = 'encorner.org'
-    ftp = '113.11.197.232'
+
+#    dm = 'encorner.org'
+#    ftp = '113.11.197.232'
+#    _remote = '/opt/node/'
+
+    dm = 'wikibeijing.com'
+    ftp = '45.33.59.69'
     _remote = '/opt/node/'
+
+    _remoteRes = '/opt/node/public/res/'
+
+
     _local = __dirname
+
 
     #    m = grunt.task.current.args[0]
 
@@ -12,7 +22,7 @@ module.exports = (grunt)->
             res.push
                 expand: true
                 cwd: it
-                src: ['*.js', '*.json', '*.jade','inc/*.jade']
+                src: ['*.js', '*.json', '*.jade', 'inc/*.jade']
                 dest: _remote + "#{if it is './' then '' else it}"
         res
     require("load-grunt-config") grunt
@@ -23,7 +33,7 @@ module.exports = (grunt)->
     #------------------------------------------backend-------------------------------------------------
     grunt.registerTask 'bk', (code) ->
         bStr = if code
-             "public/module/#{code}/tmpl,public/module/#{code},public/module/#{code}/data,public/module/#{code}/src/i18n"
+            "public/module/#{code}/tmpl,public/module/#{code},public/module/#{code}/data,public/module/#{code}/src/i18n"
         else
             "./,views,routes,ext,model,i18n,controller,bin"
 
@@ -32,6 +42,9 @@ module.exports = (grunt)->
                 server:
                     options:
                         host: ftp #port: port
+                        auth:
+                            username: 'root'
+                            password: 'rock200*'
                     files: backFiles(bStr)
 
         grunt.task.run "ftpscript:server"
@@ -47,7 +60,7 @@ module.exports = (grunt)->
         _module = "#{__dirname}/public/module/"
         _res = "public/res/"
         _resSub = "#{_res}upload/#{code}/lib"
-        _remoteRes = "/opt/s.#{dm}/res/"
+        #        _remoteRes = "/opt/s.#{dm}/res/"
         _remoteResSub = "#{_remoteRes}upload/#{code}/lib"
         _admin = "public/lib/admin/"
 
@@ -87,7 +100,7 @@ module.exports = (grunt)->
                         expand: true
                         cwd: _admin + 'style'
                         src: ['*.css']
-                        dest:  _resSub
+                        dest: _resSub
                         ext: '.css'
                     ]
 
@@ -96,11 +109,11 @@ module.exports = (grunt)->
                     options: require("#{_module}rfg.js").cfg(code, 'main')
                 admin:
                     options: require("#{_module}rfg.js").cfg(code, 'admin')
-        #                account:
-        #                    options: require("#{__dirname}/rfg").cfg(m, 'account')
-        #                wechat:
-        #                    options: require("#{__dirname}/rfg").cfg(m, 'wechat')
-        #
+#                account:
+#                    options: require("#{__dirname}/rfg").cfg(m, 'account')
+#                wechat:
+#                    options: require("#{__dirname}/rfg").cfg(m, 'wechat')
+#
             ftpscript:
                 admin:
                     options:
@@ -153,19 +166,19 @@ module.exports = (grunt)->
         grunt.task.run "requirejs:main"
         grunt.task.run "requirejs:admin"
 
-#        if grunt.file.exists("#{__dirname}/#{_dir}main.js")
-#            grunt.task.run "requirejs:main"
-#
-#        grunt.task.run "requirejs:admin"
-#
-#        if grunt.file.exists("#{__dirname}/#{_dir}geVote.js")
-#            grunt.task.run "requirejs:geVote"
-#
-#
-#        if grunt.file.exists("#{__dirname}/#{_dir}account.js")
-#            grunt.task.run "requirejs:account"
-#
-#        if grunt.file.exists("#{__dirname}/#{_dir}wechat.js")
-#            grunt.task.run "requirejs:wechat"
-#
+        #        if grunt.file.exists("#{__dirname}/#{_dir}main.js")
+        #            grunt.task.run "requirejs:main"
+        #
+        #        grunt.task.run "requirejs:admin"
+        #
+        #        if grunt.file.exists("#{__dirname}/#{_dir}geVote.js")
+        #            grunt.task.run "requirejs:geVote"
+        #
+        #
+        #        if grunt.file.exists("#{__dirname}/#{_dir}account.js")
+        #            grunt.task.run "requirejs:account"
+        #
+        #        if grunt.file.exists("#{__dirname}/#{_dir}wechat.js")
+        #            grunt.task.run "requirejs:wechat"
+        #
         grunt.task.run "ftpscript:admin"

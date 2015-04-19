@@ -1,7 +1,7 @@
 module.exports =
 
     _init: (ctx)->
-        ctx.css = ctx.cssPath('css')
+        ctx.css = ctx.cssPath('main')
         ctx.headMenu = 'sns'
         ctx.siteMap = []
 

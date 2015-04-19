@@ -10,12 +10,13 @@ process.argv.forEach(function(val, index, array) {
 });
 
 app = {};
-_ = require('underscore')
+_ = require('underscore');
 _db = 'main';
 log = console.log;
 oid = require('mongodb').ObjectID;
 code = args[2];
 _env = true;
+_st = require('./public/module/'+code+'/setting.js');
 ;
 
 require('./ext/string');

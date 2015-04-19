@@ -53,7 +53,7 @@ pre = (req, rsp, next)->
             next()
 
 checkPage = (req, rsp, next)->
-    log ck req
+#    log ck req
     pm = req.params
     page = pm.page || pm.entity || 'index'
     if page is 'r'

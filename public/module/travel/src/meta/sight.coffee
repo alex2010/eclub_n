@@ -2,21 +2,51 @@ define [
     '/lib/meta/common.js'
     '/lib/view/jsonTable.js'
 ], (meta, _jsonTable)->
-    meta.subSight =
-        refFile: meta.util.uploadPic
+#oKa6ZjrT3RnGum208ml6cj0yN1rw
+    uploadOpt = (opt)->
+        meta.util.uploadPic
             label: '景点图片'
             attrs:
                 ordered: true
                 pickBtn: true
                 style: ' '
-                itemBtns: ['popEdit','zoom', 'del']
+                itemBtns: ['popEdit', 'zoom', 'del']
+                uploader:
+                    multi: true
+                uploaderOpt:
+                    func: 'head'
+                    entity: 'sight'
+
+    textOp =
+        type: 'text'
+
+    $.extend meta.common,
+        'info::opening': textOp
+        'info::price': textOp
+        'info::address': textOp
+        'info::distance': textOp
+        'info::gettingThere': textOp
+        'info::bestTimeToSee': textOp
+        'info::englishMap': textOp
+        'info::travelTips': textOp
+        'info::officialWebsite': textOp
+        'info::watchVideo': textOp
+        'info::words': textOp
+        'info::lastUpdated': textOp
+        'info::showTime': textOp
+        'info::priceSeats': textOp
+
+
+    meta.subSight =
+        refFile: uploadOpt
+            attrs:
                 uploader:
                     multi: true
                 uploaderOpt:
                     func: 'head'
                     entity: 'sight'
         _:
-            item:[
+            item: [
                 'title'
                 'fee'
                 'row'
@@ -31,15 +61,74 @@ define [
                     type: 'btns'
                     w: 120
 
-    meta.sight =
+    meta.handicraft =
 
+        meta.food =
+
+            meta.show =
+                refFile: meta.util.uploadPic
+                    label: '景点图片'
+                    attrs:
+                        ordered: true
+                        pickBtn: true
+                        style: ' '
+                        itemBtns: ['popEdit', 'zoom', 'del']
+                        uploader:
+                            multi: true
+                        uploaderOpt:
+                            func: 'head'
+                            entity: 'sight'
+
+                theater:
+                    xtype: _jsonTable
+                    attrs:
+                        entity: 'subSight'
+                        toFetch: false
+                        _func: null
+                        _prop: 'sub'
+                        _dv: []
+                        callback: ->
+
+                _:
+                    tbItem:
+                        title: {}
+                        lastUpdated:
+                            type: 'date'
+                        _opt:
+                            type: 'btns'
+                            w: 120
+
+                    item: [
+                        'title'
+                        'subTitle'
+                        'content'
+
+                        'info::opening'
+                        'info::price'
+                        'info::address'
+                        'info::distance'
+                        'info::gettingThere'
+                        'info::website'
+                        'info::watchVideo'
+                        'info::words'
+                        'info::lastUpdated'
+                        'info::showTime'
+                        'info::priceSeats'
+
+                        'sub'
+                        'refFile'
+                        '_dateCreated_true'
+                        '_lastUpdated_true'
+                    ]
+                    action: ->
+                        ['edit', 'del']
+    meta.sight =
         refFile: meta.util.uploadPic
-            label: '景点图片'
             attrs:
                 ordered: true
                 pickBtn: true
                 style: ' '
-                itemBtns: ['popEdit','zoom', 'del']
+                itemBtns: ['popEdit', 'zoom', 'del']
                 uploader:
                     multi: true
                 uploaderOpt:
@@ -47,15 +136,13 @@ define [
                     entity: 'sight'
 
         sub:
-            label: '子景点'
             xtype: _jsonTable
             attrs:
                 entity: 'subSight'
-                title: '子景点'
                 toFetch: false
                 _func: null
                 _prop: 'sub'
-                _dv:[]
+                _dv: []
                 callback: ->
 
         _:
@@ -69,13 +156,21 @@ define [
 
             item: [
                 'title'
-                'phone'
-                'address'
-                'route'
-                'fee'
-                'brief'
+                'subTitle'
                 'content'
-                'opening'
+
+                'info::opening'
+                'info::price'
+                'info::address'
+                'info::distance'
+                'info::gettingThere'
+                'info::englishMap'
+                'info::travelTips'
+                'info::website'
+                'info::watchVideo'
+                'info::words'
+                'info::lastUpdated'
+
                 'sub'
                 'refFile'
                 '_dateCreated_true'

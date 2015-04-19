@@ -238,23 +238,35 @@ define [
             _i['cat.' + k]
 
         ii: (k, m...) ->
-            return null unless window._i
+            return k.capAll() unless window._i
+
             res = window._i[k]
-            if _.isString res
+            if res # and _.isString res
                 if res and res.indexOf('{') > -1
                     for it in m
                         res = res.substring(0, res.indexOf('{')) + it + res.substring(res.indexOf('}') + 1)
                     if _.isString(res)
                         res = res.replace(new RegExp("{", "gm"), '').replace(new RegExp("}", "gm"), '')
-            res
+                return res
+            else
+                if k.indexOf('.') > -1
+                    k = k.split('.')[1]
+                if k.indexOf('::') > -1
+                    k = k.split('::')[1]
+                return k.capAll()
         iim: (k, m...) ->
             ii('m.' + k, iin(it) for it in m)
+
         iie: (k, p) ->
-            ii(k + '.' + p) || iin(p)
+            ii(k + '.' + p)
+
         iic: (p) ->
-            ii('c.' + p) || p
+            ii('c.' + p)
+
         iin: (p) ->
-            ii('nav.' + p) || ii('c.' + p) || ii(p) || p
+            ii('nav.' + p)
+
+             #|| ii('c.' + p) || ii(p) || p
 
     absPoint: (obj)->
         oRect = obj.getBoundingClientRect()
@@ -318,7 +330,7 @@ define [
                     _len--
 
     findByType: (items, type)->
-        return it for it in items when it instanceof type
+        it for it in items when it instanceof type
 
     resPath: ->
         str = [cf.rPath + cf.resFolder + cf.code]
@@ -515,7 +527,8 @@ define [
         url
 
     pageUrl: (it)->
-        "#{cf.community.url}#{util.langPath()}page/#{it.class.toLowerCase()}-#{it.id}.html"
+#        "#{cf.community.url}#{util.langPath()}page/#{it.class.toLowerCase()}-#{it.id}.html"
+        "/#{it._entity}/#{it.id}"
 
     uri: (e, it, lang = util.langPath(), full = true)->
         if full

@@ -3,6 +3,14 @@ _.extend String::,
         @replace /^\s+|\s+$/g, ""
     capitalize: ->
         @trim().substring(0, 1).toUpperCase() + @trim().substring(1)
+    capAll:  ->
+        res = for it in [1..@length]
+            c = @charAt(it)
+            if 'A' < c < 'Z'
+                ' ' + c
+            else
+                c
+        @charAt(0).toUpperCase() + res.join('')
     startsWith: (pattern) ->
         @lastIndexOf(pattern, 0) is 0
     endsWith: (pattern) ->

@@ -7,7 +7,6 @@ adminUserId = new oid();
 
 role = [
   {
-    _id: adminRoleId,
     title: 'admin',
     res: {
       mgm: {
@@ -19,11 +18,14 @@ role = [
         },
         entity: {
           sight: 1,
-          content: 3,
-          post: 4,
-          head: 5,
-          category: 7,
-          link: 8
+          show: 2,
+          food: 3,
+          handicraft: 4,
+          content: 5,
+          post: 6,
+          head: 7,
+          category: 8,
+          link: 9
         }
       },
       permission: {
@@ -83,18 +85,12 @@ role = [
 
 user = [
   {
-    _id: adminUserId,
     username: code,
     password: 'psd'
   }
 ];
 
-membership = [
-  {
-    uid: adminUserId,
-    rid: adminRoleId
-  }
-];
+membership = [];
 
 sight = [
   {
@@ -412,11 +408,11 @@ module.exports = {
   community: {
     code: code,
     name: 'travel in Beijing',
-    url: _env ? 't.travel.com' : 'te.encorner.org'
+    url: _env ? 't.travel.com' : _st.url
   },
   data: {
-    'role:title,_id': role,
-    'user:username,_id': user,
+    'role:title': role,
+    'user:username': user,
     'membership:uid,rid': membership,
     'post:title': post,
     'sight:title': sight,
