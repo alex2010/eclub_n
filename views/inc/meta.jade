@@ -19,7 +19,4 @@ html
         meta(name='apple-mobile-web-app-capable', content='yes')
         meta(name='apple-mobile-web-app-status-bar-style', content='black')
         link(rel='alternate', type='application/rss+xml', title='#{title} RSS Feed', href='/feeds.xml')
-        if mode
-            link(rel='stylesheet', type='text/css', href='#{css}', media='all')
-        else
-            link(rel='stylesheet', type='text/css', href='#{cssPath(app)}', media='all')
+        link(rel='stylesheet', type='text/css', href='#{cssPath(app)}', media='all')

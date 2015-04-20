@@ -238,10 +238,8 @@ define [
             _i['cat.' + k]
 
         ii: (k, m...) ->
-            return k.capAll() unless window._i
 
-            res = window._i[k]
-            if res # and _.isString res
+            if window._i and res = window._i[k] # res # and _.isString res
                 if res and res.indexOf('{') > -1
                     for it in m
                         res = res.substring(0, res.indexOf('{')) + it + res.substring(res.indexOf('}') + 1)

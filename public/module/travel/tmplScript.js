@@ -149,6 +149,23 @@ module.exports = {
   },
   sight: function(ctx) {
     return {
+      headMenu: function(cb) {
+        return dao.find(ctx.c.code, 'cat', {
+          type: 'sight'
+        }, {}, function(res) {
+          var i, it, len;
+          for (i = 0, len = res.length; i < len; i++) {
+            it = res[i];
+            it.href = "/" + it.type + "List?cat=" + it.code;
+          }
+          return cb(null, res);
+        });
+      },
+      allSights: function(cb) {
+        return dao.find(ctx.c.code, 'sight', {}, {}, function(res) {
+          return cb(null, res);
+        });
+      },
       recommeded: function(cb) {
         var filter;
         filter = {

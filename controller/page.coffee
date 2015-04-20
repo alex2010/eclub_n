@@ -19,7 +19,14 @@ pageOpt = (c)->
     i18: i18n.load(code)
     cstr: JSON.stringify(_.pick(c, 'code', 'url'))
     cssPath: (name = 'css')->
-        "#{_resPath}upload/#{c.code}/lib/#{name}.css?#{new Date().getTime()}"
+        if app.env
+            if name is 'admin'
+                "/lib/admin/style/#{name}.css"
+            else
+
+                "/module/#{c.code}/src/style/#{name}.css"
+        else
+            "#{_resPath}upload/#{c.code}/lib/#{name}.css?#{new Date().getTime()}"
     jsPath: (name = 'main')->
         "#{_resPath}upload/#{c.code}/lib/#{name}.js?#{new Date().getTime()}"
 

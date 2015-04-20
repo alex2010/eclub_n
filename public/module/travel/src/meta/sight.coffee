@@ -2,26 +2,27 @@ define [
     '/lib/meta/common.js'
     '/lib/view/jsonTable.js'
 ], (meta, _jsonTable)->
-#oKa6ZjrT3RnGum208ml6cj0yN1rw
-    uploadOpt = (opt)->
-        meta.util.uploadPic
-            label: '景点图片'
-            attrs:
-                ordered: true
-                pickBtn: true
-                style: ' '
-                itemBtns: ['popEdit', 'zoom', 'del']
-                uploader:
-                    multi: true
-                uploaderOpt:
-                    func: 'head'
-                    entity: 'sight'
+
+    lsOpt = (opt)->
+        $.extend
+            tbItem:
+                title: {}
+                lastUpdated:
+                    type: 'date'
+                _opt:
+                    type: 'btns'
+                    w: 120
+            action: ->
+                ['edit', 'del']
+        , opt
+
 
     textOp =
-        type: 'text'
+        type: 'textarea'
+        row: 3
 
     $.extend meta.common,
-        'info::opening': textOp
+        'info::openingHours': textOp
         'info::price': textOp
         'info::address': textOp
         'info::distance': textOp
@@ -31,15 +32,38 @@ define [
         'info::travelTips': textOp
         'info::officialWebsite': textOp
         'info::watchVideo': textOp
-        'info::words': textOp
         'info::lastUpdated': textOp
         'info::showTime': textOp
         'info::priceSeats': textOp
 
-
-    meta.subSight =
-        refFile: uploadOpt
+        slidePic: meta.util.uploadPic
             attrs:
+                ordered: true
+                pickBtn: true
+                itemBtns: ['popEdit', 'zoom', 'del']
+                uploader:
+                    multi: true
+                uploaderOpt:
+                    func: 'show'
+                    entity: 'entity'
+
+        listPic: meta.util.uploadPic
+            attrs:
+                pickBtn: true
+                itemBtns: ['popEdit', 'zoom', 'del']
+                uploader:
+                    multi: false
+                uploaderOpt:
+                    func: 'head'
+                    entity: 'entity'
+
+
+    meta.theater = meta.extra = meta.subSight = meta.restaurant =
+        refPic: meta.util.uploadPic
+            attrs:
+                ordered: true
+                pickBtn: true
+                itemBtns: ['popEdit', 'zoom', 'del']
                 uploader:
                     multi: true
                 uploaderOpt:
@@ -51,7 +75,7 @@ define [
                 'fee'
                 'row'
                 'content'
-                'refFile'
+                'refPic'
             ]
             tbItem:
                 row:
@@ -62,79 +86,75 @@ define [
                     w: 120
 
     meta.handicraft =
+        _: lsOpt
+            item: [
+                'title'
+                'subTitle'
+                'row'
+                'content'
+                'slidePic'
+                'listPic'
+            ]
 
-        meta.food =
-
-            meta.show =
-                refFile: meta.util.uploadPic
-                    label: '景点图片'
-                    attrs:
-                        ordered: true
-                        pickBtn: true
-                        style: ' '
-                        itemBtns: ['popEdit', 'zoom', 'del']
-                        uploader:
-                            multi: true
-                        uploaderOpt:
-                            func: 'head'
-                            entity: 'sight'
-
-                theater:
-                    xtype: _jsonTable
-                    attrs:
-                        entity: 'subSight'
-                        toFetch: false
-                        _func: null
-                        _prop: 'sub'
-                        _dv: []
-                        callback: ->
-
-                _:
-                    tbItem:
-                        title: {}
-                        lastUpdated:
-                            type: 'date'
-                        _opt:
-                            type: 'btns'
-                            w: 120
-
-                    item: [
-                        'title'
-                        'subTitle'
-                        'content'
-
-                        'info::opening'
-                        'info::price'
-                        'info::address'
-                        'info::distance'
-                        'info::gettingThere'
-                        'info::website'
-                        'info::watchVideo'
-                        'info::words'
-                        'info::lastUpdated'
-                        'info::showTime'
-                        'info::priceSeats'
-
-                        'sub'
-                        'refFile'
-                        '_dateCreated_true'
-                        '_lastUpdated_true'
-                    ]
-                    action: ->
-                        ['edit', 'del']
-    meta.sight =
-        refFile: meta.util.uploadPic
+    meta.food =
+        restaurant:
+            xtype: _jsonTable
             attrs:
-                ordered: true
-                pickBtn: true
-                style: ' '
-                itemBtns: ['popEdit', 'zoom', 'del']
-                uploader:
-                    multi: true
-                uploaderOpt:
-                    func: 'head'
-                    entity: 'sight'
+                entity: 'restaurant'
+                toFetch: false
+                _func: null
+                _prop: 'sub'
+                _dv: []
+                callback: ->
 
+        _: lsOpt
+            item: [
+                'title'
+                'subTitle'
+                'row'
+                'content'
+                'restaurant'
+                'slidePic'
+                'listPic'
+            ]
+
+    meta.show =
+        theater:
+            xtype: _jsonTable
+            attrs:
+                entity: 'theater'
+                toFetch: false
+                _func: null
+                _prop: 'sub'
+                _dv: []
+                callback: ->
+        _: lsOpt
+            item: [
+                'title'
+                'subTitle'
+                'row' # top choice great than 1000
+                'content'
+
+                'info::opening'
+                'info::price'
+                'info::address'
+                'info::distance'
+                'info::gettingThere'
+                'info::website'
+                'info::watchVideo'
+                'info::words'
+                'info::lastUpdated'
+                'info::showTime'
+                'info::priceSeats'
+
+                'theater'
+                'slidePic'
+                'listPic'
+                '_dateCreated_true'
+                '_lastUpdated_true'
+            ]
+
+    meta.sight =
         sub:
             xtype: _jsonTable
             attrs:
@@ -144,22 +164,24 @@ define [
                 _prop: 'sub'
                 _dv: []
                 callback: ->
+        extra:
+            xtype: _jsonTable
+            attrs:
+                entity: 'extra'
+                toFetch: false
+                _func: null
+                _prop: 'extra'
+                _dv: []
+                callback: ->
 
-        _:
-            tbItem:
-                title: {}
-                lastUpdated:
-                    type: 'date'
-                _opt:
-                    type: 'btns'
-                    w: 120
-
+        _: lsOpt
             item: [
                 'title'
                 'subTitle'
+                'row'
                 'content'
 
-                'info::opening'
+                'info::openingHours'
                 'info::price'
                 'info::address'
                 'info::distance'
@@ -168,14 +190,14 @@ define [
                 'info::travelTips'
                 'info::website'
                 'info::watchVideo'
-                'info::words'
+                'info::officialWebsite'
                 'info::lastUpdated'
 
                 'sub'
-                'refFile'
+                'extra'
+                'slidePic'
+                'listPic'
                 '_dateCreated_true'
                 '_lastUpdated_true'
             ]
-            action: ->
-                ['edit', 'del']
 

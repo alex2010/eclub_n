@@ -44,30 +44,30 @@
   overflow: hidden;
   .item {
     position: relative;
-    height:380px;
-    overflow:hidden;
+    height: 380px;
+    overflow: hidden;
     .rel {
       height: 0;
       margin-bottom: -10px;
       h4 {
-        letter-spacing:1px;
+        letter-spacing: 1px;
         color: @white;
       }
       .dropdown {
       }
     }
     .carousel-caption {
-      position:absolute;
-      z-index:2;
-      right:10%;
-      bottom:10px;
+      position: absolute;
+      z-index: 2;
+      right: 10%;
+      bottom: 10px;
       text-align: left;
       padding: 0;
       h3 {
-        color:@white;
+        color: @white;
       }
       p {
-        color:@white;
+        color: @white;
       }
       .btn {
         position: absolute;
@@ -90,13 +90,14 @@
     }
   }
 }
+
 .carousel-indicators {
-  bottom:35px;
+  bottom: 35px;
   li {
-    background:#fff;
+    background: #fff;
   }
   .active {
-    background:#288ad6;
+    background: #288ad6;
   }
 }
 
@@ -195,7 +196,7 @@ nav {
 .panel {
   //所有的白底区块
   padding: 15px;
-
+  margin-bottom: 10px;
   h2 {
     font-size: 22px;
   }
@@ -220,11 +221,11 @@ nav {
 
   }
   ul {
-    padding:20px 0 0 20px;
+    padding: 20px 0 0 20px;
     li {
-      line-height:30px;
-      font-size:14px;
-      list-style-type:disc;
+      line-height: 30px;
+      font-size: 14px;
+      list-style-type: disc;
     }
   }
 
@@ -278,12 +279,12 @@ nav {
   }
 
   h4 {
-    padding-left:10px;
-    font-size:12px;
+    padding-left: 10px;
+    font-size: 12px;
   }
   p {
-    padding-left:10px;
-    font-size:16px;
+    padding-left: 10px;
+    font-size: 16px;
   }
 }
 
@@ -343,5 +344,38 @@ nav {
   p {
     font-size: 14px;
   }
+}
 
+a.panel-heading {
+  display: block;
+}
+
+.topHead {
+  small {
+    background-color: @gray;
+    border-radius: 10px;
+    color: white;
+  }
+}
+
+.slide {
+  .dropdown {
+    background-color: @gray;
+    border: 0;
+    a {
+      color: white;
+    }
+  }
+}
+
+#asl {
+  background-color: @gray;
+  .row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    a {
+      color: white;
+    }
+  }
+  margin-bottom: 10px;
 }

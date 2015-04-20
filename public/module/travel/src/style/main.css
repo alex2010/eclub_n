@@ -7940,6 +7940,7 @@ nav .menus li.subItem:hover ul {
 }
 .panel {
   padding: 15px;
+  margin-bottom: 10px;
 }
 .panel h2 {
   font-size: 22px;
@@ -8057,4 +8058,30 @@ nav .menus li.subItem:hover ul {
 }
 .bottomWrapper p {
   font-size: 14px;
+}
+a.panel-heading {
+  display: block;
+}
+.topHead small {
+  background-color: #555555;
+  border-radius: 10px;
+  color: white;
+}
+.slide .dropdown {
+  background-color: #555555;
+  border: 0;
+}
+.slide .dropdown a {
+  color: white;
+}
+#asl {
+  background-color: #555555;
+  margin-bottom: 10px;
+}
+#asl .row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#asl .row a {
+  color: white;
 }

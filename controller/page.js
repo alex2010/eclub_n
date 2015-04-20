@@ -32,7 +32,15 @@ pageOpt = function(c) {
       if (name == null) {
         name = 'css';
       }
-      return _resPath + "upload/" + c.code + "/lib/" + name + ".css?" + (new Date().getTime());
+      if (app.env) {
+        if (name === 'admin') {
+          return "/lib/admin/style/" + name + ".css";
+        } else {
+          return "/module/" + c.code + "/src/style/" + name + ".css";
+        }
+      } else {
+        return _resPath + "upload/" + c.code + "/lib/" + name + ".css?" + (new Date().getTime());
+      }
     },
     jsPath: function(name) {
       if (name == null) {

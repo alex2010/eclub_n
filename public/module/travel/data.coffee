@@ -95,10 +95,7 @@ sight = [
     content: "Ringed by a 52m-wide moat at the very heart of Beijing, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest
 palace complex in the world."
     opening: [
-        '17:00-18:00 19:00-21:00 (Monday)'
-        '17:00-18:00 19:00-21:00 (Tuesday)'
-        '17:00-18:00 19:00-21:00 (Wenday)'
-        '17:00-18:00 19:00-21:00 (Thursday)'
+
     ]
     refFile:
         head: ['p1.jpg', 'p2.jpg']
@@ -108,6 +105,17 @@ palace complex in the world."
         p2:
             title: 'Summer'
             description: 'amazing Fall'
+    info:
+        openingHours: "17:00-18:00 19:00-21:00 (Monday)<br/> 17:00-18:00 19:00-21:00 (Tuesday)"
+        address: "jhgjg"
+        distance: "hjg"
+        price: "sdfsdf"
+        gettingThere: "hjgjh"
+        englishMap: "sadfsadfasdf"
+        travelTips: "jhghj"
+        officialWebsite: 'www.sdfsdf.com'
+        watchVideo: "sdfsdfa"
+        lastUpdated: "jghg"
     extra: [
         title: 'Empress Dowsdf CiXi'
         content: 'Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably'

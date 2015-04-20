@@ -106,7 +106,7 @@ sight = [
     row: 1009,
     brief: 'Ringed by a 52m-wide moat at the very heart of Beijing, the Forb',
     content: "Ringed by a 52m-wide moat at the very heart of Beijing, the Forbidden City is China’s largest and best-preserved collectionm of ancient buildings, and the largest palace complex in the world.",
-    opening: ['17:00-18:00 19:00-21:00 (Monday)', '17:00-18:00 19:00-21:00 (Tuesday)', '17:00-18:00 19:00-21:00 (Wenday)', '17:00-18:00 19:00-21:00 (Thursday)'],
+    opening: [],
     refFile: {
       head: ['p1.jpg', 'p2.jpg'],
       p1: {
@@ -117,6 +117,18 @@ sight = [
         title: 'Summer',
         description: 'amazing Fall'
       }
+    },
+    info: {
+      openingHours: "17:00-18:00 19:00-21:00 (Monday)<br/> 17:00-18:00 19:00-21:00 (Tuesday)",
+      address: "jhgjg",
+      distance: "hjg",
+      price: "sdfsdf",
+      gettingThere: "hjgjh",
+      englishMap: "sadfsadfasdf",
+      travelTips: "jhghj",
+      officialWebsite: 'www.sdfsdf.com',
+      watchVideo: "sdfsdfa",
+      lastUpdated: "jghg"
     },
     extra: [
       {

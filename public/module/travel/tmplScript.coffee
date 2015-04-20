@@ -1,3 +1,4 @@
+
 module.exports =
 
     _init: (ctx)->
@@ -100,6 +101,14 @@ module.exports =
                 cb(null, res)
 
     sight: (ctx)->
+        headMenu: (cb)->
+            dao.find ctx.c.code, 'cat', {type:'sight'}, {}, (res)->
+                for it in res
+                    it.href = "/#{it.type}List?cat=#{it.code}"
+                cb(null, res)
+        allSights: (cb)->
+            dao.find ctx.c.code, 'sight', {}, {}, (res)->
+                cb(null, res)
         recommeded: (cb)->
             filter =
                 cat: 'top'
