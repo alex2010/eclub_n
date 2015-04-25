@@ -77,11 +77,12 @@ module.exports =
 
 
     index: (ctx)->
-        sights: (cb)->
+        top: (cb)->
             filter =
-                row:
-                    $gt: 1000
-            dao.find ctx.c.code, 'sight', filter, {}, (res)->
+                type: 'top'
+#                row:
+#                    $gt: 1000
+            dao.get ctx.c.code, 'head', filter, (res)->
                 cb(null, res)
 
         head: (cb)->
@@ -100,6 +101,17 @@ module.exports =
             dao.get ctx.c.code, 'head', {type: 'top'}, (res)->
                 cb(null, res)
 
+    sightList: (ctx, req)->
+        headMenu: (cb)->
+            dao.find ctx.c.code, 'cat', {type:'sight'}, {}, (res)->
+                for it in res
+                    it.href = "/#{it.type}List?cat=#{it.code}"
+                cb(null, res)
+        sightList: (cb)->
+            filter =
+                cat: req.query.cat
+            dao.find ctx.c.code, 'sight', filter, {}, (res)->
+                cb(null, res)
     sight: (ctx)->
         headMenu: (cb)->
             dao.find ctx.c.code, 'cat', {type:'sight'}, {}, (res)->

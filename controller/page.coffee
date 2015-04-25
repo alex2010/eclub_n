@@ -37,22 +37,22 @@ pre =(req)->
     ctx.index = ps.page || ps.entity || 'index'
     ctx
 
-pickScript = (ctx)->
+pickScript = (ctx,req)->
     sc = require("../public/module/#{ctx.c.code}/tmplScript")
 
     initOpt = sc._init(ctx) || {}
 
     opt = if sc[ctx.index]
-        sc[ctx.index](ctx) || {}
+        sc[ctx.index](ctx,req) || {}
     else if ts[ctx.index]
-        ts[ctx.index](ctx) || {}
+        ts[ctx.index](ctx,req) || {}
     else
         {}
 
     _.extend initOpt, opt
 
 render = (req, rsp, ctx)->
-    opt = pickScript(ctx)
+    opt = pickScript(ctx,req)
     dao.pick(_mdb, 'cache').ensureIndex time: 1,
         expireAfterSeconds: 7200
         background: true

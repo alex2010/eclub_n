@@ -105,9 +105,11 @@ dataController = {
   },
   del: function(req, rsp) {
     var code, entity;
+    log('del');
+    log(req.params.id);
     code = req.c.code;
     entity = req.params.entity;
-    return dao.del(code, entity, {
+    return dao.delItem(code, entity, {
       _id: req.params.id
     }, function() {
       return rsp.send({

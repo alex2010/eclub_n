@@ -1,7 +1,8 @@
 extends inc/main
 
 block slide
-    - var _slides = sights;
+    - var _slides = top.list;
+    - log(top.list)
     #slide.carousel.slide(data-ride='carousel')
         .carousel-inner
             each it,i in _slides
@@ -22,13 +23,12 @@ block slide
                                         a Fall
                                     li
                                         a Winter
-                    != f.imgItem(it, c.code)
+                    - log(it);
+                    != f.imgItem(it, c.code, 'top')
 
                     .carousel-caption
                         h3= it.title
-                        //-p= it.slogan
-                        //-假数据
-                        p The biggest inporid gorden in China
+                        p= it.subTitle
                         a.btn.btn-primary(href='/') See Details
         include ../../../../views/inc/slideBtn
 

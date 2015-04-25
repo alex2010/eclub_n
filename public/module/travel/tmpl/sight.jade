@@ -30,7 +30,7 @@ block content
 
     article.col-md-12.panel
         h3= title
-        .article= content
+        .article!= content
     .row
         .col-md-8.pr0
             if sub
@@ -40,7 +40,7 @@ block content
                         if it.refFile && it.refFile.head
                             .row
                                 img(src= f.resPath(c.code, it.refFile.head[0]))
-                        p= it.content
+                        p!= it.content
             if extra
                 #people
                     .panel.panel-default(style='padding:0')
@@ -48,7 +48,7 @@ block content
                             a.panel-heading(data-toggle='collapse', data-parent='#people', href= '#cl' + i)
                                 h4.panel-title= it.title
                             .panel-collapse.collapse(id= 'cl' + i, class= i == 0 ? 'in' : '')
-                                .panel-body= it.content
+                                .panel-body!= it.content
 
         #info.col-md-4
             if info
@@ -57,7 +57,7 @@ block content
                         a.panel-heading(data-toggle='collapse', data-parent='#info', href= '#' + k)
                             h4.panel-title= k.toString().capAll()
                         .panel-collapse.collapse(id= k, class= k == 'openingHours' ? 'in' : '')
-                            .panel-body= v
+                            .panel-body!= v
 
 
     .col-md-12

@@ -1,7 +1,8 @@
 define [
     '/lib/meta/common.js'
     '/lib/view/jsonTable.js'
-], (meta, _jsonTable)->
+    '/lib/widget/refFileCollection.js'
+], (meta, _jsonTable, _refFileCollection)->
 
     lsOpt = (opt)->
         $.extend
@@ -36,39 +37,26 @@ define [
         'info::showTime': textOp
         'info::priceSeats': textOp
 
-        slidePic: meta.util.uploadPic
+        slidePic:
+            type: 'holder'
+            xtype: _refFileCollection
             attrs:
-                ordered: true
-                pickBtn: true
-                itemBtns: ['popEdit', 'zoom', 'del']
-                uploader:
-                    multi: true
-                uploaderOpt:
-                    func: 'show'
-                    entity: 'entity'
+                multi: true
+                func: 'slide'
 
-        listPic: meta.util.uploadPic
+        listPic:
+            type: 'holder'
+            xtype: _refFileCollection
             attrs:
-                pickBtn: true
-                itemBtns: ['popEdit', 'zoom', 'del']
-                uploader:
-                    multi: false
-                uploaderOpt:
-                    func: 'head'
-                    entity: 'entity'
-
+                func:'list'
 
     meta.theater = meta.extra = meta.subSight = meta.restaurant =
-        refPic: meta.util.uploadPic
+        refPic:
+            type: 'holder'
+            xtype: _refFileCollection
             attrs:
-                ordered: true
-                pickBtn: true
-                itemBtns: ['popEdit', 'zoom', 'del']
-                uploader:
-                    multi: true
-                uploaderOpt:
-                    func: 'head'
-                    entity: 'sight'
+                multi: true
+
         _:
             item: [
                 'title'

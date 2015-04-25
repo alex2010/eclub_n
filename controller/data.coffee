@@ -71,9 +71,11 @@ dataController =
             rsp.send u.r _.pick(item, _attrs)
 
     del: (req, rsp) ->
+        log 'del'
+        log req.params.id
         code = req.c.code
         entity = req.params.entity
-        dao.del code, entity, _id: req.params.id, ->
+        dao.delItem code, entity, _id: req.params.id, ->
             rsp.send msg: 'del.ok'
 
 module.exports = dataController
