@@ -35,6 +35,12 @@ module.exports = {
       },
       btm_top: function(cb) {
         return dao.find(ctx.c.code, 'top', {}, btm_opt, function(res) {
+          var i, it, len;
+          for (i = 0, len = res.length; i < len; i++) {
+            it = res[i];
+            it._e = it.entity;
+            it._id = it.id;
+          }
           ctx.siteMap.push({
             title: 'Top Choices',
             items: res,
@@ -123,6 +129,9 @@ module.exports = {
           type: 'index'
         };
         return dao.get(ctx.c.code, 'head', filter, function(res) {
+          log('indexxx');
+          log(res);
+          log('indexxx');
           return cb(null, res);
         });
       }
@@ -145,31 +154,6 @@ module.exports = {
       }
     };
   },
-  sightList: function(ctx, req) {
-    return {
-      headMenu: function(cb) {
-        return dao.find(ctx.c.code, 'cat', {
-          type: 'sight'
-        }, {}, function(res) {
-          var i, it, len;
-          for (i = 0, len = res.length; i < len; i++) {
-            it = res[i];
-            it.href = "/" + it.type + "List?cat=" + it.code;
-          }
-          return cb(null, res);
-        });
-      },
-      sightList: function(cb) {
-        var filter;
-        filter = {
-          cat: req.query.cat
-        };
-        return dao.find(ctx.c.code, 'sight', filter, {}, function(res) {
-          return cb(null, res);
-        });
-      }
-    };
-  },
   sight: function(ctx) {
     return {
       headMenu: function(cb) {
@@ -179,7 +163,7 @@ module.exports = {
           var i, it, len;
           for (i = 0, len = res.length; i < len; i++) {
             it = res[i];
-            it.href = "/" + it.type + "List?cat=" + it.code;
+            it.href = "/itemList?entity=" + it.type + "&cat=" + it.code;
           }
           return cb(null, res);
         });
@@ -200,49 +184,59 @@ module.exports = {
       }
     };
   },
-  foodList: function(ctx) {
+  itemList: function(ctx, req) {
+    var et;
+    et = req.query.entity;
+    ctx.title = (et.capitalize()) + " in Beijing";
+    ctx._entity = et;
     return {
-      food: function(cb) {
+      _slides: function(cb) {
         var filter;
-        filter = {
-          type: 'food'
-        };
-        return dao.get(ctx.c.code, 'cat', filter, function(res) {
-          return cb(null, res);
-        });
-      },
-      foodList: function(cb) {
-        return dao.find(ctx.c.code, 'food', {}, {}, function(res) {
-          var i, it, len;
-          ctx.slides = [];
-          for (i = 0, len = res.length; i < len; i++) {
-            it = res[i];
-            if (it.row > 1000) {
-              ctx.slides.push(it);
+        if (req.query.cat) {
+          return cb();
+        } else {
+          filter = {
+            row: {
+              $gt: 1000
             }
-          }
-          return cb(null, res);
-        });
-      }
-    };
-  },
-  attraction: function(ctx) {
-    ctx.pageTitle = "The Attractions in Beijing";
-    return {
+          };
+          return dao.find(ctx.c.code, et, filter, {}, function(res) {
+            return cb(null, res);
+          });
+        }
+      },
       headMenu: function(cb) {
         return dao.find(ctx.c.code, 'cat', {
-          type: 'sight'
+          type: et
         }, {}, function(res) {
           var i, it, len;
           for (i = 0, len = res.length; i < len; i++) {
             it = res[i];
-            it.href = "/" + it.type + "List?cat=" + it.code;
+            it.href = "/itemList?entity=" + it.type + "&cat=" + it.code;
           }
           return cb(null, res);
         });
       },
-      sightList: function(cb) {
-        return dao.find(ctx.c.code, 'sight', {}, {}, function(res) {
+      item: function(cb) {
+        var filter;
+        if (req.query.cat) {
+          return cb();
+        } else {
+          filter = {
+            type: et
+          };
+          return dao.get(ctx.c.code, 'cat', filter, function(res) {
+            return cb(null, res);
+          });
+        }
+      },
+      _items: function(cb) {
+        var filter;
+        filter = {};
+        if (req.query.cat) {
+          filter.cat = req.query.cat;
+        }
+        return dao.find(ctx.c.code, et, filter, {}, function(res) {
           return cb(null, res);
         });
       }

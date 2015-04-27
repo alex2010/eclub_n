@@ -40,13 +40,17 @@ _.extend(util, {
     id = String.randomChar(4);
     return "<div id=\"" + id + "\" class=\"" + cls + "\" src=\"" + path + "\" pop=\"" + pop + "\"\nstyle=\"background:url(" + _resPath + "img/loading-bk.gif) no-repeat 50% 50%\">loading...</div>";
   },
-  link: function(name, it, prop, cls) {
-    var text;
+  link: function(it, prop, cls) {
+    var href, text;
     if (prop == null) {
       prop = 'title';
     }
-    text = prop === '_str' ? it : it[prop];
-    return "<a href='/" + name + "/" + it._id + "' title='" + text + "' class='" + (cls || '') + "'>" + text + "</a>";
+    text = prop === '_str' ? it : it ? it[prop] : void 0;
+    if (!text) {
+      return '';
+    }
+    href = it._e === 'cat' ? "/" + (it.type.split('_')[0]) + "List?cat=" + it.code : "/" + it._e + "/" + it._id;
+    return "<a href='" + href + "' title='" + text + "' class='" + (cls || '') + "'>" + text + "</a>";
   },
   href: function(name, id) {
     return "/" + name + "/" + id;

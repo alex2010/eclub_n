@@ -1,8 +1,10 @@
-@bg: url(/module/travel/images/bg.png);
+//@bg: url(/module/travel/images/bg.png);
 @logo: url(/res/upload/travel/images/logo.jpg);
-@mainBg: url(/module/travel/css/images/bg.gif);
-@sidebg: url(/module/travel/css/images/sidebg.jpg);
-@headbg: url(/module/travel/css/images/headbg.jpg);
+//@mainBg: url(/module/travel/css/images/bg.gif);
+//@sidebg: url(/module/travel/css/images/sidebg.jpg);
+//@headbg: url(/module/travel/css/images/headbg.jpg);
+
+
 
 @width: 900px;
 @_fontColor: #111;
@@ -109,7 +111,7 @@ a {
     .logoPic {
       background: @logo repeat 0 0 transparent;
       background-size: contain;
-      .square(100px);
+      //.square(100px);
       float: right;
       margin: 25px;
     }
@@ -143,7 +145,7 @@ a {
     background-color: white;
     padding: 10px;
     width: 100%;
-    color: @gray-dark;
+    //color: @gray-dark;
     border: 0;
     border-radius: 6px;
     margin-bottom: 10px;
@@ -182,11 +184,11 @@ nav {
           .transition(all 0.5s ease);
           .transition-delay(0.5s);
         }
-        span{
+        span {
           margin: -25px 15px 0;
         }
         &:hover {
-          span{
+          span {
             display: none;
           }
           ul {
@@ -327,6 +329,12 @@ nav {
 .headMenu {
   text-align: right;
   li {
+    &.active {
+      a {
+        background-color: #32cd32;
+        color: white;
+      }
+    }
     a {
       padding: 5px 10px;
       border-radius: 5px;

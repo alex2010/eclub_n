@@ -36,6 +36,19 @@ define(['/lib/meta/common.js', '/lib/view/jsonTable.js', '/lib/widget/refFileCol
     'info::lastUpdated': textOp,
     'info::showTime': textOp,
     'info::priceSeats': textOp,
+    cat: {
+      type: 'select',
+      title: iic('category'),
+      entity: 'cat',
+      keyVal: 'code,title',
+      criteria: function() {
+        return {
+          q: {
+            type: 'sight'
+          }
+        };
+      }
+    },
     slidePic: {
       type: 'holder',
       xtype: _refFileCollection,
@@ -135,7 +148,7 @@ define(['/lib/meta/common.js', '/lib/view/jsonTable.js', '/lib/widget/refFileCol
       }
     },
     _: lsOpt({
-      item: ['title', 'subTitle', 'row', 'content', 'info::openingHours', 'info::price', 'info::address', 'info::distance', 'info::gettingThere', 'info::englishMap', 'info::travelTips', 'info::website', 'info::watchVideo', 'info::officialWebsite', 'info::lastUpdated', 'sub', 'extra', 'slidePic', 'listPic', '_dateCreated_true', '_lastUpdated_true']
+      item: ['title', 'subTitle', 'row', 'cat', 'content', 'info::openingHours', 'info::price', 'info::address', 'info::distance', 'info::gettingThere', 'info::englishMap', 'info::travelTips', 'info::website', 'info::watchVideo', 'info::officialWebsite', 'info::lastUpdated', 'sub', 'extra', 'slidePic', 'listPic', '_dateCreated_true', '_lastUpdated_true']
     })
   };
 });

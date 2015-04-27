@@ -3,3 +3,4 @@ require [
 ], (router) ->
     new router()
     app.start()
+    _init?()

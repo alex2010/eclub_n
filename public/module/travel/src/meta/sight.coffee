@@ -37,6 +37,18 @@ define [
         'info::showTime': textOp
         'info::priceSeats': textOp
 
+        cat:
+            type: 'select'
+            title: iic('category')
+            entity: 'cat'
+            keyVal: 'code,title'
+            criteria:->
+                q:
+                    type: 'sight'
+#            valid:
+#                required: 'required'
+
+
         slidePic:
             type: 'holder'
             xtype: _refFileCollection
@@ -167,6 +179,7 @@ define [
                 'title'
                 'subTitle'
                 'row'
+                'cat'
                 'content'
 
                 'info::openingHours'

@@ -20,12 +20,18 @@ _.extend util,
         """<div id="#{id}" class="#{cls}" src="#{path}" pop="#{pop}"
         style="background:url(#{_resPath}img/loading-bk.gif) no-repeat 50% 50%">loading...</div>"""
 
-    link: (name, it, prop = 'title', cls)->
+    link: (it, prop = 'title', cls)->
         text = if prop is '_str'
             it
-        else
+        else if it
             it[prop]
-        "<a href='/#{name}/#{it._id}' title='#{text}' class='#{cls || ''}'>#{text}</a>"
+        return '' unless text
+        href = if it._e is 'cat'
+            "/#{it.type.split('_')[0]}List?cat=#{it.code}"
+        else
+            "/#{it._e}/#{it._id}"
+
+        "<a href='#{href}' title='#{text}' class='#{cls || ''}'>#{text}</a>"
 
     href: (name, id)->
         "/#{name}/#{id}"

@@ -16,11 +16,13 @@ role = [
                 show: 2
                 food: 3
                 handicraft: 4
-                content: 5
-                post: 6
-                head: 7
-                category: 8
-                link: 9
+                map:5
+                cg:6
+                content: 15
+                post: 16
+                head: 17
+                cat: 18
+                link: 19
         permission:
             page: 'console'
 ,
@@ -33,26 +35,25 @@ role = [
             href: '/top'
         ,
             label: 'Attractions'
-            href: '/attraction'
+            href: '/itemList?entity=sight'
         ,
             label: 'Famous Food good'
-            href: '/foodList'
+            href: '/itemList?entity=food'
         ,
             label: 'Beijing Shows'
-            href: '/showList'
+            href: '/itemList?entity=show'
         ,
             label: 'Handicrafts'
-            title: 'xzcvxcvzxcv'
-            href: '/handicraftList'
+            href: '/itemList?entity=handicraft'
         ,
             label: 'Cars & Guides'
-            href: '/cg'
+            href: '/itemList?entity=cg'
         ,
             label: 'Beijing Maps'
-            href: '/mapList'
+            href: '/itemList?entity=map'
         ,
             label: 'Tours'
-            href: '/tourList'
+            href: '/itemList?entity=tour'
         ]
         foot: [
             label: 'About Us'
@@ -84,7 +85,7 @@ sight = [
     title: 'Summer Palace'
     subTitle: 'at the very heart of Beijing'
     phone: '12233322'
-    cat: 'top'
+    cat: 'unesco'
     address: 'sadfsd sdfsdfsadf'
     fee: 200
     route: 'sadfsd dsfdsfsdaf'
@@ -98,7 +99,7 @@ palace complex in the world."
 
     ]
     refFile:
-        head: ['p1.jpg', 'p2.jpg']
+        slide: ['p1.jpg', 'p2.jpg']
         p1:
             title: 'Spring'
             description: 'amazing spring'
@@ -136,10 +137,10 @@ palace complex in the world."
     phone: '1231231231'
     address: 'sdvxcvzcvcvxczv'
     row: 1008
-    cat: 'top'
+    cat: 'museum'
     content: "de moat at the very heart of Beijing, the For"
     refFile:
-        head: ['p1.jpg', 'p2.jpg']
+        slide: ['p1.jpg', 'p2.jpg']
         p1:
             title: 'Spring'
             description: 'amazing spring'
@@ -174,7 +175,6 @@ content = [
 ]
 
 cat = [
-
     title: 'UNESCO'
     code: 'unesco'
     type: 'sight'
@@ -233,18 +233,22 @@ cat = [
     type: 'cg'
 ,
     title: 'City Highlight'
+    code: 'tour_ch'
     content: "Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux, and Backbone.js's suspenders. Underscore provides 80-odd functions that support both the usual functional suspects: map, select, invoke — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on. It delegates to built-in functions, if present, so modern browsers will use the native implementations of forEach, map, reduce, filter, every, some and indexOf."
     type: 'tour'
 ,
     title: 'Great Wall'
+    code: 'tour_gw'
     content: "Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux, and Backbone.js's suspenders. Underscore provides 80-odd functions that support both the usual functional suspects: map, select, invoke — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on. It delegates to built-in functions, if present, so modern browsers will use the native implementations of forEach, map, reduce, filter, every, some and indexOf."
     type: 'tour'
 ,
     title: 'depth Tour'
+    code: 'tour_dt'
     content: "Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux, and Backbone.js's suspenders. Underscore provides 80-odd functions that support both the usual functional suspects: map, select, invoke — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on. It delegates to built-in functions, if present, so modern browsers will use the native implementations of forEach, map, reduce, filter, every, some and indexOf."
     type: 'tour'
 ,
     title: 'Jump in Tour'
+    code: 'tour_jt'
     content: "Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux, and Backbone.js's suspenders. Underscore provides 80-odd functions that support both the usual functional suspects: map, select, invoke — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on. It delegates to built-in functions, if present, so modern browsers will use the native implementations of forEach, map, reduce, filter, every, some and indexOf."
     type: 'tour'
 ]
@@ -297,22 +301,22 @@ head = [
         title: 'Attraction'
         subTitle: 'Majir scenic sights in Beijing'
         cls: 'col-md-3'
-        href: '/attraction'
+        href: '/itemList?entity=sight'
     ,
         title: 'Famous Food'
         subTitle: 'Popular food with locats'
         cls: 'col-md-3'
-        href: '/foodList'
+        href: '/itemList?entity=food'
     ,
         title: 'Beijing Shows'
         subTitle: 'A collection of most-see orders in Beijing'
         cls: 'col-md-3'
-        href: '/showList'
+        href: '/itemList?entity=show'
     ,
         title: 'Handicrafts'
         subTitle: 'A collection of most-see orders in Beijing'
         cls: 'col-md-3'
-        href: '/handicraftList'
+        href: '/itemList?entity=handicraft'
     ]
 
 ]
@@ -322,8 +326,17 @@ food = [
     subTitle: 'The Biggest sdfsdfsdf gorden in China'
     content: "Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux, and Backbone.js's suspenders. Underscore provides 80-odd functions that support both the usual functional suspects: map, select, invoke — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on. It delegates to built-in functions, if present, so modern browsers will use the native implementations of forEach, map, reduce, filter, every, some and indexOf."
     row: 1001
+    restaurant:[
+        title:'da dong'
+        content: 'agood'
+        refFile:
+            slide: ['p1.jpg']
+            p1:
+                title:'da dong'
+    ]
+
     refFile:
-        head: ['p1.jpg', 'p2.jpg']
+        slide: ['p1.jpg', 'p2.jpg']
         p1:
             title: 'Spring'
             description: 'amazing spring'
@@ -336,7 +349,7 @@ food = [
     content: "Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux, and Backbone.js's suspenders. Underscore provides 80-odd functions that support both the usual functional suspects: map, select, invoke — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on. It delegates to built-in functions, if present, so modern browsers will use the native implementations of forEach, map, reduce, filter, every, some and indexOf."
     row: 1002
     refFile:
-        head: ['p1.jpg', 'p2.jpg']
+        slide: ['p1.jpg', 'p2.jpg']
         p1:
             title: 'Spring'
             description: 'amazing spring'
@@ -345,13 +358,45 @@ food = [
             description: 'amazing Fall'
 ]
 show = [
-    title: 'Jingju'
-    subTitle: 'The Biggest sdfsdfsdf gorden in China'
-,
-    title: 'Jingju'
-    subTitle: 'The Biggest sdfsdfsdf gorden in China'
+    title: 'Beijing GongFu'
+    subTitle: 'The Biggest GongFu'
+    content: "Underscore is a utility-belt library for JavaScript that provides a lot of the functional programming support that you would expect in Prototype.js (or Ruby), but without extending any of the built-in JavaScript objects. It's the tie to go along with jQuery's tux, and Backbone.js's suspenders. Underscore provides 80-odd functions that support both the usual functional suspects: map, select, invoke — as well as more specialized helpers: function binding, javascript templating, deep equality testing, and so on. It delegates to built-in functions, if present, so modern browsers will use the native implementations of forEach, map, reduce, filter, every, some and indexOf."
+    row: 1001
+    theater:[
+        title:'Gong fu'
+        content: 'agoodsdfasdfasdf'
+        refFile:
+            slide: ['p1.jpg']
+            p1:
+                title:'da dong'
+    ]
+    refFile:
+        slide: ['p1.jpg', 'p2.jpg']
+        p1:
+            title: 'Spring'
+            description: 'amazing spring'
+        p2:
+            title: 'Summer'
+            description: 'amazing Fall'
 ]
 
+content= [
+    code: 'sight'
+    title: 'Sight in Beijing'
+    content:'The Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in China'
+,
+    code: 'show'
+    title: 'Show in Beijing'
+    content:'The Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in China'
+,
+    code: 'food'
+    title: 'food in Beijing'
+    content:'The Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in China'
+,
+    code: 'handicraft'
+    title: 'handicraft in Beijing'
+    content:'The Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in ChinaThe Biggest sdfsdfsdf gorden in China'
+]
 handicraft = [
     title: 'Jingju'
     subTitle: 'The Biggest sdfsdfsdf gorden in China'
@@ -370,15 +415,14 @@ module.exports =
         'user:username': user
         'membership:uid,rid': membership
 
-        'post:title': post
-        'sight:title': sight
-        'city:title': city
-        'content:title': content
+#        'post:title': post
+#        'sight:title': sight
+#        'city:title': city
+#        'content:title': content
 
         'cat:title': cat
-        'food:title': food
-        'head:title': head
+#        'food:title': food
+#        'show:title': food
+        'head:type': head
         'top:title': top
 
-
-    reset: ['post']

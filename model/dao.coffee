@@ -48,11 +48,14 @@ module.exports = (@name, callback) ->
         opt = @cleanOpt(opt)
         @pick(db, entity).findOne opt, (err, doc)->
             log err if err
+            doc._e = entity if doc
             callback?(doc)
 
     @find = (db, entity, filter, op, callback)->
         @pick(db, entity).find(filter, op).toArray (err, docs)->
             log err if err
+            for it in docs
+                it._e = entity
             callback?(docs)
 
 

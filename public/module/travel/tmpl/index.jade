@@ -2,7 +2,6 @@ extends inc/main
 
 block slide
     - var _slides = top.list;
-    - log(top.list)
     #slide.carousel.slide(data-ride='carousel')
         .carousel-inner
             each it,i in _slides
@@ -23,7 +22,6 @@ block slide
                                         a Fall
                                     li
                                         a Winter
-                    - log(it);
                     != f.imgItem(it, c.code, 'top')
 
                     .carousel-caption
@@ -42,15 +40,17 @@ block content
 
     .pBoxList
         .row
-            each it in head.list
-                div(class= it.cls)
-                    .pBox
-                        a(href= it.href)
-                            != f.imgItem(it, c.code)
-                            .text
-                                h4= it.title
-                                p= it.subTitle
-            include inc/tours
+            if head && head.list
+                each it in head.list
+                    div(class= it.cls)
+                        .pBox
+                            a(href= it.href)
+                                != f.imgItem(it, c.code)
+                                .text
+                                    h4= it.title
+                                    p= it.subTitle
+                include inc/tours
+
 
             .col-md-3
                 .panel.pBox

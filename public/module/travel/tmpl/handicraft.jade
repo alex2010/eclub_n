@@ -1,0 +1,16 @@
+extends inc/main
+
+block content
+    .topHead
+        if refFile
+            -var _slides = refFile.slide || []
+            -var _prop = 'slide'
+            include inc/slide
+
+    article.col-md-12.panel
+        h3= title
+        .article!= content
+
+    .col-md-12
+        .row
+            include inc/recommend

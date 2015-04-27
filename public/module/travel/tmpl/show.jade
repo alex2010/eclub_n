@@ -1,0 +1,35 @@
+extends inc/main
+block content
+    .topHead
+        if refFile
+            -var _slides = refFile.slide || []
+            -var _prop = 'slide'
+            include inc/slide
+
+    article.col-md-12.panel
+        h3= title
+        .article!= content
+
+    .col-md-12.panel
+        h3 Famous #{title} theater in Beijing
+
+    if theater
+        #theater
+            .col-md-12.panel.panel-default(style='padding:0')
+                each it,i in restaurant
+                    a.panel-heading(data-toggle='collapse', data-parent='#theater', href= '#cl' + i)
+                        h4.panel-title= it.title
+                    .panel-collapse.collapse.clearfix(id= 'cl' + i, class= i == 0 ? 'in' : '')
+                        if it.refFile && it.refFile.slide
+                            .col-md-6
+                                -var _slides = it.refFile.slide || []
+                                -var _sid = 'resPic'
+                                -var _prop = 'slide'
+                                include inc/slide
+                            .col-md-6
+                                p!= it.content
+                        else
+                            p!= it.content
+    .col-md-12
+        .row
+            include inc/recommend

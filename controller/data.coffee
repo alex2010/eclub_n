@@ -30,11 +30,10 @@ dataController =
     list: (req, rsp) ->
         code = req.c.code
         qu = req.query
-        log code
         if req.query
             op =
                 skip: u.d(req.query, 'offset') || 0
-                limit: u.d(req.query, 'max') || 5
+                limit: u.d(req.query, 'max') || 10
             if req.query._attrs
                 op.fields = attrs u.d req.query, '_attrs'
         q = buildQuery req.query.q

@@ -1,11 +1,27 @@
-#slide.carousel.slide(data-ride='carousel')
+- _sid || (_sid = 'slide');
+- _prop || (_prop = 'head');
+.carousel.slide(id= _sid , data-ride='carousel')
     .carousel-inner
         each it,i in _slides
             .item(class= i == 0 ? 'active' : '' )
-                != f.imgItem(it, c.code)
-                .carousel-caption
-                    h3= it.title
-                    p= it.subTitle
-                    a.btn(href!= it.href || f.href('sight', it._id)) See Details
+                if it.title
+                    != f.imgItem(it, c.code, _prop)
+                    .carousel-caption
+                        h3!= f.link(it)
+                        p= it.subTitle
+                        - it.title  = 'See Details'
+                        != f.link(it,null,'btn btn-primary')
+
+                else if _.isString(it)
+                    != f.imgItem(locals, c.code, _prop)
+                        .carousel-caption
+                            - kk = it.split('.')[0];
+                            if refFile[kk]
+                                - var xt = {title: refFile[kk].title};
+                                - xt._e = locals._e;
+                                - xt._id=locals._id;
+                                h4!= f.link(xt)
+                                if refFile[kk].description
+                                    p= refFile[kk].description
 
     include ../../../../../views/inc/slideBtn

@@ -1,0 +1,22 @@
+extends inc/main
+
+block content
+    .panel
+        h2= title
+
+    if _slides
+        - var _prop = 'slide'
+        include inc/slide
+
+    if item
+        .panel
+            h3= item.title
+            p= item.content
+
+    include inc/items
+
+block st
+    :coffee(bare=true)
+        window._init = ->
+            if @app.cat
+                $('.headMenu').find("a[href*='#{@app.cat}']").parent().addClass 'active'

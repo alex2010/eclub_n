@@ -10,23 +10,13 @@ block content
         #asl.collapse
             .row.text-center
                 each it in allSights
-                    != f.link('sight',it,null,'col-md-3')
+                    != f.link(it,null,'col-md-3')
 
 
         if refFile
-            #slide.carousel.slide(data-ride='carousel')
-                .carousel-inner
-                    -var _slides = refFile.show
-                    each it,i in refFile.show
-                        .item(class= i == 0 ? 'active' : '' )
-                            img(src= f.resPath(c.code, it))
-                            - k = it.split('.')[0]
-                            if refFile[k]
-                                .carousel-caption
-                                    h4
-                                        a(target='_blank')= refFile[k].title
-                                    p= refFile[k].description
-                include ../../../../views/inc/slideBtn
+            -var _slides = refFile.slide || []
+            -var _prop = 'slide'
+            include inc/slide
 
     article.col-md-12.panel
         h3= title

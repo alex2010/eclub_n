@@ -1,4 +1,3 @@
-
 module.exports =
 
     _init: (ctx)->
@@ -25,6 +24,9 @@ module.exports =
 
         btm_top: (cb)->
             dao.find ctx.c.code, 'top', {}, btm_opt, (res)->
+                for it in res
+                    it._e = it.entity
+                    it._id = it.id
                 ctx.siteMap.push
                     title: 'Top Choices'
                     items: res
@@ -56,7 +58,7 @@ module.exports =
                 cb(null, res)
 
         btm_cg: (cb)->
-            dao.find ctx.c.code, 'cat', {type:'cg'}, btm_opt, (res)->
+            dao.find ctx.c.code, 'cat', {type: 'cg'}, btm_opt, (res)->
                 ctx.siteMap.push
                     title: 'Cars & Guides'
                     items: res
@@ -80,8 +82,6 @@ module.exports =
         top: (cb)->
             filter =
                 type: 'top'
-#                row:
-#                    $gt: 1000
             dao.get ctx.c.code, 'head', filter, (res)->
                 cb(null, res)
 
@@ -89,6 +89,9 @@ module.exports =
             filter =
                 type: 'index'
             dao.get ctx.c.code, 'head', filter, (res)->
+                log 'indexxx'
+                log res
+                log 'indexxx'
                 cb(null, res)
 
     top: (ctx)->
@@ -101,56 +104,88 @@ module.exports =
             dao.get ctx.c.code, 'head', {type: 'top'}, (res)->
                 cb(null, res)
 
-    sightList: (ctx, req)->
-        headMenu: (cb)->
-            dao.find ctx.c.code, 'cat', {type:'sight'}, {}, (res)->
-                for it in res
-                    it.href = "/#{it.type}List?cat=#{it.code}"
-                cb(null, res)
-        sightList: (cb)->
-            filter =
-                cat: req.query.cat
-            dao.find ctx.c.code, 'sight', filter, {}, (res)->
-                cb(null, res)
+#    sightList: (ctx, req)->
+#        headMenu: (cb)->
+#            dao.find ctx.c.code, 'cat', {type: 'sight'}, {}, (res)->
+#                for it in res
+#                    it.href = "/#{it.type}List?cat=#{it.code}"
+#                cb(null, res)
+#        sightList: (cb)->
+#            filter =
+#                cat: req.query.cat
+#            dao.find ctx.c.code, 'sight', filter, {}, (res)->
+#                cb(null, res)
+
     sight: (ctx)->
         headMenu: (cb)->
-            dao.find ctx.c.code, 'cat', {type:'sight'}, {}, (res)->
+            dao.find ctx.c.code, 'cat', {type: 'sight'}, {}, (res)->
                 for it in res
-                    it.href = "/#{it.type}List?cat=#{it.code}"
+                    it.href = "/itemList?entity=#{it.type}&cat=#{it.code}"
                 cb(null, res)
+
         allSights: (cb)->
             dao.find ctx.c.code, 'sight', {}, {}, (res)->
                 cb(null, res)
+
         recommeded: (cb)->
             filter =
                 cat: 'top'
             dao.find ctx.c.code, 'sight', filter, {}, (res)->
                 cb(null, res)
 
-    foodList: (ctx)->
-        food: (cb)->
-            filter =
-                type: 'food'
-            dao.get ctx.c.code, 'cat', filter, (res)->
-                cb(null, res)
+    itemList: (ctx, req)->
+        et = req.query.entity
+        ctx.title = "#{et.capitalize()} in Beijing"
+        ctx._entity = et
 
-        foodList: (cb)->
-            dao.find ctx.c.code, 'food', {}, {}, (res)->
-                ctx.slides = []
+        _slides: (cb)->
+            if req.query.cat
+                cb()
+            else
+                filter =
+                    row:
+                        $gt: 1000
+                dao.find ctx.c.code, et, filter, {}, (res)->
+                    cb(null, res)
+
+
+        headMenu: (cb)->
+            dao.find ctx.c.code, 'cat', {type: et}, {}, (res)->
                 for it in res
-                    ctx.slides.push it if it.row > 1000
+                    it.href = "/itemList?entity=#{it.type}&cat=#{it.code}"
                 cb(null, res)
 
-    attraction:(ctx)->
-        ctx.pageTitle = "The Attractions in Beijing"
-        headMenu:(cb)->
-            dao.find ctx.c.code, 'cat', {type:'sight'}, {}, (res)->
-                for it in res
-                    it.href = "/#{it.type}List?cat=#{it.code}"
-                cb(null, res)
+        item: (cb)->
+            if req.query.cat
+                cb()
+            else
+                filter =
+                    type: et
+                dao.get ctx.c.code, 'cat', filter, (res)->
+                    cb(null, res)
 
-        sightList: (cb)->
-            dao.find ctx.c.code, 'sight', {}, {}, (res)->
+        _items: (cb)->
+            filter = {}
+            if req.query.cat
+                filter.cat = req.query.cat
+            dao.find ctx.c.code, et, filter, {}, (res)->
                 cb(null, res)
+#
+#                dao.find ctx.c.code, 'food', {}, {}, (res)->
+#                ctx.slides = []
+#                for it in res
+#                    ctx.slides.push it if it.row > 1000
+#                cb(null, res)
+#    attraction: (ctx)->
+#        ctx.pageTitle = "The Attractions in Beijing"
+#        headMenu: (cb)->
+#            dao.find ctx.c.code, 'cat', {type: 'sight'}, {}, (res)->
+#                for it in res
+#                    it.href = "/#{it.type}List?cat=#{it.code}"
+#                cb(null, res)
+#
+#        sightList: (cb)->
+#            dao.find ctx.c.code, 'sight', {}, {}, (res)->
+#                cb(null, res)
 
 

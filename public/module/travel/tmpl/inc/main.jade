@@ -6,6 +6,7 @@ html
     head
         title= title
         include ../../../../../views/inc/meta
+        block style
         block head
     body
         .headerWrapper
@@ -40,7 +41,7 @@ html
                 nav.col-md-2
                     - var mClass = 'menus row';
                     include ../../../../../views/inc/b3Menu
-                .col-md-10
+                .col-md-10.clearfix
                     block content
 
         .footerWrapper
@@ -48,68 +49,15 @@ html
                 .row
                     .col-md-12
                         h4 Destination #{city.title}
-
                     each it in siteMap.sortBy('row')
                         ul.col-md-2
                             p
                                 strong= it.title
-                            each tt in it.items
-                                li
-                                    a(href= tt.href)= tt.title
-                    //    li
-                    //        a(href='/page/content-119.html') Great Wall
-                    //    li
-                    //        a(href='/page/content-151.html') Summer Palace
-                    //    li
-                    //        a(href='/team.html') Ming Tomb
-                    //    li
-                    //        a(href='/page/content-121.html') Hutong
-                    //ul.col-md-2
-                    //    p
-                    //        strong Top Eevents
-                    //    li
-                    //        a(href='/page/content-122.html') English Salon
-                    //    li
-                    //        a(href='/linkList.html') Music Festival
-                    //    li
-                    //        a(href='http://www.eclubnet.com') Temple Fair
-                    //ul.col-md-2
-                    //    p
-                    //        strong Top Restaurants
-                    //    li
-                    //        a(href='/page/form-null.html') Quanjude
-                    //    li
-                    //        a(href='/page/content-127.html') Bianyifang
-                    //    li
-                    //        a(href='/page/content-152.html') Da Dong
-                    //ul.col-md-2
-                    //    p
-                    //        strong Top Shows
-                    //    li
-                    //        a(href='http://postenglishtime.com') Peking Opera
-                    //    li
-                    //        a(href='http://postenglishtime.com') Acrobatics
-                    //    li
-                    //        a(href='http://postenglishtime.com') Kung Fu
-                    //ul.col-md-2
-                    //    p
-                    //        strong Top Shows
-                    //    li
-                    //        a(href='http://postenglishtime.com') Peking Opera
-                    //    li
-                    //        a(href='http://postenglishtime.com') Acrobatics
-                    //    li
-                    //        a(href='http://postenglishtime.com') Kung Fu
-                    //ul.col-md-2
-                    //    p
-                    //        strong Shows
-                    //    li
-                    //        a(href='http://postenglishtime.com') Peking Opera
-                    //    li
-                    //        a(href='http://postenglishtime.com') Acrobatics
-                    //    li
-                    //        a(href='http://postenglishtime.com') Kung Fu
-
+                            if it.items && it.items.length
+                                each ts in it.items
+                                    - log(ts);
+                                    if ts
+                                        li!= f.link(ts)
         .bottomWrapper
             .container
                 .row
