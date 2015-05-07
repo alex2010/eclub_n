@@ -1,5 +1,5 @@
 module.exports =
-    'title': '后英语时代'
+    'server': '服务'
     'slogan': '用英语创造价值'
     'abbr': 'PET'
     'vision': '靠谱的英文社交活动平台'
