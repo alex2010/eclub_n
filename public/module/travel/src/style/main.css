@@ -1,4 +1,3 @@
-util.print: Use console.log instead
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -7042,9 +7041,6 @@ body > .popMsg i {
   line-height: 1.5em;
   text-decoration: none;
 }
-.carousel .carousel-caption a:hover {
-  color: #ff4500;
-}
 .carousel .carousel-indicators {
   opacity: 0.8;
 }
@@ -7810,13 +7806,81 @@ a.glyphicon:hover {
   overflow: hidden;
   clear: both;
 }
+.carousel {
+  width: 100%;
+}
+.carousel .carousel-caption .btn-primary {
+  width: 12.5%;
+  background: #288ad6;
+  border: 1px solid #288ad6;
+  border-radius: 6px;
+  line-height: 1.3em;
+  font-size: 1em;
+  letter-spacing: 1px;
+}
+.carousel .item {
+  position: relative;
+}
+.carousel .item .rel {
+  height: 0;
+  margin-bottom: -10px;
+}
+.carousel .item .rel h3 {
+  font-weight: normal;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+.carousel .item .rel .dropdown {
+  margin-top: 15px;
+}
+.carousel .item .rel .dropdown .dropdown-menu {
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.carousel .item .carousel-caption {
+  position: absolute;
+  z-index: 2;
+  right: 10%;
+  bottom: 22px;
+  text-align: left;
+  padding: 0;
+}
+.carousel .item .carousel-caption h3 {
+  color: #ffffff;
+}
+.carousel .item .carousel-caption p {
+  color: #ffffff;
+}
+.carousel .item .carousel-caption .btn {
+  position: absolute;
+  right: 0;
+  bottom: 15px;
+}
+.carousel .item .carousel-indicators li {
+  margin-right: 10px;
+  background: #fff;
+}
+.carousel .carousel-indicators {
+  bottom: 35px;
+}
+.carousel .carousel-indicators li {
+  background: #fff;
+}
+.carousel .carousel-indicators li.active {
+  background: #288ad6 !important;
+}
 .topLine {
   background: #fff;
   height: 70px;
   margin-bottom: 10px;
 }
 .topLine h2 {
-  font-size: 22px;
+  font-size: 20px;
+  color: #0a4f9c;
+  letter-spacing: 1px;
+}
+.topLine h2 a {
+  color: #0a4f9c;
 }
 .topLine h3 {
   font-size: 20px;
@@ -7828,7 +7892,7 @@ a.glyphicon:hover {
   font-size: 18px;
 }
 .topLine .headMenu li.active a {
-  background-color: #32cd32;
+  background-color: #288ad6;
   color: white;
 }
 .topLine .headMenu li a {
@@ -7838,7 +7902,7 @@ a.glyphicon:hover {
 }
 .topLine .headMenu li a:hover,
 .topLine .headMenu li a.current {
-  background-color: #32cd32;
+  background-color: #288ad6;
   color: white;
 }
 nav {
@@ -7939,33 +8003,53 @@ nav .menus li.subItem:hover ul {
   padding-left: 5px;
   padding-right: 5px;
 }
-.pBoxList .more {
-  margin-top: 15px;
-  cursor: pointer;
-  display: block;
-  background: #ddd;
-  border-radius: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 30px;
-  color: #fff;
-}
 .pBox {
-  border: 1px solid #e6e6e6;
   height: 420px;
   overflow: hidden;
   margin-bottom: 10px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  position: relative;
+}
+.pBox .topIcon {
+  width: 50px;
+  height: 100px;
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 10px;
+  background: url(../../../../res/upload/travel/images/topC_03.png) no-repeat right 0;
 }
 .pBox .markImg {
   height: 320px;
+  border-radius: 4px;
 }
-.pBox h4 {
-  padding-left: 10px;
+.pBox .text h4 {
+  margin-top: 15px;
+  padding: 0 15px;
   font-size: 12px;
+  color: #333;
 }
-.pBox p {
-  padding-left: 10px;
+.pBox .text p {
+  padding: 0 15px;
   font-size: 16px;
+  color: #000;
+}
+.more {
+  cursor: pointer;
+  display: block;
+  background: #2d3743;
+  font-weight: normal;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+}
+.more:hover {
+  color: #fff;
 }
 .footerWrapper {
   margin-top: 15px;
@@ -8117,10 +8201,18 @@ a.panel-heading {
   right: 0;
   bottom: 15px;
 }
-.carousel .item .carousel-indicators {
+.carousel .item.active {
+  opacity: .9;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000000 100%);
+}
+.carousel .carousel .active {
+  opacity: .9;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000000 100%);
+}
+.carousel .carousel .carousel-indicators {
   bottom: 35px;
 }
-.carousel .item .carousel-indicators li {
+.carousel .carousel .carousel-indicators li {
   width: 8px;
   height: 8px;
   box-shadow: none;
@@ -8128,17 +8220,13 @@ a.panel-heading {
   margin-right: 10px;
   background: #fff;
 }
-.carousel .item .carousel-indicators .active {
-  background: #288ad6;
+.carousel .carousel .carousel-indicators li.active {
+  background: #288ad6 !important;
 }
-.carousel .item .active {
-  opacity: .9;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000000 100%);
-}
-.carousel-control {
+.carousel .carousel-control {
   opacity: 1;
 }
-.carousel-control .glyphicon-chevron-left {
+.carousel .carousel-control .glyphicon-chevron-left {
   text-align: center;
   border-radius: 50%;
   width: 50px;
@@ -8150,7 +8238,7 @@ a.panel-heading {
   line-height: 42px;
   background: rgba(100, 100, 100, 0.6);
 }
-.carousel-control .glyphicon-chevron-right {
+.carousel .carousel-control .glyphicon-chevron-right {
   text-align: center;
   border-radius: 50%;
   width: 50px;
@@ -8161,4 +8249,76 @@ a.panel-heading {
   font-size: 24px;
   line-height: 42px;
   background: rgba(100, 100, 100, 0.6);
+}
+.article-sight {
+  border-radius: 0;
+  padding-top: 0;
+  position: relative;
+}
+.article-sight h3 {
+  margin-top: 20px;
+  margin-bottom: 25px;
+  font-size: 14px;
+}
+.article-sight .article {
+  font-size: 12px;
+  padding-bottom: 20px;
+}
+.article-sight .amplify,
+.article-sight .less {
+  position: absolute;
+  z-index: 2;
+  right: 15px;
+  font-size: 12px;
+  color: #0c4f9d;
+}
+.article-sight .amplify {
+  bottom: 15px;
+}
+.article-sight .less {
+  top: 15px;
+}
+.active-sight .panel-none {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.mod-active {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+.mod-active .block-active {
+  margin-bottom: 10px;
+  padding: 0 5px;
+  background: #fff;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border: 1px solid #e6e6e6;
+  letter-spacing: 1px;
+}
+.mod-active .block-active.current {
+  border-left: 3px solid #bd0304;
+}
+.mod-active .block-active .panel-heading {
+  padding: 15px 10px 10px;
+  color: #0c4f9d;
+}
+.mod-active .block-active .panel-heading .panel-title {
+  font-weight: normal;
+}
+.mod-active .block-active .panel-body {
+  padding: 5px 15px 15px;
+  color: #333;
+  font-size: 12px;
+  line-height: 1.8em;
+}
+.recommended-panel {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.recommended-panel h3 {
+  margin: 0;
+  font-weight: normal;
 }

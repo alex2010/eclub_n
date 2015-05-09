@@ -3,7 +3,7 @@
 @import "../../../../lib/style/widget.less";
 
 @container-lg: 1100px;
-@body-bg: #EDF1F4;
+@body-bg: #edf1f4;
 @headings-color: #0C4F9D;
 @link-color: #111;
 @link-hover-decoration: none;
@@ -37,12 +37,100 @@
   }
 }
 
+.carousel {
+  // 幻灯片
+  width: 100%;
+
+  .carousel-caption {
+    .btn-primary {
+      width:12.5%;
+      background:#288ad6;
+      border:1px solid #288ad6;
+      border-radius:6px;
+      line-height:1.3em;
+      font-size:1em;
+      letter-spacing:1px;
+    }
+  }
+  //min-height: 600px;#user js to set
+  .item {
+    position: relative;
+    //height: 600px;
+    .rel {
+      height: 0;
+      margin-bottom: -10px;
+      h3 {
+        font-weight:normal;
+        letter-spacing: 1px;
+        color: @white;
+      }
+      .dropdown {
+        margin-top:15px;
+        .dropdown-menu {
+          border-radius:0;
+          background:rgba(0,0,0,0.5);
+        }
+      }
+    }
+    .carousel-caption {
+      position: absolute;
+      z-index: 2;
+      right: 10%;
+      bottom: 22px;
+      text-align: left;
+      padding: 0;
+      h3 {
+        color: @white;
+      }
+      p {
+        color: @white;
+      }
+      .btn {
+        position: absolute;
+        right: 0;
+        bottom: 15px;
+      }
+    }
+
+    .carousel-indicators {
+      li {
+        margin-right: 10px;
+        background: #fff;
+      }
+    }
+    h3 {
+
+    }
+    p {
+
+    }
+  }
+}
+
+.carousel{
+  .carousel-indicators {
+    bottom: 35px;
+    li {
+      background: #fff;
+    }
+    li.active {
+      background: #288ad6 !important;
+    }
+  }
+}
+
+
 .topLine {
   background: #fff;
   height: 70px;
   margin-bottom: 10px;
   h2 {
-    font-size: 22px;
+    font-size: 20px;
+    color:#0a4f9c;
+    letter-spacing:1px;
+    a {
+      color:#0a4f9c;
+    }
   }
   h3 {
     font-size: 20px;
@@ -55,7 +143,7 @@
     li {
       &.active {
         a {
-          background-color: #32cd32;
+          background-color: #288ad6;
           color: white;
         }
       }
@@ -64,7 +152,7 @@
         border-radius: 5px;
         text-decoration: none;
         &:hover, &.current {
-          background-color: #32cd32;
+          background-color: #288ad6;
           color: white;
         }
       }
@@ -193,41 +281,64 @@ nav {
       padding-right: 5px
     }
   }
-  .more {
-    margin-top: 15px;
-    cursor: pointer;
-    display: block;
-    background: #ddd;
-    border-radius: 10px;
-    font-weight: bold;
-    text-align: center;
-    line-height: 30px;
-    color: #fff;
-    //&:hover {
-    //  background-color: @deepBlue;
-    //  color: white;
-    //}
-  }
+
 }
 
 .pBox {
-  //图片块
-  border: 1px solid #e6e6e6;
   height: 420px;
   overflow: hidden;
   margin-bottom: 10px;
+  background:#fff;
+  border:1px solid #e6e6e6;
+  border-radius:4px;
+  position:relative;
+  .topIcon {
+    width:50px;
+    height:100px;
+    position:absolute;
+    z-index:2;
+    top:0;
+    right:10px;
+    background:url(../../../../res/upload/travel/images/topC_03.png) no-repeat right 0;
+  }
   .markImg {
     height: 320px;
+    border-radius:4px;
+  }
+  .text {
+    h4 {
+      margin-top:15px;
+      padding:0 15px;
+      font-size: 12px;
+      color:#333;
+    }
+    p {
+      padding:0 15px;
+      font-size: 16px;
+      color:#000;
+    }
   }
 
-  h4 {
-    padding-left: 10px;
-    font-size: 12px;
+
+}
+.more {
+  cursor: pointer;
+  display: block;
+  background: #2d3743;
+  font-weight:normal;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  font-size:0.8em;
+  letter-spacing:1px;
+  &:hover {
+    color:#fff;
   }
-  p {
-    padding-left: 10px;
-    font-size: 16px;
-  }
+  //&:hover {
+  //  background-color: @deepBlue;
+  //  color: white;
+  //}
 }
 
 .pBox.top {
@@ -425,7 +536,16 @@ a.panel-heading {
         bottom: 15px;
       }
     }
-
+    &.active {
+      opacity: .9;
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+    }
+  }
+  .carousel {
+    .active {
+      opacity: .9;
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+    }
     .carousel-indicators {
       bottom: 35px;
       li {
@@ -436,31 +556,107 @@ a.panel-heading {
         margin-right: 10px;
         background: #fff;
       }
-      .active {
-        background: #288ad6;
+      li.active {
+        background: #288ad6 !important;
       }
     }
-    .active {
-      opacity: .9;
-      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+
+  }
+  .carousel-control {
+    opacity: 1;
+    .glyphicon-chevron-left {
+      .circle(50px);
+      border: 2px solid #fff;
+      font-size: 24px;
+      line-height: 42px;
+      background: rgba(100, 100, 100, .6);
+    }
+    .glyphicon-chevron-right {
+      .circle(50px);
+      border: 2px solid #fff;
+      font-size: 24px;
+      line-height: 42px;
+      background: rgba(100, 100, 100, .6);
     }
   }
 }
 
-.carousel-control {
-  opacity: 1;
-  .glyphicon-chevron-left {
-    .circle(50px);
-    border: 2px solid #fff;
-    font-size: 24px;
-    line-height: 42px;
-    background: rgba(100, 100, 100, .6);
+//sight单页
+  //头文章
+.article-sight {
+  border-radius:0;
+  padding-top:0;
+  position:relative;
+  h3 {
+    margin-top:20px;
+    margin-bottom:25px;
+    font-size:14px;
   }
-  .glyphicon-chevron-right {
-    .circle(50px);
-    border: 2px solid #fff;
-    font-size: 24px;
-    line-height: 42px;
-    background: rgba(100, 100, 100, .6);
+  .article {
+    font-size:12px;
+    padding-bottom:20px;
+  }
+  .amplify,.less {
+    position:absolute;
+    z-index:2;
+    right:15px;
+    font-size:12px;
+    color:#0c4f9d;
+  }
+  .amplify {
+    bottom:15px;
+  }
+  .less {
+    top:15px;
+  }
+}
+//活动
+.active-sight {
+  .panel-none {
+    background:none;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+  }
+}
+  //活动左侧块
+.mod-active {
+  background:none;
+  border:none;
+  box-shadow:none;
+  .block-active {
+    margin-bottom:10px;
+    padding:0 5px;
+    background:#fff;
+    border-top-left-radius:4px;
+    border-top-right-radius:4px;
+    border:1px solid #e6e6e6;
+    letter-spacing:1px;
+    &.current {
+      border-left:3px solid #bd0304;
+    }
+
+    .panel-heading {
+      padding:15px 10px 10px;
+      .panel-title {
+        font-weight:normal;
+      }
+      color:#0c4f9d;
+    }
+    .panel-body {
+      padding:5px 15px 15px;
+      color:#333;
+      font-size:12px;
+      line-height:1.8em;
+    }
+  }
+}
+//recommended
+.recommended-panel {
+  border-bottom-left-radius:0;
+  border-bottom-right-radius:0;
+  h3 {
+    margin:0;
+    font-weight:normal;
   }
 }

@@ -18,13 +18,16 @@ block content
             -var _prop = 'slide'
             include inc/slide
 
-    article.col-md-12.panel
+    article.col-md-12.panel.article-sight
+        .amplify amplify
+        .less less
         h3= title
         .article!= content
     .row
-        .col-md-8.pr0
+        .col-md-8.pr0.active-sight
             if sub
                 .panel
+                    //.panel-none
                     each it in sub
                         h4= it.title
                         if it.refFile && it.refFile.head
@@ -42,12 +45,13 @@ block content
 
         #info.col-md-4
             if info
-                .panel.panel-default.p0
+                .panel.panel-default.p0.mod-active
                     each v,k in info
-                        a.panel-heading(data-toggle='collapse', data-parent='#info', href= '#' + k)
-                            h4.panel-title= k.toString().capAll()
-                        .panel-collapse.collapse(id= k, class= k == 'openingHours' ? 'in' : '')
-                            .panel-body!= v
+                        .block-active(class= k == 'openingHours' ? 'current' : '')
+                            a.panel-heading(data-toggle='collapse', data-parent='#info', href= '#' + k)
+                                h4.panel-title= k.toString().capAll()
+                            .panel-collapse.collapse(id= k, class= k == 'openingHours' ? 'in' : '')
+                                .panel-body!= v
 
 
     .col-md-12
