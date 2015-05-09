@@ -1,4 +1,3 @@
-util.print: Use console.log instead
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -7813,6 +7812,15 @@ a.glyphicon:hover {
 .carousel {
   width: 100%;
 }
+.carousel .carousel-caption .btn-primary {
+  width: 12.5%;
+  background: #288ad6;
+  border: 1px solid #288ad6;
+  border-radius: 6px;
+  line-height: 1.3em;
+  font-size: 1em;
+  letter-spacing: 1px;
+}
 .carousel .item {
   position: relative;
 }
@@ -7820,15 +7828,19 @@ a.glyphicon:hover {
   height: 0;
   margin-bottom: -10px;
 }
-.carousel .item .rel h4 {
+.carousel .item .rel h3 {
+  font-weight: normal;
   letter-spacing: 1px;
   color: #ffffff;
+}
+.carousel .item .rel .dropdown {
+  margin-top: 15px;
 }
 .carousel .item .carousel-caption {
   position: absolute;
   z-index: 2;
   right: 10%;
-  bottom: 10px;
+  bottom: 22px;
   text-align: left;
   padding: 0;
 }
@@ -8044,20 +8056,37 @@ nav .menus li.subItem:hover ul {
 }
 .bottomWrapper {
   background: #fff;
+  height: 80px;
 }
-.bottomWrapper p,
+.bottomWrapper .row {
+  margin-bottom: 0;
+}
+.bottomWrapper .logo {
+  width: 10%;
+  margin-top: 15px;
+}
+.bottomWrapper p {
+  padding-top: 28px;
+}
+.bottomWrapper .list-inline {
+  width: 45%;
+  color: #333;
+}
 .bottomWrapper ul {
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 33px;
 }
 .bottomWrapper li {
   margin-left: 15px;
 }
 .bottomWrapper a {
-  font-size: 16px;
+  font-size: 14px;
 }
 .bottomWrapper p {
-  font-size: 14px;
+  font-size: 12px;
+}
+.bottomWrapper .text-bottom {
+  width: 40%;
+  color: #666;
 }
 a.panel-heading {
   display: block;
@@ -8068,11 +8097,15 @@ a.panel-heading {
   color: white;
 }
 .slide .dropdown {
-  background-color: #555555;
+  width: 115px;
+  background: rgba(0, 0, 0, 0.6);
   border: 0;
+  border-radius: 0;
 }
 .slide .dropdown a {
+  font-size: .8em;
   color: white;
+  letter-spacing: 1px;
 }
 #asl {
   background-color: #555555;
@@ -8084,4 +8117,53 @@ a.panel-heading {
 }
 #asl .row a {
   color: white;
+}
+.carousel .item .rel {
+  height: 380px;
+}
+.carousel .item .rel .glyphicon {
+  float: right;
+  width: 0;
+  height: 0;
+  margin: 4px 10px 0 0;
+}
+.carousel .active {
+  opacity: .9;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000000 100%);
+}
+.carousel .carousel-indicators li {
+  width: 8px;
+  height: 8px;
+  box-shadow: none;
+  border: none;
+}
+.carousel .carousel-indicators li.active {
+  background: #288ad6 !important;
+}
+.carousel-control {
+  opacity: 1;
+}
+.carousel-control .glyphicon-chevron-left {
+  text-align: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  font-weight: bold;
+  border: 2px solid #fff;
+  font-size: 24px;
+  line-height: 42px;
+  background: rgba(100, 100, 100, 0.6);
+}
+.carousel-control .glyphicon-chevron-right {
+  text-align: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  font-weight: bold;
+  border: 2px solid #fff;
+  font-size: 24px;
+  line-height: 42px;
+  background: rgba(100, 100, 100, 0.6);
 }

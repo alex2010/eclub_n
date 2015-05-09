@@ -61,13 +61,13 @@ html
         .bottomWrapper
             .container
                 .row
-                    .col-md-2
-                        img()
+                    .col-md-2.logo
+                        img(src= f.resPath(c.code, 'images/logo_27.jpg'))
                     ul.col-md-6.list-inline
                         each it in foot
                             li
                                 a(href= it.href)= it.label
-                    .col-md-4
+                    .col-md-4.text-bottom
                         p.row © 2014 China Viator. All rights reserved. No part of this site may be reproduced without our written permission.
 
     include ../../../../../views/inc/ssub
