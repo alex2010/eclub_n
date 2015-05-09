@@ -31,7 +31,7 @@ ck = function(req) {
 
 pre = function(req, rsp, next) {
   var cc, k, opt;
-  if (!(app.env && !app._hk)) {
+  if (!app.env) {
     req.hostname = req.get('Host');
   }
   cc = req.query._c;
@@ -52,7 +52,6 @@ pre = function(req, rsp, next) {
       };
     }
     if (opt) {
-      log(opt);
       dao.delItem(_mdb, 'cache', opt, function(res) {
         return log('del...');
       });
@@ -66,6 +65,7 @@ pre = function(req, rsp, next) {
       return rsp.end(res.str);
     } else {
       req.c = app._community[req.hostname];
+      req.c = app._community['t.travel.com'];
       req.k = k;
       return next();
     }

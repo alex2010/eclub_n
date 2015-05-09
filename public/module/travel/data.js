@@ -7,6 +7,7 @@ adminUserId = new oid();
 
 role = [
   {
+    _id: adminRoleId,
     title: 'admin',
     res: {
       mgm: {
@@ -23,6 +24,7 @@ role = [
           handicraft: 4,
           map: 5,
           cg: 6,
+          guide: 7,
           content: 15,
           post: 16,
           head: 17,
@@ -86,12 +88,18 @@ role = [
 
 user = [
   {
+    _id: adminUserId,
     username: code,
     password: 'psd'
   }
 ];
 
-membership = [];
+membership = [
+  {
+    uid: adminUserId,
+    rid: adminRoleId
+  }
+];
 
 sight = [
   {
@@ -476,6 +484,7 @@ handicraft = [
 ];
 
 module.exports = {
+  r: role[0],
   community: {
     code: code,
     name: 'travel in Beijing',
@@ -485,7 +494,13 @@ module.exports = {
     'role:title': role,
     'user:username': user,
     'membership:uid,rid': membership,
+    'post:title': post,
+    'sight:title': sight,
+    'city:title': city,
+    'content:title': content,
     'cat:title': cat,
+    'food:title': food,
+    'show:title': food,
     'head:type': head,
     'top:title': top
   }

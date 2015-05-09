@@ -127,16 +127,15 @@ dao = new require('./model/dao') _db, ->
                                                 title: res.title
                                                 code: res.code
                                             dao.save code, estr, act
-
     else
         data = require("./public/module/#{code}/data")
         dao.save _db, 'community:code', data.community
-
-        log data.community
-
+#
         for k, v of data.data
-            dao.save code, k, v, ->
-                log code
+            dao.save code, k, v
+
+#        log data.r
+#        dao.save code, 'role:title', [data.r], ->
 
 _.delay ->
     dao.close()

@@ -22,7 +22,7 @@ ck = (req)->
 
 pre = (req, rsp, next)->
 
-    unless app.env and !app._hk
+    unless app.env
         req.hostname = req.get('Host')
 
     cc = req.query._c
@@ -39,7 +39,6 @@ pre = (req, rsp, next)->
                 k: ck(req)
 
         if opt
-            log opt
             dao.delItem _mdb, 'cache', opt, (res)->
                 log 'del...'
 
@@ -49,6 +48,7 @@ pre = (req, rsp, next)->
             rsp.end res.str
         else
             req.c = app._community[req.hostname]
+            req.c = app._community['t.travel.com']
             req.k = k
             next()
 
