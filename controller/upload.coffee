@@ -71,5 +71,6 @@ module.exports =
         rsp.send
             success: true
             entity: file
+            msg: 'm.upload'
 
 

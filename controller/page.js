@@ -28,6 +28,7 @@ pageOpt = function(c) {
     f: tmplUtil,
     i18: i18n.load(code),
     cstr: JSON.stringify(_.pick(c, 'code', 'url')),
+    libPath: _resPath + "upload/" + c.code + "/lib/",
     cssPath: function(name) {
       if (name == null) {
         name = 'css';
@@ -54,6 +55,9 @@ pageOpt = function(c) {
 pre = function(req) {
   var ctx, ps;
   ctx = pageOpt(req.c);
+  if (req.query.dev) {
+    ctx.dev = true;
+  }
   ps = req.params;
   ctx.index = ps.page || ps.entity || 'index';
   return ctx;
@@ -96,11 +100,16 @@ module.exports = {
     return render(req, rsp, pre(req));
   },
   entity: function(req, rsp) {
-    var ctx;
+    var ctx, filter;
     ctx = pre(req);
-    return dao.get(ctx.c.code, req.params.entity, {
-      _id: req.params.id
-    }, function(item) {
+    filter = {};
+    if (req.params.attr) {
+      filter[req.params.attr] = req.params.id;
+    } else {
+      filter._id = req.params.id;
+    }
+    log(filter);
+    return dao.get(ctx.c.code, req.params.entity, filter, function(item) {
       if (!item) {
         rsp.end('no item');
       }

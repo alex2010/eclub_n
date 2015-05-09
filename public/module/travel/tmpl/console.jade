@@ -3,9 +3,9 @@ html
     head
         meta(charset='UTF-8')
         if mode
-            link(rel='stylesheet', type='text/css', href= mode?'http://127.0.0.1:8088/main.css':'', media='all')
+            link(rel='stylesheet', type='text/css', href= mode?'http://127.0.0.1:8088/admin.css':'', media='all')
         else
-            link(rel='stylesheet', type='text/css', href= mode ? 'http://127.0.0.1:8088/main.css' : '', media='all')
+            link(rel='stylesheet', type='text/css', href= mode ? 'http://127.0.0.1:8088/admin.css' : '', media='all')
 
     body test
 
@@ -22,7 +22,7 @@ html
     if mode
         script(src='http://127.0.0.1:8088/webpack-dev-server.js')
         script(src='http://127.0.0.1:8088/lib.js')
-        script(src='http://127.0.0.1:8088/main.js')
+        script(src='http://127.0.0.1:8088/admin.js')
     else
         script(src= jsPath(app))
     script

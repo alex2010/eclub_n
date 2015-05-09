@@ -10,7 +10,7 @@ html
 
         block style
         block head
-    body
+    body(data-dm='wikibeijing.com')
         .headerWrapper
             header#header.container
                 h1 TRAVEL IN CHINA
@@ -49,8 +49,6 @@ html
         .footerWrapper
             footer.container
                 .row
-                    .col-md-12
-                        h4 Destination #{city.title}
                     each it in siteMap.sortBy('row')
                         ul.col-md-2
                             p

@@ -48,7 +48,7 @@ pre = (req, rsp, next)->
             rsp.end res.str
         else
             req.c = app._community[req.hostname]
-            req.c = app._community['t.travel.com']
+#            req.c = app._community['t.travel.com']
             req.k = k
             next()
 
@@ -78,6 +78,9 @@ router.get '/:page', checkPage
 router.get '/:entity/:id', pre
 router.get '/:entity/:id', checkPage
 
+router.get '/:entity/:attr/:id', pre
+router.get '/:entity/:attr/:id', checkPage
+
 
 router.get '/', page.page
 
@@ -96,5 +99,7 @@ router.delete '/r/:entity/:id', data.del
 
 router.get '/:page', page.page
 router.get '/:entity/:id', page.entity
+
+router.get '/:entity/:attr/:id', page.entity
 
 module.exports = router

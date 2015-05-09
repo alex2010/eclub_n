@@ -8,7 +8,6 @@ i18n = require('../i18n/lang')('zh')
 
 pageOpt = (c)->
     code = c.code
-
     tRender: jade.renderFile
     title: c.title
     lang: 'zh'
@@ -18,6 +17,7 @@ pageOpt = (c)->
     f: tmplUtil
     i18: i18n.load(code)
     cstr: JSON.stringify(_.pick(c, 'code', 'url'))
+    libPath: "#{_resPath}upload/#{c.code}/lib/"
     cssPath: (name = 'css')->
         if app.env
             if name is 'admin'
@@ -33,6 +33,8 @@ pageOpt = (c)->
 
 pre =(req)->
     ctx = pageOpt(req.c)
+    if req.query.dev
+        ctx.dev = true
     ps = req.params
     ctx.index = ps.page || ps.entity || 'index'
     ctx
@@ -72,7 +74,13 @@ module.exports =
 
     entity: (req, rsp) ->
         ctx = pre(req)
-        dao.get ctx.c.code, req.params.entity, _id: req.params.id, (item)->
+        filter = {}
+        if req.params.attr
+            filter[req.params.attr] = req.params.id
+        else
+            filter._id = req.params.id
+        log filter
+        dao.get ctx.c.code, req.params.entity, filter, (item)->
             unless item
                 rsp.end('no item')
             ctx = _.extend ctx, item

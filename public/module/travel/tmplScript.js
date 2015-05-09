@@ -241,5 +241,8 @@ module.exports = {
         });
       }
     };
+  },
+  content: function(ctx, req) {
+    return log('zzzzzz');
   }
 };

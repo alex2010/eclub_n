@@ -170,6 +170,11 @@ module.exports =
                 filter.cat = req.query.cat
             dao.find ctx.c.code, et, filter, {}, (res)->
                 cb(null, res)
+
+    content:(ctx, req)->
+        log 'zzzzzz'
+
+
 #
 #                dao.find ctx.c.code, 'food', {}, {}, (res)->
 #                ctx.slides = []
