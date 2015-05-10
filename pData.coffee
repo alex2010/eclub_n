@@ -130,7 +130,7 @@ dao = new require('./model/dao') _db, ->
     else
         data = require("./public/module/#{code}/data")
         dao.save _db, 'community:code', data.community
-#
+
         for k, v of data.data
             dao.save code, k, v
 

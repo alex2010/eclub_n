@@ -2,7 +2,7 @@ adminRoleId = new oid()
 adminUserId = new oid()
 
 role = [
-    _id: adminRoleId
+#    _id: adminRoleId
     title: 'admin'
     res:
         mgm:
@@ -17,7 +17,7 @@ role = [
                 food: 3
                 handicraft: 4
                 map:5
-                cg:6
+                car:6
                 guide:7
                 content: 15
                 post: 16
@@ -418,17 +418,17 @@ module.exports =
         url: if _env then 't.travel.com' else _st.url
     data:
         'role:title': role
-        'user:username': user
-        'membership:uid,rid': membership
-
-        'post:title': post
-        'sight:title': sight
-        'city:title': city
-        'content:title': content
-
-        'cat:title': cat
-        'food:title': food
-        'show:title': food
-        'head:type': head
-        'top:title': top
+#        'user:username': user
+#        'membership:uid,rid': membership
+#
+#        'post:title': post
+#        'sight:title': sight
+#        'city:title': city
+#        'content:title': content
+#
+#        'cat:title': cat
+#        'food:title': food
+#        'show:title': food
+#        'head:type': head
+#        'top:title': top
 

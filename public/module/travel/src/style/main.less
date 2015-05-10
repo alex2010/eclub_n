@@ -36,83 +36,6 @@
     }
   }
 }
-
-.carousel {
-  .carousel-caption {
-    .btn-primary {
-      width:12.5%;
-      background:#288ad6;
-      border:1px solid #288ad6;
-      border-radius:6px;
-      line-height:1.3em;
-      font-size:1em;
-      letter-spacing:1px;
-    }
-  }
-
-  // 幻灯片
-  width: 100%;
-  //min-height: 600px;#user js to set
-  .item {
-    position: relative;
-    //height: 600px;
-    .rel {
-      height: 0;
-      margin-bottom: -10px;
-      h3 {
-        font-weight:normal;
-        letter-spacing: 1px;
-        color: @white;
-      }
-      .dropdown {
-        margin-top:15px;
-      }
-    }
-    .carousel-caption {
-      position: absolute;
-      z-index: 2;
-      right: 10%;
-      bottom: 22px;
-      text-align: left;
-      padding: 0;
-      h3 {
-        color: @white;
-      }
-      p {
-        color: @white;
-      }
-      .btn {
-        position: absolute;
-        right: 0;
-        bottom: 15px;
-      }
-    }
-
-    .carousel-indicators {
-      li {
-        margin-right: 10px;
-        background: #fff;
-      }
-    }
-    h3 {
-
-    }
-    p {
-
-    }
-  }
-}
-
-.carousel-indicators {
-  bottom: 35px;
-  li {
-    background: #fff;
-  }
-  .active {
-    background: #288ad6;
-  }
-}
-
 .topLine {
   background: #fff;
   height: 70px;
@@ -419,34 +342,89 @@ a.panel-heading {
   margin-bottom: 10px;
 }
 
-.carousel .item .rel {
-  height:380px;
-
-  .glyphicon {
-    float:right;
-    width:0;
-    height:0;
-    margin:4px 10px 0 0;
-  }
-}
 .carousel {
-  .active {
-    opacity:.9;
-    background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
-  }
-  .carousel-indicators {
-    li {
-      width:8px;
-      height:8px;
-      box-shadow:none;
-      border:none;
-    }
-    li.active {
-      background:#288ad6 !important;
+  .carousel-caption {
+    .btn-primary {
+      width:12.5%;
+      background:#288ad6;
+      border:1px solid #288ad6;
+      border-radius:6px;
+      line-height:1.3em;
+      font-size:1em;
+      letter-spacing:1px;
     }
   }
+  // 幻灯片
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  //min-height: 600px;#user js to set
+  .item {
+    position: relative;
+    height: 600px;
+    overflow: hidden;
+    .markImg{
+      width: 100%;
+    }
+    .rel {
+      height: 0;
+      margin-bottom: -20px;
+      h3 {
+        font-weight:normal;
+        letter-spacing: 1px;
+        color: @white;
+      }
+      .dropdown {
+        margin-top:15px;
+      }
+    }
+    .glyphicon {
+      float:right;
+      width:0;
+      height:0;
+      margin:4px 10px 0 0;
+    }
+    .carousel-caption {
+      position: absolute;
+      z-index: 2;
+      right: 10%;
+      bottom: 22px;
+      text-align: left;
+      padding: 0;
+      h3 {
+        color: @white;
+      }
+      p {
+        color: @white;
+      }
+      .btn {
+        position: absolute;
+        right: 0;
+        bottom: 15px;
+      }
+    }
 
+    .carousel-indicators {
+      bottom: 35px;
+      li {
+        width:8px;
+        height:8px;
+        box-shadow:none;
+        border:none;
+        margin-right: 10px;
+        background: #fff;
+      }
+      .active {
+        background: #288ad6;
+      }
+    }
+    .active {
+      opacity:.9;
+      background-image:linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+    }
+  }
 }
+
 .carousel-control {
   opacity:1;
   .glyphicon-chevron-left {
