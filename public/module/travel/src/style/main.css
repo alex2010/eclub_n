@@ -7970,31 +7970,25 @@ nav .menus li.subItem:hover ul {
 .footerWrapper {
   margin-top: 15px;
   min-height: 180px;
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
+  border-top: 1px solid #dce5ea;
+  border-bottom: 1px solid #dce5ea;
 }
-.footerWrapper #footer ul {
-  text-align: left;
-  margin: 55px 30px 20px 0;
-  float: left;
-  width: 120px;
+.footerWrapper .container {
+  padding-left: 45px;
+  padding-right: 45px;
 }
-.footerWrapper #footer ul h3 {
-  color: #3b444f;
-  font-size: 14px;
-  margin: -32px 0 15px 0;
+.footerWrapper ul {
+  margin-top: 30px;
+  font-size: .8em;
 }
-.footerWrapper #footer ul li {
-  line-height: 28px;
-  float: left;
-  width: 100%;
+.footerWrapper ul p {
+  margin-bottom: 12px;
 }
-.footerWrapper #footer ul li a {
-  color: #111;
-  font-size: 0.9em;
+.footerWrapper ul li {
+  line-height: 1.4em;
 }
-.footerWrapper #footer ul li a.hover {
-  text-decoration: underline;
+.footerWrapper ul li a {
+  color: #666;
 }
 .bottomWrapper {
   background: #fff;
@@ -8093,6 +8087,10 @@ a.panel-heading {
 }
 .carousel .item .rel .dropdown {
   margin-top: 15px;
+}
+.carousel .item .rel .dropdown .dropdown-menu {
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.5);
 }
 .carousel .item .glyphicon {
   float: right;

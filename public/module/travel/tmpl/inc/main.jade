@@ -14,7 +14,8 @@ html
         .headerWrapper
             header#header.container
                 h1 TRAVEL IN CHINA
-                    img(src= f.resPath(c.code, 'images/logo_03.jpg'))
+                    a(href= '/')
+                        img(src= f.resPath(c.code, 'images/logo_03.jpg'))
 
         block slide
 
@@ -62,7 +63,8 @@ html
             .container
                 .row
                     .col-md-2.logo
-                        img(src= f.resPath(c.code, 'images/logo_27.jpg'))
+                        a(href= '/')
+                            img(src= f.resPath(c.code, 'images/logo_27.jpg'))
                     ul.col-md-6.list-inline
                         each it in foot
                             li

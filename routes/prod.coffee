@@ -48,7 +48,6 @@ pre = (req, rsp, next)->
             rsp.end res.str
         else
             req.c = app._community[req.hostname]
-#            req.c = app._community['t.travel.com']
             req.k = k
             next()
 

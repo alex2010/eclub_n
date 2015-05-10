@@ -31,5 +31,5 @@ public/lib/model
 public/lib/plugins
 public/lib/view
 public/lib/widget
-#public/res
+public/res/js
 memo.txt
