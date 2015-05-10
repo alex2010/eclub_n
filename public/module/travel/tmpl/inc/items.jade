@@ -3,6 +3,7 @@
         each it in _items
             div(class= it.cls || 'col-md-3')
                 .pBox
+                    .topIcon
                     - ee = it.entity || _entity
                     a(href= f.href(ee, it._id))
                         != f.imgItem(ee)
