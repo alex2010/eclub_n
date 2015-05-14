@@ -13,4 +13,6 @@ util =
         else if it
             entity: it
 
+    randomInt: (low,high)->
+        Math.floor(Math.random() * (high - low + 1) + low)
 module.exports = util

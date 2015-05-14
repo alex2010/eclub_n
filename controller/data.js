@@ -22,6 +22,13 @@ attrs = function(attr) {
 };
 
 buildQuery = function(q) {
+  var k, v;
+  for (k in q) {
+    v = q[k];
+    if (k === 'rid' || k === 'uid' || k === '_id') {
+      q[k] = new oid(v);
+    }
+  }
   return q;
 };
 
@@ -39,6 +46,9 @@ cleanItem = function(q) {
   }
   for (k in q) {
     v = q[k];
+    if (k === 'rid' || k === 'uid' || k === '_id') {
+      q[k] = new oid(v);
+    }
     if (v.toString().charAt(0) === '_') {
       delete q[k];
     }
@@ -104,8 +114,6 @@ dataController = {
   },
   del: function(req, rsp) {
     var code, entity;
-    log('del');
-    log(req.params.id);
     code = req.c.code;
     entity = req.params.entity;
     return dao.delItem(code, entity, {

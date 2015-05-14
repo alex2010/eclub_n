@@ -3,13 +3,29 @@
         each it in _items
             div(class= it.cls || 'col-md-3')
                 .pBox
-                    .topIcon
-                    - ee = it.entity || _entity
-                    a(href= f.href(ee, it._id))
-                        != f.imgItem(ee)
+                    if hasTop
+                        .topIcon
+                    a(href= it.href)
+                        != f.img(it.imgPath)
                         .text
-                            h4= it.title
-                            p= it.subTitle
-    //if _items.length > 3
-        a.more More
-    a.more More
+                            h4= it.small
+                            p= it.title
+    if morePath
+        a(href= morePath).more More
+
+    //
+    //.row
+    //    each it in _items
+    //        div(class= it.cls || 'col-md-3')
+    //            .pBox
+    //                //to-do: check if topIcon is needed
+    //                if top
+    //                    .topIcon
+    //                - ee = it.entity || _entity
+    //                a(href= f.href(ee, it._id))
+    //                    != f.img(ee)
+    //                    .text
+    //                        h4= it.title
+    //                        p= it.subTitle
+    //if _items && _items.length > 3
+    //    a.more More

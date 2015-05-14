@@ -1,3 +1,4 @@
+util.print: Use console.log instead
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -7784,6 +7785,14 @@ a.glyphicon:hover {
 .form-inline .btnCtn {
   float: right;
 }
+.r0 {
+  padding-right: 0;
+  margin-right: 0;
+}
+.l0 {
+  padding-left: 0;
+  margin-left: 0;
+}
 .headerWrapper {
   width: 100%;
   background: #0a4f9c;
@@ -7806,8 +7815,42 @@ a.glyphicon:hover {
   overflow: hidden;
   clear: both;
 }
+.subSlide {
+  position: relative;
+}
+.subSlide span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  background-color: #16ca8d;
+  word-break: break-all;
+  font-size: 16px;
+  text-align: center;
+  padding: 15px 4px;
+  color: #fff;
+}
+#sight .carousel,
+#itemList .carousel {
+  height: 332px;
+}
+#sight .carousel .item,
+#itemList .carousel .item {
+  height: 332px;
+}
+hr {
+  height: 1px;
+}
+#indexSlide {
+  height: 600px;
+}
+#indexSlide .item {
+  height: 600px;
+}
 .carousel {
   width: 100%;
+  overflow: hidden;
 }
 .carousel .carousel-caption .btn-primary {
   width: 12.5%;
@@ -7820,10 +7863,11 @@ a.glyphicon:hover {
 }
 .carousel .item {
   position: relative;
+  overflow: hidden;
 }
 .carousel .item .rel {
   height: 0;
-  margin-bottom: -10px;
+  margin-bottom: -20px;
 }
 .carousel .item .rel h3 {
   font-weight: normal;
@@ -7856,18 +7900,46 @@ a.glyphicon:hover {
   right: 0;
   bottom: 15px;
 }
+.carousel .item .carousel-indicators {
+  bottom: 35px;
+}
 .carousel .item .carousel-indicators li {
+  width: 8px;
+  height: 8px;
+  box-shadow: none;
+  border: none;
   margin-right: 10px;
   background: #fff;
 }
-.carousel .carousel-indicators {
-  bottom: 35px;
-}
-.carousel .carousel-indicators li {
-  background: #fff;
-}
-.carousel .carousel-indicators li.active {
+.carousel .item .carousel-indicators li.active {
   background: #288ad6 !important;
+}
+.carousel .carousel-control {
+  opacity: 1;
+}
+.carousel .carousel-control .glyphicon-chevron-left {
+  text-align: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  font-weight: bold;
+  border: 2px solid #fff;
+  font-size: 24px;
+  line-height: 42px;
+  background: rgba(100, 100, 100, 0.6);
+}
+.carousel .carousel-control .glyphicon-chevron-right {
+  text-align: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  font-weight: bold;
+  border: 2px solid #fff;
+  font-size: 24px;
+  line-height: 42px;
+  background: rgba(100, 100, 100, 0.6);
 }
 .topLine {
   background: #fff;
@@ -7919,10 +7991,13 @@ nav .menus li {
 nav .menus li:hover {
   background-color: #f2f6fa;
 }
+nav .menus li.active {
+  background-color: #effdfe;
+}
 nav .menus li.top {
   font-size: 22px;
   line-height: 70px;
-  border-bottom: 8px solid #edf1f4;
+  border-bottom: 10px solid #edf1f4;
 }
 nav .menus li.top i {
   display: none;
@@ -7955,10 +8030,6 @@ nav .menus li.subItem:hover span {
 }
 nav .menus li.subItem:hover ul {
   max-height: 600px;
-}
-.panel {
-  padding: 15px;
-  margin-bottom: 10px;
 }
 .panel h2 {
   font-size: 22px;
@@ -8025,16 +8096,18 @@ nav .menus li.subItem:hover ul {
   height: 320px;
   border-radius: 4px;
 }
+.pBox .text {
+  color: white !important;
+}
 .pBox .text h4 {
   margin-top: 15px;
   padding: 0 15px;
-  font-size: 12px;
-  color: #333;
+  font-size: 14px;
+  color: white !important;
 }
 .pBox .text p {
   padding: 0 15px;
-  font-size: 16px;
-  color: #000;
+  font-size: 18px;
 }
 .more {
   cursor: pointer;
@@ -8111,6 +8184,12 @@ nav .menus li.subItem:hover ul {
 a.panel-heading {
   display: block;
 }
+.topHead h2 {
+  margin-top: 12px;
+}
+.topHead .panel {
+  margin-bottom: 10px;
+}
 .topHead small {
   background-color: #555555;
   border-radius: 10px;
@@ -8137,118 +8216,16 @@ a.panel-heading {
 }
 #asl .row a {
   color: white;
+  line-height: 30px;
 }
-.carousel {
-  width: 100%;
+#asl .row a.top {
+  text-decoration: underline;
+}
+#index .carousel {
   height: 600px;
-  overflow: hidden;
 }
-.carousel .carousel-caption .btn-primary {
-  width: 12.5%;
-  background: #288ad6;
-  border: 1px solid #288ad6;
-  border-radius: 6px;
-  line-height: 1.3em;
-  font-size: 1em;
-  letter-spacing: 1px;
-}
-.carousel .item {
-  position: relative;
+#index .carousel .item {
   height: 600px;
-  overflow: hidden;
-}
-.carousel .item .markImg {
-  width: 100%;
-}
-.carousel .item .rel {
-  height: 0;
-  margin-bottom: -20px;
-}
-.carousel .item .rel h3 {
-  font-weight: normal;
-  letter-spacing: 1px;
-  color: #ffffff;
-}
-.carousel .item .rel .dropdown {
-  margin-top: 15px;
-}
-.carousel .item .rel .dropdown .dropdown-menu {
-  border-radius: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
-.carousel .item .glyphicon {
-  float: right;
-  width: 0;
-  height: 0;
-  margin: 4px 10px 0 0;
-}
-.carousel .item .carousel-caption {
-  position: absolute;
-  z-index: 2;
-  right: 10%;
-  bottom: 22px;
-  text-align: left;
-  padding: 0;
-}
-.carousel .item .carousel-caption h3 {
-  color: #ffffff;
-}
-.carousel .item .carousel-caption p {
-  color: #ffffff;
-}
-.carousel .item .carousel-caption .btn {
-  position: absolute;
-  right: 0;
-  bottom: 15px;
-}
-.carousel .item.active {
-  opacity: .9;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000000 100%);
-}
-.carousel .carousel .active {
-  opacity: .9;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000000 100%);
-}
-.carousel .carousel .carousel-indicators {
-  bottom: 35px;
-}
-.carousel .carousel .carousel-indicators li {
-  width: 8px;
-  height: 8px;
-  box-shadow: none;
-  border: none;
-  margin-right: 10px;
-  background: #fff;
-}
-.carousel .carousel .carousel-indicators li.active {
-  background: #288ad6 !important;
-}
-.carousel .carousel-control {
-  opacity: 1;
-}
-.carousel .carousel-control .glyphicon-chevron-left {
-  text-align: center;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: inline-block;
-  font-weight: bold;
-  border: 2px solid #fff;
-  font-size: 24px;
-  line-height: 42px;
-  background: rgba(100, 100, 100, 0.6);
-}
-.carousel .carousel-control .glyphicon-chevron-right {
-  text-align: center;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: inline-block;
-  font-weight: bold;
-  border: 2px solid #fff;
-  font-size: 24px;
-  line-height: 42px;
-  background: rgba(100, 100, 100, 0.6);
 }
 .article-sight {
   border-radius: 0;

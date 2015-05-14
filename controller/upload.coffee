@@ -16,9 +16,7 @@ app.use multer
         fieldname
 
     onFileUploadComplete: (file, req, rsp)->
-        log 'fild cp'
         rp = sPath("#{req.query.code}/#{file.fieldname}.#{file.extension}")
-        log rp
         qu = req.query
         if qu.maxWidth
             thumb(rp, ':' + qu.maxWidth)

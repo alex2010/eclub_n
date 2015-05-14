@@ -61,6 +61,7 @@ render = (req, rsp, ctx)->
     async.parallel opt, (err, res)->
         _.extend ctx, res
         str = jade.renderFile("#{req.fp}/#{ctx.index}.jade", ctx)
+
         unless app.env
             dao.save _mdb, 'cache',
                 k: req.k
@@ -79,7 +80,6 @@ module.exports =
             filter[req.params.attr] = req.params.id
         else
             filter._id = req.params.id
-        log filter
         dao.get ctx.c.code, req.params.entity, filter, (item)->
             unless item
                 rsp.end('no item')

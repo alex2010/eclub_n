@@ -4,9 +4,10 @@ block content
 
     .topHead
         .panel
-            h2= title
-                include inc/share
-                small.pull-right.btn(data-toggle="collapse",data-target="#asl") A ~ Z
+            .panel-heading
+                h2= title
+                    small.pull-right.btn(data-toggle="collapse",data-target="#asl") A ~ Z
+                    include inc/share
         #asl.collapse
             .row.text-center
                 each it in allSights
@@ -24,36 +25,79 @@ block content
         h3= title
         .article!= content
     .row
-        .col-md-8.pr0.active-sight
+        .col-md-8.r0
             if sub
                 .panel
-                    //.panel-none
-                    each it in sub
-                        h4= it.title
-                        if it.refFile && it.refFile.head
-                            .row
-                                img(src= f.resPath(c.code, it.refFile.head[0]))
-                        p!= it.content
-            if extra
-                #people
-                    .panel.panel-default(style='padding:0')
-                        each it,i in extra
+                    .panel-heading
+                        h3.panel-title Feature spots
+
+                    each s,i in sub
+                        .subSlide
+                            if s.refFile && s.refFile.head
+                                -var _slides = s.refFile.head
+                                -var _sid = 'subs'+i
+                                -var _ctx = s
+                                -var _prop = 'head'
+                                include inc/slide
+                            if fee
+                                span HIGHLIGHT
+                        .panel-heading
+                            h4.panel-title= s.title
+                        .panel-body
+                            p!= s.content
+                        hr
+            if extra && extra.length
+                .panel
+                    .panel-heading
+                        h3.panel-title Additional Information
+
+                #people.panel-group
+                    each it,i in extra
+                        .panel.panel-default
                             a.panel-heading(data-toggle='collapse', data-parent='#people', href= '#cl' + i)
                                 h4.panel-title= it.title
                             .panel-collapse.collapse(id= 'cl' + i, class= i == 0 ? 'in' : '')
-                                .panel-body!= it.content
+                                .panel-body
+                                    if it.refFile && it.refFile.head
+                                        .row
+                                            .col-md-4
+                                                != f.imgItem(it,c.code)
+                                            .col-md-8!= it.content
+                                    else
+                                        != it.content
 
-        #info.col-md-4
+        #info.col-md-4.panel-group(role='tablist')
             if info
-                .panel.panel-default.p0.mod-active
-                    each v,k in info
-                        .block-active(class= k == 'openingHours' ? 'current' : '')
-                            a.panel-heading(data-toggle='collapse', data-parent='#info', href= '#' + k)
-                                h4.panel-title= k.toString().capAll()
-                            .panel-collapse.collapse(id= k, class= k == 'openingHours' ? 'in' : '')
-                                .panel-body!= v
-
+                each v,k in info
+                    .panel.panel-default
+                        a.panel-heading(data-toggle='collapse', data-parent='#info', href= '#' + k)
+                            h4.panel-title= k.toString().capAll()
+                        .panel-collapse.collapse(id= k, class= k == 'openingHours' ? 'in' : '')
+                            .panel-body(style='border-left: 2px red solid')!= v
 
     .col-md-12
         .row
             include inc/recommend
+
+
+
+    // Modal
+    #myMap.modal.fade
+        .modal-dialog
+            .modal-content
+                img(width='100%')
+
+
+block st
+    :coffee(bare=true)
+        m = $('#myMap')
+        url = $('#map .markImg').attr 'src'
+        $('#map').click ->
+            m.find('img').attr 'src', url
+            m.modal('show')
+
+        tops = ($(it).attr('href') for it in $('footer .top a')).join(',')
+        for it in $('#asl a')
+            if tops.indexOf($(it).attr('href'))>-1
+                $(it).addClass 'top'
+

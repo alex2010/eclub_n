@@ -24,9 +24,7 @@ app.use(multer({
   },
   onFileUploadComplete: function(file, req, rsp) {
     var qu, rp;
-    log('fild cp');
     rp = sPath(req.query.code + "/" + file.fieldname + "." + file.extension);
-    log(rp);
     qu = req.query;
     if (qu.maxWidth) {
       thumb(rp, ':' + qu.maxWidth);

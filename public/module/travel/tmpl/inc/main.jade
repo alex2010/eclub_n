@@ -40,7 +40,7 @@ html
 
         #content.container
 
-            #home.row
+            div(id= index).row
                 nav.col-md-2
                     - var mClass = 'menus row';
                     include ../../../../../views/inc/b3Menu
@@ -51,12 +51,11 @@ html
             footer.container
                 .row
                     each it in siteMap.sortBy('row')
-                        ul.col-md-2
+                        ul.col-md-2(class= it.top?'top':'')
                             p
                                 strong= it.title
                             if it.items && it.items.length
                                 each ts in it.items
-                                    - log(ts);
                                     if ts
                                         li!= f.link(ts)
         .bottomWrapper

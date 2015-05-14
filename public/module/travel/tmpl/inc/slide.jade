@@ -1,27 +1,31 @@
 - _sid || (_sid = 'slide');
 - _prop || (_prop = 'head');
-.carousel.slide(id= _sid , data-ride='carousel')
-    .carousel-inner
-        each it,i in _slides
-            .item(class= i == 0 ? 'active' : '' )
-                if it.title
-                    != f.imgItem(it, c.code, _prop)
-                    .carousel-caption
-                        h3!= f.link(it)
-                        p= it.subTitle
-                        - it.title  = 'See Details'
-                        != f.link(it,null,'btn btn-primary')
+- _ctx || (_ctx = locals);
+if _slides.length > 1
+    .carousel.slide(id= _sid , data-ride='carousel')
+        .carousel-inner
+            each it,i in _slides
+                .item(class= i == 0 ? 'active' : '' )
+                    if it.title
+                        != f.imgItem(it, c.code, _prop, i)
+                        .carousel-caption
+                            h3!= f.link(it)
+                            p= it.subTitle
+                            - it.title  = 'See Details'
+                            != f.link(it, null, 'btn btn-primary')
 
-                else if _.isString(it)
-                    != f.imgItem(locals, c.code, _prop)
+                    else if _.isString(it)
+                        != f.imgItem(_ctx, c.code, _prop, i)
                         .carousel-caption
                             - kk = it.split('.')[0];
-                            if refFile[kk]
-                                - var xt = {title: refFile[kk].title};
-                                - xt._e = locals._e;
-                                - xt._id=locals._id;
+                            if _ctx.refFile[kk]
+                                - var xt = {title: _ctx.refFile[kk].title};
+                                - xt._e = _ctx._e;
+                                - xt._id= _ctx._id;
                                 h4!= f.link(xt)
-                                if refFile[kk].description
-                                    p= refFile[kk].description
+                                if _ctx.refFile[kk].description
+                                    p= _ctx.refFile[kk].description
 
-    include ../../../../../views/inc/slideBtn
+        //include ../../../../../views/inc/slideBtn
+else
+    .item!= f.imgItem(_ctx, c.code, _prop)

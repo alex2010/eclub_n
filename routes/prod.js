@@ -43,10 +43,8 @@ pre = function(req, rsp, next) {
         }
       };
     } else if (cc === '1') {
-      req.url = req.url.replace('_c=1', '');
-      if (req.url.endsWith('?')) {
-        req.url = req.url.substr(0, req.url.length - 1);
-      }
+      req.url = req.url.replace('&_c=1', '');
+      req.url = req.url.replace('?_c=1', '');
       opt = {
         k: ck(req)
       };

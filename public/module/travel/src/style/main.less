@@ -11,6 +11,16 @@
 @white: #fff;
 @header-bg: #0a4f9c;
 
+.r0 {
+  padding-right: 0;
+  margin-right: 0;
+}
+
+.l0 {
+  padding-left: 0;
+  margin-left: 0;
+}
+
 .headerWrapper {
   width: 100%;
   background: @header-bg;
@@ -36,42 +46,86 @@
     }
   }
 }
+.subSlide{
+  position: relative;
+  span{
+    position: absolute;
+    left:0;
+    top:0;
+    width: 20px;
+    height: 100%;
+    background-color: #16ca8d;
+    word-break: break-all;
+    font-size: 16px;
+    text-align: center;
+    padding: 15px 4px;
+    color: #fff;
+  }
+}
+#sight, #itemList {
+  .carousel {
+    height: 332px;
+    .item {
+      height: 332px;
+    }
+  }
+}
+hr {
+  height: 1px;
+}
+#indexSlide {
+  height: 600px;
+  .item {
+    height: 600px;
+    //.opc {
+    //  height: 600px;
+    //  opacity: .9;
+    //  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.05) 100%);
+    //  background-repeat: repeat-x;
+    //}
+  }
+}
 
 .carousel {
   // 幻灯片
   width: 100%;
-
+  overflow: hidden;
   .carousel-caption {
     .btn-primary {
-      width:12.5%;
-      background:#288ad6;
-      border:1px solid #288ad6;
-      border-radius:6px;
-      line-height:1.3em;
-      font-size:1em;
-      letter-spacing:1px;
+      width: 12.5%;
+      background: #288ad6;
+      border: 1px solid #288ad6;
+      border-radius: 6px;
+      line-height: 1.3em;
+      font-size: 1em;
+      letter-spacing: 1px;
     }
   }
-  //min-height: 600px;#user js to set
   .item {
     position: relative;
-    //height: 600px;
+    overflow: hidden;
     .rel {
       height: 0;
-      margin-bottom: -10px;
+      margin-bottom: -20px;
       h3 {
-        font-weight:normal;
+        font-weight: normal;
         letter-spacing: 1px;
         color: @white;
       }
       .dropdown {
-        margin-top:15px;
+        margin-top: 15px;
         .dropdown-menu {
-          border-radius:0;
-          background:rgba(0,0,0,0.5);
+          border-radius: 0;
+          background: rgba(0, 0, 0, 0.5);
         }
       }
     }
+    //.glyphicon {
+    //  float: right;
+    //  width: 0;
+    //  height: 0;
+    //  margin: 4px 10px 0 0;
+    //}
     .carousel-caption {
       position: absolute;
       z-index: 2;
@@ -93,9 +147,18 @@
     }
 
     .carousel-indicators {
+      bottom: 35px;
       li {
+        background: #fff;
+        width: 8px;
+        height: 8px;
+        box-shadow: none;
+        border: none;
         margin-right: 10px;
         background: #fff;
+        &.active {
+          background: #288ad6 !important;
+        }
       }
     }
     h3 {
@@ -105,20 +168,24 @@
 
     }
   }
-}
-
-.carousel{
-  .carousel-indicators {
-    bottom: 35px;
-    li {
-      background: #fff;
+  .carousel-control {
+    opacity: 1;
+    .glyphicon-chevron-left {
+      .circle(50px);
+      border: 2px solid #fff;
+      font-size: 24px;
+      line-height: 42px;
+      background: rgba(100, 100, 100, .6);
     }
-    li.active {
-      background: #288ad6 !important;
+    .glyphicon-chevron-right {
+      .circle(50px);
+      border: 2px solid #fff;
+      font-size: 24px;
+      line-height: 42px;
+      background: rgba(100, 100, 100, .6);
     }
   }
 }
-
 
 .topLine {
   background: #fff;
@@ -126,10 +193,10 @@
   margin-bottom: 10px;
   h2 {
     font-size: 20px;
-    color:#0a4f9c;
-    letter-spacing:1px;
+    color: #0a4f9c;
+    letter-spacing: 1px;
     a {
-      color:#0a4f9c;
+      color: #0a4f9c;
     }
   }
   h3 {
@@ -172,10 +239,13 @@ nav {
       &:hover {
         background-color: #f2f6fa;
       }
+      &.active{
+        background-color: #effdfe;
+      }
       &.top {
         font-size: 22px;
         line-height: 70px;
-        border-bottom: 8px solid @body-bg;
+        border-bottom: 10px solid @body-bg;
         i {
           display: none;
         }
@@ -225,8 +295,8 @@ nav {
 
 .panel {
   //所有的白底区块
-  padding: 15px;
-  margin-bottom: 10px;
+  //padding: 15px;
+  //margin-bottom: 10px;
   h2 {
     font-size: 22px;
   }
@@ -285,62 +355,60 @@ nav {
 }
 
 .pBox {
-height: 420px;
+  height: 420px;
   overflow: hidden;
   margin-bottom: 10px;
-  background:#fff;
-  border:1px solid #e6e6e6;
-  border-radius:4px;
-  position:relative;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  position: relative;
   .topIcon {
-    width:50px;
-    height:100px;
-    position:absolute;
-    z-index:2;
-    top:0;
-    right:10px;
-    background:url(../../../../res/upload/travel/images/topC_03.png) no-repeat right 0;
+    width: 50px;
+    height: 100px;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 10px;
+    background: url(../../../../res/upload/travel/images/topC_03.png) no-repeat right 0;
   }
   .markImg {
     height: 320px;
-    border-radius:4px;
+    border-radius: 4px;
   }
   .text {
+    color: white !important;
     h4 {
-      margin-top:15px;
-      padding:0 15px;
-      font-size: 12px;
-      color:#333;
+      margin-top: 15px;
+      padding: 0 15px;
+      font-size: 14px;
+      color: white !important;
     }
     p {
-      padding:0 15px;
-      font-size: 16px;
-      color:#000;
+      padding: 0 15px;
+      font-size: 18px;
     }
   }
-
-
 }
+
 .more {
   cursor: pointer;
   display: block;
   background: #2d3743;
-  font-weight:normal;
+  font-weight: normal;
   border-radius: 4px;
   text-align: center;
   line-height: 30px;
   color: #fff;
-  font-size:0.8em;
-  letter-spacing:1px;
+  font-size: 0.8em;
+  letter-spacing: 1px;
   &:hover {
-    color:#fff;
+    color: #fff;
   }
   //&:hover {
   //  background-color: @deepBlue;
   //  color: white;
   //}
 }
-
 
 .pBox.top {
   //首页图片块
@@ -439,6 +507,12 @@ a.panel-heading {
 }
 
 .topHead {
+  h2 {
+    margin-top: 12px;
+  }
+  .panel {
+    margin-bottom: 10px;
+  }
   small {
     background-color: @gray;
     border-radius: 10px;
@@ -467,197 +541,195 @@ a.panel-heading {
     padding-bottom: 10px;
     a {
       color: white;
+      line-height: 30px;
+      &.top {
+        text-decoration: underline;
+      }
+
     }
   }
   margin-bottom: 10px;
 }
 
-.carousel {
-  .carousel-caption {
-    .btn-primary {
-      width: 12.5%;
-      background: #288ad6;
-      border: 1px solid #288ad6;
-      border-radius: 6px;
-      line-height: 1.3em;
-      font-size: 1em;
-      letter-spacing: 1px;
-    }
-  }
-  // 幻灯片
-  width: 100%;
-  height: 600px;
-  overflow: hidden;
-  .item {
-    position: relative;
-    height: 600px;
-    overflow: hidden;
-    .markImg {
-      width: 100%;
-    }
-    .rel {
-      height: 0;
-      margin-bottom: -20px;
-      h3 {
-        font-weight: normal;
-        letter-spacing: 1px;
-        color: @white;
-      }
-      .dropdown {
-        margin-top: 15px;
-        .dropdown-menu {
-          border-radius: 0;
-          background: rgba(0, 0, 0, 0.5);
-        }
-      }
-    }
-    .glyphicon {
-      float: right;
-      width: 0;
-      height: 0;
-      margin: 4px 10px 0 0;
-    }
-    .carousel-caption {
-      position: absolute;
-      z-index: 2;
-      right: 10%;
-      bottom: 22px;
-      text-align: left;
-      padding: 0;
-      h3 {
-        color: @white;
-      }
-      p {
-        color: @white;
-      }
-      .btn {
-        position: absolute;
-        right: 0;
-        bottom: 15px;
-      }
-    }
-    &.active {
-      opacity: .9;
-      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
-    }
-  }
+#index {
   .carousel {
-    .active {
-      opacity: .9;
-      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
-    }
-    .carousel-indicators {
-      bottom: 35px;
-      li {
-        width: 8px;
-        height: 8px;
-        box-shadow: none;
-        border: none;
-        margin-right: 10px;
-        background: #fff;
-      }
-      li.active {
-        background: #288ad6 !important;
-      }
-    }
-    
-  }
-  .carousel-control {
-    opacity: 1;
-    .glyphicon-chevron-left {
-      .circle(50px);
-      border: 2px solid #fff;
-      font-size: 24px;
-      line-height: 42px;
-      background: rgba(100, 100, 100, .6);
-    }
-    .glyphicon-chevron-right {
-      .circle(50px);
-      border: 2px solid #fff;
-      font-size: 24px;
-      line-height: 42px;
-      background: rgba(100, 100, 100, .6);
+    height: 600px;
+    .item {
+      height: 600px;
     }
   }
 }
 
+//
+//.carousel {
+//
+//  // 幻灯片
+//  width: 100%;
+//  .item {
+//    position: relative;
+//    .markImg {
+//      width: 100%;
+//    }
+//    .rel {
+//      height: 0;
+//      margin-bottom: -20px;
+//      h3 {
+//        font-weight: normal;
+//        letter-spacing: 1px;
+//        color: @white;
+//      }
+//      .dropdown {
+//        margin-top: 15px;
+//        .dropdown-menu {
+//          border-radius: 0;
+//          background: rgba(0, 0, 0, 0.5);
+//        }
+//      }
+//    }
+//
+//    .carousel-caption {
+//      position: absolute;
+//      z-index: 2;
+//      right: 10%;
+//      bottom: 22px;
+//      text-align: left;
+//      padding: 0;
+//      h3 {
+//        color: @white;
+//      }
+//      p {
+//        color: @white;
+//      }
+//      .btn {
+//        position: absolute;
+//        right: 0;
+//        bottom: 15px;
+//      }
+//    }
+//    &.active {
+//      opacity: .9;
+//      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+//    }
+//  }
+//  .carousel {
+//    .active {
+//      opacity: .9;
+//      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+//    }
+//    .carousel-indicators {
+//      bottom: 35px;
+//      li {
+//        width: 8px;
+//        height: 8px;
+//        box-shadow: none;
+//        border: none;
+//        margin-right: 10px;
+//        background: #fff;
+//      }
+//      li.active {
+//        background: #288ad6 !important;
+//      }
+//    }
+//
+//  }
+//  .carousel-control {
+//    opacity: 1;
+//    .glyphicon-chevron-left {
+//      .circle(50px);
+//      border: 2px solid #fff;
+//      font-size: 24px;
+//      line-height: 42px;
+//      background: rgba(100, 100, 100, .6);
+//    }
+//    .glyphicon-chevron-right {
+//      .circle(50px);
+//      border: 2px solid #fff;
+//      font-size: 24px;
+//      line-height: 42px;
+//      background: rgba(100, 100, 100, .6);
+//    }
+//  }
+//}
+
 //sight单页
 //头文章
 .article-sight {
-  border-radius:0;
-  padding-top:0;
-  position:relative;
+  border-radius: 0;
+  padding-top: 0;
+  position: relative;
   h3 {
-    margin-top:20px;
-    margin-bottom:25px;
-    font-size:14px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-size: 14px;
   }
   .article {
-    font-size:12px;
-    padding-bottom:20px;
+    font-size: 12px;
+    padding-bottom: 20px;
   }
-  .amplify,.less {
-    position:absolute;
-    z-index:2;
-    right:15px;
-    font-size:12px;
-    color:#0c4f9d;
+  .amplify, .less {
+    position: absolute;
+    z-index: 2;
+    right: 15px;
+    font-size: 12px;
+    color: #0c4f9d;
   }
   .amplify {
-    bottom:15px;
+    bottom: 15px;
   }
   .less {
-    top:15px;
+    top: 15px;
   }
 }
+
 //活动
 .active-sight {
   .panel-none {
-    background:none;
-    border:0;
-    border-radius:0;
-    box-shadow:none;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 
 //活动左侧块
 .mod-active {
-  background:none;
-  border:none;
-  box-shadow:none;
+  background: none;
+  border: none;
+  box-shadow: none;
   .block-active {
-    margin-bottom:10px;
-    padding:0 5px;
-    background:#fff;
-    border-top-left-radius:4px;
-    border-top-right-radius:4px;
-    border:1px solid #e6e6e6;
-    letter-spacing:1px;
+    margin-bottom: 10px;
+    padding: 0 5px;
+    background: #fff;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border: 1px solid #e6e6e6;
+    letter-spacing: 1px;
     &.current {
-      border-left:3px solid #bd0304;
+      border-left: 3px solid #bd0304;
     }
 
     .panel-heading {
-      padding:15px 10px 10px;
+      padding: 15px 10px 10px;
       .panel-title {
-        font-weight:normal;
+        font-weight: normal;
       }
-      color:#0c4f9d;
+      color: #0c4f9d;
     }
     .panel-body {
-      padding:5px 15px 15px;
-      color:#333;
-      font-size:12px;
-      line-height:1.8em;
+      padding: 5px 15px 15px;
+      color: #333;
+      font-size: 12px;
+      line-height: 1.8em;
     }
   }
 }
+
 //recommended
 .recommended-panel {
-  border-bottom-left-radius:0;
-  border-bottom-right-radius:0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   h3 {
-    margin:0;
-    font-weight:normal;
+    margin: 0;
+    font-weight: normal;
   }
 }

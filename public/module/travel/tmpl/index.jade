@@ -2,10 +2,12 @@ extends inc/main
 
 block slide
     - var _slides = top.list;
-    #slide.carousel.slide(data-ride='carousel')
+    - var _sid = 'indexSlide';
+    #indexSlide.carousel.slide(data-ride='carousel', style='height:600px')
         .carousel-inner
             each it,i in _slides
-                .item(class= i == 0 ? 'active' : '' )
+                .item(class= i == 0 ? 'active' : '', style='height:600px')
+                    .opc
                     .container.text-center
                         .rel
                             h3 Beijing in For Seasons
@@ -25,18 +27,20 @@ block slide
                     != f.imgItem(it, c.code, 'top')
 
                     .carousel-caption
-                        h3= it.title
+                        h3
+                            a(href= it.href)= it.title
                         p= it.subTitle
-                        a.btn.btn-primary(href='/') See Details
+                        a.btn.btn-primary(href= it.href) See Details
         include ../../../../views/inc/slideBtn
 
 
 block content
 
     .panel
-        h2 Introducing #{city.title}
-        p= city.description
-        a= more
+        .panel-heading
+            h2 Introducing #{city.title}
+        .panel-body
+            p= city.description
 
     .pBoxList
         .row
@@ -45,7 +49,7 @@ block content
                     div(class= it.cls)
                         .pBox
                             a(href= it.href)
-                                != f.imgItem(it, c.code)
+                                != f.imgItem(it, c.code, 'top')
                                 .text
                                     h4= it.title
                                     p= it.subTitle
@@ -54,15 +58,17 @@ block content
 
             .col-md-3
                 .panel.pBox
-                    h3 Cars & Guides
-                    ul
+                    .panel-heading
+                        h3 Cars & Guides
+                    ul.panel-body
                         each it in btm_cg
                             li
                                 a(href= it.href)= it.title
             .col-md-3
                 .panel.pBox
-                    h3 Maps
-                    ul
+                    .panel-heading
+                        h3 Maps
+                    ul.panel-body
                         each it in btm_map
                             li
                                 a(href= it.href)= it.title

@@ -108,7 +108,6 @@ module.exports = {
     } else {
       filter._id = req.params.id;
     }
-    log(filter);
     return dao.get(ctx.c.code, req.params.entity, filter, function(item) {
       if (!item) {
         rsp.end('no item');

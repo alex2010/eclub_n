@@ -14,6 +14,7 @@ role = [
           home: 1,
           site: 2,
           data: 3,
+          userRole: 4,
           file: 6
         },
         entity: {
@@ -24,6 +25,8 @@ role = [
           map: 5,
           car: 6,
           guide: 7,
+          top: 7,
+          city: 8,
           content: 15,
           post: 16,
           head: 17,
@@ -299,8 +302,8 @@ top = [
   {
     title: 'Summer Place',
     subTitle: 'The Biggest indd sdfsdf sdf',
-    entity: 'sight',
-    id: 'vcxvsdfsdfsdf',
+    refClass: 'sight',
+    ref: 'vcxvsdfsdfsdf',
     refFile: {
       head: ['p1.jpg']
     }

@@ -6,7 +6,7 @@ module.exports =
         ctx.siteMap = []
 
         btm_opt =
-            limit: 10
+            limit: 15
             sort:
                 row: -1
 
@@ -25,9 +25,10 @@ module.exports =
         btm_top: (cb)->
             dao.find ctx.c.code, 'top', {}, btm_opt, (res)->
                 for it in res
-                    it._e = it.entity
-                    it._id = it.id
+                    it._e = it.refClass
+                    it._id = it.ref
                 ctx.siteMap.push
+                    top: true
                     title: 'Top Choices'
                     items: res
                     row: 10
@@ -89,15 +90,18 @@ module.exports =
             filter =
                 type: 'index'
             dao.get ctx.c.code, 'head', filter, (res)->
-                log 'indexxx'
-                log res
-                log 'indexxx'
                 cb(null, res)
 
     top: (ctx)->
         ctx.headTitle = 'Top Choices In Beijing'
         topList: (cb)->
             dao.find ctx.c.code, 'top', {}, {}, (res)->
+                for it in res
+                    it.href = "#{it.refClass}/#{it.ref}"
+                    it.hasTop = true
+                    it.small = it.subTitle
+                    if it.refFile && it.refFile.list
+                        it.imgPath = ctx.f.resPath ctx.c.code, it.refFile.list[0]
                 cb(null, res)
 
         head: (cb)->
@@ -133,6 +137,14 @@ module.exports =
             dao.find ctx.c.code, 'sight', filter, {}, (res)->
                 cb(null, res)
 
+        map: (cb)->
+            filter =
+                ref: ctx._id.toString()
+            dao.get ctx.c.code, 'map', filter, (res)->
+                ctx.info.map = ctx.f.imgItem(res,ctx.c.code,'slide')
+                cb(null, res)
+
+
     itemList: (ctx, req)->
         et = req.query.entity
         ctx.title = "#{et.capitalize()} in Beijing"
@@ -147,7 +159,6 @@ module.exports =
                         $gt: 1000
                 dao.find ctx.c.code, et, filter, {}, (res)->
                     cb(null, res)
-
 
         headMenu: (cb)->
             dao.find ctx.c.code, 'cat', {type: et}, {}, (res)->
@@ -166,10 +177,27 @@ module.exports =
 
         _items: (cb)->
             filter = {}
-            if req.query.cat
-                filter.cat = req.query.cat
+            qu = req.query
+            if qu.cat
+                filter.cat = qu.cat
             dao.find ctx.c.code, et, filter, {}, (res)->
-                cb(null, res)
+                dao.count ctx.c.code, et, filter, (count)->
+                    for it in res
+                        it.href = "/#{it._e}/#{it._id}"
+                        it.hasTop = false
+                        it.small = it.cat
+                        if it.refFile && it.refFile.list
+                            le = it.refFile.list.length
+                            if le > 1
+                                idx = ctx.f.randomInt(0,le-1)
+                            it.imgPath = ctx.f.resPath ctx.c.code, it.refFile.list[idx]
+
+                    if et in ['sight','map'] and count > res.length
+                        qu.max || qu.max = 10
+                        offset = (qu.offset||0) + qu.max
+                        ctx.morePath = "/itemList?entity=#{filter.cat}&offset=#{offset}&max=#{qu.max}"
+
+                    cb(null, res)
 
     content:(ctx, req)->
         log 'zzzzzz'

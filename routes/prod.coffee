@@ -32,9 +32,10 @@ pre = (req, rsp, next)->
                 $regex:
                     k: "#{req.query._e}"
         else if cc is '1'
-            req.url = req.url.replace('_c=1', '')
-            if req.url.endsWith('?')
-                req.url = req.url.substr(0, req.url.length - 1)
+            req.url = req.url.replace('&_c=1', '')
+            req.url = req.url.replace('?_c=1', '')
+#            if req.url.endsWith('?')
+#                req.url = req.url.substr(0, req.url.length - 1)
             opt =
                 k: ck(req)
 

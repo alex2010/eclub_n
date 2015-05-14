@@ -1,19 +1,23 @@
-util = {}
+u = require '../util'
 
+util = {}
 _.extend util,
 
-    userLink: ->
+    randomInt: u.randomInt
 
+    userLink: ->
 
     icon: (icon, tag = 'i', str = '', cls = '')->
         "<#{tag} class='glyphicon glyphicon-#{icon} #{cls}'>#{str}</#{tag}>"
 
-    imgItem: (it, code, name = 'head')->
+    imgItem: (it, code, name = 'head',index = 0)->
+        return '' unless it
         if it.refFile and it.refFile[name]
-            path = it.refFile[name][0]
+            path = it.refFile[name][index]
         else
             path = ''
         util.img util.resPath(code, path)
+
 
     img: (path, cls = 'markImg', pop = false)->
         id = String.randomChar(4)

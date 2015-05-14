@@ -6,7 +6,7 @@ module.exports = {
     ctx.headMenu = 'sns';
     ctx.siteMap = [];
     btm_opt = {
-      limit: 10,
+      limit: 15,
       sort: {
         row: -1
       }
@@ -38,10 +38,11 @@ module.exports = {
           var i, it, len;
           for (i = 0, len = res.length; i < len; i++) {
             it = res[i];
-            it._e = it.entity;
-            it._id = it.id;
+            it._e = it.refClass;
+            it._id = it.ref;
           }
           ctx.siteMap.push({
+            top: true,
             title: 'Top Choices',
             items: res,
             row: 10
@@ -129,9 +130,6 @@ module.exports = {
           type: 'index'
         };
         return dao.get(ctx.c.code, 'head', filter, function(res) {
-          log('indexxx');
-          log(res);
-          log('indexxx');
           return cb(null, res);
         });
       }
@@ -142,6 +140,16 @@ module.exports = {
     return {
       topList: function(cb) {
         return dao.find(ctx.c.code, 'top', {}, {}, function(res) {
+          var i, it, len;
+          for (i = 0, len = res.length; i < len; i++) {
+            it = res[i];
+            it.href = it.refClass + "/" + it.ref;
+            it.hasTop = true;
+            it.small = it.subTitle;
+            if (it.refFile && it.refFile.list) {
+              it.imgPath = ctx.f.resPath(ctx.c.code, it.refFile.list[0]);
+            }
+          }
           return cb(null, res);
         });
       },
@@ -179,6 +187,16 @@ module.exports = {
           cat: 'top'
         };
         return dao.find(ctx.c.code, 'sight', filter, {}, function(res) {
+          return cb(null, res);
+        });
+      },
+      map: function(cb) {
+        var filter;
+        filter = {
+          ref: ctx._id.toString()
+        };
+        return dao.get(ctx.c.code, 'map', filter, function(res) {
+          ctx.info.map = ctx.f.imgItem(res, ctx.c.code, 'slide');
           return cb(null, res);
         });
       }
@@ -231,13 +249,35 @@ module.exports = {
         }
       },
       _items: function(cb) {
-        var filter;
+        var filter, qu;
         filter = {};
-        if (req.query.cat) {
-          filter.cat = req.query.cat;
+        qu = req.query;
+        if (qu.cat) {
+          filter.cat = qu.cat;
         }
         return dao.find(ctx.c.code, et, filter, {}, function(res) {
-          return cb(null, res);
+          return dao.count(ctx.c.code, et, filter, function(count) {
+            var i, idx, it, le, len, offset;
+            for (i = 0, len = res.length; i < len; i++) {
+              it = res[i];
+              it.href = "/" + it._e + "/" + it._id;
+              it.hasTop = false;
+              it.small = it.cat;
+              if (it.refFile && it.refFile.list) {
+                le = it.refFile.list.length;
+                if (le > 1) {
+                  idx = ctx.f.randomInt(0, le - 1);
+                }
+                it.imgPath = ctx.f.resPath(ctx.c.code, it.refFile.list[idx]);
+              }
+            }
+            if ((et === 'sight' || et === 'map') && count > res.length) {
+              qu.max || (qu.max = 10);
+              offset = (qu.offset || 0) + qu.max;
+              ctx.morePath = "/itemList?entity=" + filter.cat + "&offset=" + offset + "&max=" + qu.max;
+            }
+            return cb(null, res);
+          });
         });
       }
     };

@@ -42,7 +42,6 @@ log 'init app'
 setTimeout ->
     dao.find _mdb, 'community', {}, {}, (res)->
         log 'init data...'
-        log res
         for it in res
             app._community[it.url] = it
 

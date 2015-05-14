@@ -2,7 +2,8 @@ extends inc/main
 
 block content
     .panel
-        h2= title
+        .panel-heading
+            h2= title
 
     if _slides
         - var _prop = 'slide'
@@ -10,13 +11,23 @@ block content
 
     if item
         .panel
-            h3= item.title
-            p= item.content
+            .panel-heading
+                h3= item.title
+            .panel-body
+                p= item.content
 
     include inc/items
 
 block st
     :coffee(bare=true)
-        window._init = ->
-            if @app.cat
-                $('.headMenu').find("a[href*='#{@app.cat}']").parent().addClass 'active'
+        pp = util.parseUrl()
+        cat = pp.cat
+        ent = pp.entity
+        $('.headMenu').find("a[href*='#{cat}']").parent().addClass 'active'
+        $('.menus').find("a[href*='entity=#{ent}']").parent().addClass 'active'
+        tops = ($(it).attr('href') for it in $('footer .top a')).join(',')
+        for it in $('.pBox>a')
+            if tops.indexOf($(it).attr('href'))>-1
+                $(it).addClass 'topIcon'
+
+

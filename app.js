@@ -54,7 +54,6 @@ setTimeout(function() {
   return dao.find(_mdb, 'community', {}, {}, function(res) {
     var i, it, len, results;
     log('init data...');
-    log(res);
     results = [];
     for (i = 0, len = res.length; i < len; i++) {
       it = res[i];

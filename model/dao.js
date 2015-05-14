@@ -158,7 +158,6 @@ module.exports = function(name1, callback) {
     } else {
       m = 'deleteMany';
     }
-    log(m);
     return this.pick(db, entity)[m](filter, opt, function(err, res) {
       if (err) {
         log(err);

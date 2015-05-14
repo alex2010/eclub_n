@@ -104,7 +104,6 @@ module.exports = (@name, callback) ->
             m = 'deleteOne'
         else
             m = 'deleteMany'
-        log m
         @pick(db, entity)[m] filter, opt, (err, res)->
             log err if err
             log 'del finish'

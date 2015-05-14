@@ -9,7 +9,11 @@ attrs = (attr)->
         op[it] = 1
     op
 buildQuery =  (q)->
+    for k, v of q
+        if k in ['rid','uid','_id']
+            q[k] = new oid(v)
     q
+
 
 cleanItem = (q)->
     if q.dateCreated
@@ -21,6 +25,8 @@ cleanItem = (q)->
         q.lastUpdated = new Date()
 
     for k,v of q
+        if k in ['rid','uid','_id']
+            q[k] = new oid(v)
         if v.toString().charAt(0) is '_'
             delete q[k]
     q
@@ -70,8 +76,6 @@ dataController =
             rsp.send u.r _.pick(item, _attrs)
 
     del: (req, rsp) ->
-        log 'del'
-        log req.params.id
         code = req.c.code
         entity = req.params.entity
         dao.delItem code, entity, _id: req.params.id, ->
