@@ -1,38 +1,40 @@
-s = require('../setting')
+
 Mongodb = require('mongodb')
 _ = require('underscore')
 
 oid = require('mongodb').ObjectID
-
+`
+_db={};
+`
 Db = Mongodb.Db
 Connection = Mongodb.Connection
 Server = Mongodb.Server
 
 #log = console.log
 _opt = {w: 1}
-module.exports = (@name, callback) ->
-    if app and app._hk
-        opt = s[app._hk]
-        that = @
-        Mongodb.MongoClient.connect "mongodb://#{opt.user}:#{opt.psd}@#{opt.host}:#{opt.port}/#{opt.db}", (err, db)->
-            log 'connect to hk'
-            that.db = db
-            callback?()
-    else
-        @db = new Db(@name || s.db, new Server(s.host, s.port)) #, safe: true
-        @db.open ->
-#            @db.setMaxListeners(0)
-            callback?()
+module.exports = ->
 
-#    emitter.setMaxListeners()
+    @newDb = (name, callback)->
+        if app.env
+            s =
+                db_host: '127.0.0.1'
+                db_port: 27017
+        else
+            s = require("../views/module/#{name}/script/setting")
+        db = new Db(name, new Server(s.db_host, s.db_port)) #, safe: true
+        db.open ->
+            callback?()
+        db
 
     @pick = (name, cName)->
-        if @name isnt name and !app._hk
+        if cName is 'community'
+            name = _mdb
+
+        if @name isnt name
+            @db = _db[name]
+            unless @db
+                @db = _db[name] = @newDb(name)
             @name = name
-#            log @db._emitter
-#            log @db.removeAllListeners()
-            @db.removeAllListeners()
-            @db = @db.db(name)
 
         if @cName isnt cName or !@collection
             @cName = cName
@@ -40,9 +42,8 @@ module.exports = (@name, callback) ->
 
         @collection
 
-    #    @index = (db, entity, index, opt)->
-    #
-    #        @pick(db, entity).createIndex index, opt
+    @index = (db, entity, index, opt)->
+        @pick(db, entity).createIndex index, opt
 
     @get = (db, entity, opt, callback)->
         opt = @cleanOpt(opt)
@@ -51,13 +52,19 @@ module.exports = (@name, callback) ->
             doc._e = entity if doc
             callback?(doc)
 
-    @find = (db, entity, filter, op, callback)->
+    @find = (db, entity, filter, op = {}, callback)->
+        unless op.sort
+            op.sort = [
+                [
+                    'lastUpdated'
+                    'desc'
+                ]
+            ]
         @pick(db, entity).find(filter, op).toArray (err, docs)->
             log err if err
             for it in docs
                 it._e = entity
             callback?(docs)
-
 
     @cleanOpt = (opt) ->
         if opt._id
@@ -82,6 +89,7 @@ module.exports = (@name, callback) ->
 
     @save = (db, entity, items, callback)->
         [entity,keys] = entity.split(':')
+
         items = [items] unless _.isArray items
         if keys
             keys = keys.split(',')
@@ -135,3 +143,12 @@ module.exports = (@name, callback) ->
 #        unless @db.openCalled
 #            @db.open (err)->
 #                log err if err
+
+#    if app and app._hk
+#        opt = s[app._hk]
+#        that = @
+#        Mongodb.MongoClient.connect "mongodb://#{opt.user}:#{opt.psd}@#{opt.host}:#{opt.port}/#{opt.db}", (err, db)->
+#            log 'connect to hk'
+#            that.db = db
+#            callback?()
+#    else

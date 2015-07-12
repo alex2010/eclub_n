@@ -2,7 +2,6 @@
 .ftppass
 .idea
 npm-debug.log
-node_modules
 
 # heroku
 #*.coffee
@@ -11,25 +10,8 @@ node_modules
 #github
 #*.js
 # *.css
-
-
-public/module/bower_components
-public/module/_club
-public/module/_wShop
-public/module/after
-public/module/gwsport
-public/module/upup
-public/module/hailai
-public/module/house
-public/module/tmpl
-
+node_modules
+public
+doc
 back
-public/lib/admin
-public/lib/func
-public/lib/meta
-public/lib/model
-public/lib/plugins
-public/lib/view
-public/lib/widget
-public/res/js
 memo.txt

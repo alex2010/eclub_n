@@ -1,37 +1,41 @@
-u = require '../util'
+u = util
 oid = require('mongodb').ObjectID
 async = require('async')
-tmplUtil = require('../views/tmplUtil')
-ts = require('../views/tmplScript')
 jade = require('jade')
-i18n = require('../i18n/lang')('zh')
+
+String::splitCap = (i, t)->
+    (it.capitalize() for it in @split(i)).join(t)
 
 pageOpt = (c)->
+    libPath = "#{c.resPath}/upload/#{c.code}/lib/"
+    resPath = "#{c.resPath}/upload/#{c.code}/"
+
     code = c.code
+
     tRender: jade.renderFile
     title: c.title
     lang: 'zh'
     mode: app.env
+    _ts: new Date().getTime()
     c: c
     app: 'main'
-    f: tmplUtil
-    i18: i18n.load(code)
-    cstr: JSON.stringify(_.pick(c, 'code', 'url'))
-    libPath: "#{_resPath}upload/#{c.code}/lib/"
+    f: require('../ext/tmpl')
+    cstr: JSON.stringify(_.pick(c, 'code','name', 'url', '_id','resPath'))
+    libPath: libPath
+    resPath: resPath
     cssPath: (name = 'css')->
         if app.env
             if name is 'admin'
                 "/lib/admin/style/#{name}.css"
             else
-
                 "/module/#{c.code}/src/style/#{name}.css"
         else
-            "#{_resPath}upload/#{c.code}/lib/#{name}.css?#{new Date().getTime()}"
+            "#{libPath}#{name}.css?#{new Date().getTime()}"
     jsPath: (name = 'main')->
-        "#{_resPath}upload/#{c.code}/lib/#{name}.js?#{new Date().getTime()}"
+        "#{libPath}#{name}.js?#{new Date().getTime()}"
 
 
-pre =(req)->
+pre = (req)->
     ctx = pageOpt(req.c)
     if req.query.dev
         ctx.dev = true
@@ -39,22 +43,35 @@ pre =(req)->
     ctx.index = ps.page || ps.entity || 'index'
     ctx
 
-pickScript = (ctx,req)->
-    sc = require("../public/module/#{ctx.c.code}/tmplScript")
+pickScript = (ctx, req)->
+    ts =
+        console: (ctx)->
+            ctx.app = 'admin'
+            null
+
+    sc = require("../views/module/#{ctx.c.code}/script/tmplScript")
 
     initOpt = sc._init(ctx) || {}
 
     opt = if sc[ctx.index]
-        sc[ctx.index](ctx,req) || {}
+        sc[ctx.index](ctx, req) || {}
     else if ts[ctx.index]
-        ts[ctx.index](ctx,req) || {}
+        ts[ctx.index](ctx, req) || {}
     else
         {}
+
+    opt.i18 = (cb)->
+        dao.find ctx.c.code, "i18n", {lang:req.query.lang || 'zh'}, {},(res)->
+            langs = {}
+            for it in res
+                langs[it.key] = it.val
+            cb null, require('../service/lang')(langs)
 
     _.extend initOpt, opt
 
 render = (req, rsp, ctx)->
-    opt = pickScript(ctx,req)
+#    if req.fp
+    opt = pickScript(ctx, req)
     dao.pick(_mdb, 'cache').ensureIndex time: 1,
         expireAfterSeconds: 7200
         background: true

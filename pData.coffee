@@ -1,3 +1,9 @@
+#node pData run
+#node pData run -p
+
+#node pData run i18n
+
+
 async = require('async')
 
 args = null
@@ -6,17 +12,18 @@ process.argv.forEach (val, index, array)->
 
 `app = {};
 _ = require('underscore');
-_db = 'main';
+_mdb = 'main';
 log = console.log;
 oid = require('mongodb').ObjectID;
 code = args[2];
 _env = true;
-_st = require('./public/module/'+code+'/setting.js');
 `
+
 require('./ext/string')
-
-dao = new require('./model/dao') _db, ->
-
+dao = new require('./service/dao')()
+dao.pick('main','cache')
+dao.pick(code,'post')
+_.delay ->
     if args.length > 3
         if args[3] is '-p'
             `
@@ -26,14 +33,14 @@ dao = new require('./model/dao') _db, ->
             entity = args[3]
 
     if entity
-        filter = if entity is 'user'
+        filter = if entity in ['user','role']
              x:'x'
         else
             {}
 
         dao.remove code, entity, filter, {}, ->
             list = []
-            for it in require("./public/module/#{code}/data/#{entity}")
+            for it in require("./views/module/#{code}/data/#{entity}")
                 ob = {}
                 for k, v of it
                     if v isnt null and !(k in ['cid', 'version'])
@@ -128,15 +135,15 @@ dao = new require('./model/dao') _db, ->
                                                 code: res.code
                                             dao.save code, estr, act
     else
-        data = require("./public/module/#{code}/data")
-        dao.save _db, 'community:code', data.community
+        data = require("./views/module/#{code}/script/data")
+        dao.save _mdb, 'community:code', data.community
 
         for k, v of data.data
             dao.save code, k, v
-
-#        log data.r
+, 1000
 #        dao.save code, 'role:title', [data.r], ->
 
 _.delay ->
     dao.close()
-, 6000
+, 4000
+

@@ -1,14 +1,29 @@
+#setting = require './setting.js'
+#
+#log setting
+
+String::replaceAll= (s1, s2)->
+    this.replace(new RegExp(s1, "gm"), s2);
+
 module.exports = (grunt)->
 
 #    dm = 'encorner.org'
 #    ftp = '113.11.197.232'
 #    _remote = '/opt/node/'
 
-    dm = 'wikibeijing.com'
-    ftp = '45.33.59.69'
+#    dm = 'wikibeijing.com'
+#    ftp = '45.33.59.69'
+#
+#    ftp = '139.162.24.228'
+#    upload_path: '/opt/node/public'
+    _resPath = "http://s.newenglishtime.com/"
+#    _resPath = setting.res_path
+#    ftp = setting.ftp
+
     _remote = '/opt/node/'
     _remoteRes = '/opt/node/public/res/'
     _local = __dirname
+    _module = "#{__dirname}/public/module/"
     #    m = grunt.task.current.args[0]
 
     backFiles = (nstr)->
@@ -20,23 +35,26 @@ module.exports = (grunt)->
                 src: ['*.js', '*.json', '*.jade', 'inc/*.jade']
                 dest: _remote + "#{if it is './' then '' else it}"
         res
+
     require("load-grunt-config") grunt
 
     grunt.registerTask 'default', ->
         grunt.initConfig {}
 
     #------------------------------------------backend-------------------------------------------------
-    grunt.registerTask 'bk', (code) ->
-        bStr = if code
-            "public/module/#{code}/tmpl,public/module/#{code},public/module/#{code}/data,public/module/#{code}/src/i18n"
+    grunt.registerTask 'bk', (code,mode) ->
+        setting = require "#{__dirname}/views/module/#{code}/script/setting.js"
+
+        bStr = if mode
+            "views/module/#{code},views/module/#{code}/script,views/module/#{code}/data"
         else
-            "./,views,routes,ext,model,i18n,controller,bin"
+            "./,views,routes,ext,controller,bin,service"
 
         grunt.config.init
             ftpscript:
                 server:
                     options:
-                        host: ftp #port: port
+                        host: setting.ftp #port: port
                         auth:
                             username: 'root'
                             password: 'rock200*'
@@ -45,27 +63,32 @@ module.exports = (grunt)->
         grunt.task.run "ftpscript:server"
 
     #------------------------------------------frontend-------------------------------------------------
-    cssProcess = (content, srcPath)->
-        _rres = "http://s.#{dm}/"
-        content = content.replace(/..\/..\/..\/res\//g, _rres)
-        content = content.replace(/\/res\//g, _rres)
-        content
-
     grunt.registerTask 'ft', (code) ->
-        _module = "#{__dirname}/public/module/"
         _res = "public/res/"
         _resSub = "#{_res}upload/#{code}/lib"
         #        _remoteRes = "/opt/s.#{dm}/res/"
         _remoteResSub = "#{_remoteRes}upload/#{code}/lib"
         _admin = "public/lib/admin/"
 
+        setting = require "#{__dirname}/views/module/#{code}/script/setting.js"
         m = "#{_module + code}/src/"
 
-        grunt.log.write(require("#{_module}rfg.js").cfg(code, 'main').out)
+#        grunt.log.write(require("#{_module}rfg.js").cfg(code, 'main').out)
+
+
+        cssProcess = (content, srcPath)->
+    #        content = content.replace(/..\/..\/..\/..\/res\//g, _resPath)
+    #        content = content.replace(/\/res\//g, _resPath)
+            grunt.log.write setting.local_path
+            grunt.log.write setting.res_path
+            content = content.replaceAll(setting.local_path, setting.res_path)
+            grunt.log.write content.indexOf setting.local_path
+            content
+
 
         grunt.config.init
-            clean:
-                all: [m + '/lib/*']
+#            clean:
+#                all: [m + '/lib/*']
             copy:
 #                cleanAdmin:
 #                    expand: true
@@ -99,11 +122,11 @@ module.exports = (grunt)->
                         ext: '.css'
                     ]
 
-            requirejs:
-                main:
-                    options: require("#{_module}rfg.js").cfg(code, 'main')
-                admin:
-                    options: require("#{_module}rfg.js").cfg(code, 'admin')
+            requirejs:{}
+#                main:
+#                    options: require("#{_module}rfg.js").cfg(code, 'main')
+#                admin:
+#                    options: require("#{_module}rfg.js").cfg(code, 'admin')
 #                account:
 #                    options: require("#{__dirname}/rfg").cfg(m, 'account')
 #                wechat:
@@ -112,7 +135,7 @@ module.exports = (grunt)->
             ftpscript:
                 admin:
                     options:
-                        host: ftp
+                        host: setting.ftp
                     files: [
 #                        expand: true
 #                        cwd: _res + 'css'
@@ -121,7 +144,7 @@ module.exports = (grunt)->
 #                    ,
                         expand: true
                         cwd: _resSub
-                        src: ['*.js', '*.css']
+                        src: ['*.*']
                         dest: _remoteResSub
 #                    ,
 #                        expand: true
@@ -154,8 +177,8 @@ module.exports = (grunt)->
         #        v.version = vv.join('.')
         #        grunt.file.write(fn, JSON.stringify(v))
 
-        grunt.task.run 'clean'
-        grunt.task.run "cssmin"
+#        grunt.task.run 'clean'
+#        grunt.task.run "cssmin"
         grunt.task.run "copy:cleanCss"
 
 #        grunt.task.run "requirejs:main"
@@ -176,4 +199,4 @@ module.exports = (grunt)->
 #        if grunt.file.exists("#{__dirname}/#{_dir}wechat.js")
 #            grunt.task.run "requirejs:wechat"
 #
-#        grunt.task.run "ftpscript:admin"
+        grunt.task.run "ftpscript:admin"

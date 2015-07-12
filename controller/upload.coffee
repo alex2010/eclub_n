@@ -2,6 +2,7 @@ multer = require('multer')
 fs = require('fs')
 gm = require('gm')
 
+
 sPath = (code)->
     path = "/public/res/upload/#{code}"
     if app.env

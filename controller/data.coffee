@@ -1,5 +1,5 @@
-_ = require('underscore')
-u = require '../util'
+#_ = require('underscore')
+#u = require '../util'
 async = require('async')
 
 attrs = (attr)->
@@ -8,26 +8,23 @@ attrs = (attr)->
         continue if it.charAt(0) is '_'
         op[it] = 1
     op
-buildQuery =  (q)->
+buildQuery = (q)->
     for k, v of q
-        if k in ['rid','uid','_id']
+        if k in ['rid', 'uid', '_id']
             q[k] = new oid(v)
     q
 
 
-cleanItem = (q)->
-    if q.dateCreated
-        if q.dateCreated isnt 'true'
-            delete q.dateCreated
-        else
-            q.dateCreate = new Date()
-    if q.lastUpdated
-        q.lastUpdated = new Date()
+cleanItem = (q, isNew)->
+    if isNew
+        q.dateCreated = new Date()
+    q.lastUpdated = new Date()
 
     for k,v of q
-        if k in ['rid','uid','_id']
+        if k in ['rid', 'uid']
             q[k] = new oid(v)
-        if v.toString().charAt(0) is '_'
+
+        if k.toString().charAt(0) is '_'
             delete q[k]
     q
 
@@ -36,49 +33,80 @@ dataController =
     list: (req, rsp) ->
         code = req.c.code
         qu = req.query
-        if req.query
+        if qu
             op =
-                skip: u.d(req.query, 'offset') || 0
-                limit: u.d(req.query, 'max') || 10
-            if req.query._attrs
-                op.fields = attrs u.d req.query, '_attrs'
-        q = buildQuery req.query.q
+                skip: util.d(qu, 'offset') || 0
+                limit: util.d(qu, 'max') || 10
+                sort:
+                    lastUpdated: -1
+            if qu._attrs
+                op.fields = attrs util.d qu, '_attrs'
+        q = buildQuery qu.q
         entity = req.params.entity
         dao.find code, entity, q, op, (entities)->
             dao.count code, entity, q, (count)->
-                rsp.send u.r entities, count
+                rsp.send util.r entities, count
 
     get: (req, rsp) ->
         code = req.c.code
         entity = req.params.entity
 
         dao.get code, entity, _id: req.params.id, (item)->
-            rsp.send u.r item
+            rsp.send util.r item
+
+    getByKey: (req, rsp) ->
+        code = req.c.code
+        pa = req.params
+        filter = {}
+        filter[pa.key] = pa.val
+
+        dao.get code, pa.entity, filter, (item)->
+            rsp.send util.r item
 
     edit: (req, rsp) ->
         code = req.c.code
         entity = req.params.entity
         bo = req.body
-        _attrs = bo._attrs
+
+        after = util.del 'afterSave', req.body
+        _attrs = bo._attrs || ''
+        _attrs = _attrs.split(',')
+        _attrs.push '_id'
         cleanItem(bo)
 
-        dao.findAndUpdate code, entity, _id: req.params.id, req.body, (item)->
-            rsp.send u.r _.pick(item, _attrs)
+        dao.findAndUpdate code, entity, _id: req.params.id, bo, (item)->
+            gs(it)(req, item.value) for it in after.split(',') if after
+            rsp.send util.r _.pick(item.value, _attrs)
 
     save: (req, rsp) ->
         code = req.c.code
         entity = req.params.entity
         bo = req.body
-        _attrs = bo._attrs
-        cleanItem(bo)
+
+        after = util.del 'afterSave', req.body
+        _attrs = bo._attrs || ''
+        _attrs = _attrs.split(',')
+        _attrs.push '_id'
+        cleanItem(bo,true)
 
         dao.save code, entity, bo, (item)->
-            rsp.send u.r _.pick(item, _attrs)
+            gs(it)(req, item) for it in after.split(',') if after
+            rsp.send util.r _.pick(item.value, _attrs)
 
     del: (req, rsp) ->
         code = req.c.code
         entity = req.params.entity
         dao.delItem code, entity, _id: req.params.id, ->
             rsp.send msg: 'del.ok'
+
+    cleanCache: (req, rsp)->
+        opt =
+            k:
+                $regex: req.c.url
+        dao.delItem _mdb, 'cache', opt, (res)->
+            log res
+            log 'clean Cache...'
+            rsp.send msg: 'del.ok'
+
 
 module.exports = dataController

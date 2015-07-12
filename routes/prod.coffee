@@ -53,53 +53,83 @@ pre = (req, rsp, next)->
             next()
 
 checkPage = (req, rsp, next)->
-#    log ck req
     pm = req.params
     page = pm.page || pm.entity || 'index'
-    if page is 'r'
+#    log req.originalUrl
+    if page in ['a','r']
         next()
         return
-    req.fp = path.join(_path, "public/module/#{req.c.code}/tmpl")
+    req.fp = path.join(_path, "views/module/#{req.c.code}")
+
+    if page in ['res','images']
+        rsp.end 'no page'
+        return
+
     if fs.existsSync("#{req.fp}/#{page}.jade")
         next()
     else
-        rsp.end 'no page'
+        req.fp = path.join(_path, "views")
+        log "#{req.fp}/#{page}.jade"
+        if fs.existsSync("#{req.fp}/#{page}.jade")
 
-
-router.all '/a/*', pre
-router.all '/r/*', pre
+            next()
+        else
+            rsp.end 'no page'
 
 router.get '/', pre
-router.get '/', checkPage
-
-router.get '/:page', pre
-router.get '/:page', checkPage
-
-router.get '/:entity/:id', pre
-router.get '/:entity/:id', checkPage
-
-router.get '/:entity/:attr/:id', pre
-router.get '/:entity/:attr/:id', checkPage
-
-
-router.get '/', page.page
+router.all '/a/*', pre
+router.all '/r/*', pre
 
 router.post '/a/upload', up.upload
 router.post '/a/upload/remove', up.remove
 
+router.post '/a/cleanCache', data.cleanCache
+
 router.post '/a/auth/login', auth.login
+router.post '/a/auth/loginByWoid', auth.loginByWoid
 router.post '/a/auth/logout', auth.logout
+router.post '/a/auth/logoutByWoid', auth.logoutByWoid
+#wechat call
+
+
+wt = require '../controller/wechat'
+router.post '/a/wt/createMenu', wt.createMenu
+router.post '/a/wt/createLimitQRCode', wt.createLimitQRCode
+router.post '/a/wt/showQRCodeURL', wt.showQRCodeURL
+router.post '/a/wt/uploadNews', wt.uploadNews
+router.get '/a/wt/userInfoByCode', wt.userInfoByCode
+
 
 router.get '/r/:entity', data.list
 router.get '/r/:entity/:id', data.get
+router.get '/r/:entity/:key/:val', data.getByKey
 
 router.put '/r/:entity/:id', data.edit
 router.post '/r/:entity', data.save
 router.delete '/r/:entity/:id', data.del
 
+
+
+#wechat request
+#wtr = require('wechat')
+
+#router.use express.query
+
+
+router.get '/:entity/:attr/:id', pre
+router.get '/:entity/:attr/:id', checkPage
+
+router.get '/:entity/:id', pre
+router.get '/:entity/:id', checkPage
+
+router.get '/:page', pre
+router.get '/:page', checkPage
+
+router.get '/', checkPage
+
+router.get '/', page.page
 router.get '/:page', page.page
 router.get '/:entity/:id', page.entity
-
 router.get '/:entity/:attr/:id', page.entity
 
 module.exports = router

@@ -1,16 +1,10 @@
 doctype html
 html
     head
-        include inc/meta
-    body
-        .headerWrapper
-            #header.navbar.navbar-inverse.navbar-fixed-top
-                .navbar-header
-                    h1#logo
-                        a.navbar-brand(href="#")
-        .container-fluid
-            #content
-        .footerWrapper
-            #footer
+        meta(charset='UTF-8')
+        - main = 'admin'
+        include ./inc/smeta
 
-    include inc/sub
+    body
+
+    include ./inc/ssub
